@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>바이브 옵시디언 강의 제안서</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='a' x1='20%25' y1='0%25' x2='80%25' y2='100%25'><stop offset='0%25' stop-color='%23D4BBFF'/><stop offset='100%25' stop-color='%239B6FE8'/></linearGradient><linearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%237C4ECF'/><stop offset='100%25' stop-color='%234A2D7E'/></linearGradient></defs><path d='M50 8 L25 35 L22 70 L48 92 L50 50 Z' fill='url(%23a)'/><path d='M50 8 L78 38 L82 68 L52 92 L50 50 Z' fill='url(%23b)'/></svg>">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0B0B0F;
+    --bg-card:#16151C;
+    --bg-card-2:#1C1B24;
+    --line:#2A2833;
+    --purple-1:#B48EFF;
+    --purple-2:#8B5CF6;
+    --purple-3:#6B3FA0;
+    --purple-4:#483699;
+    --purple-deep:#2B1F5C;
+    --text:#E8E6F0;
+    --text-mute:#9A93B0;
+    --accent:#C4B5FD;
+    --good:#7DD3A0;
+    --warn:#F4B860;
+    --bad:#F07178;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",-apple-system,sans-serif;line-height:1.65;font-feature-settings:"tnum"}
+  html{scroll-behavior:smooth}
+  a{color:var(--purple-1);text-decoration:none}
+
+  /* 레이아웃: 사이드바 + 메인 */
+  .layout{max-width:1380px;margin:0 auto;padding:48px 32px 96px;display:grid;grid-template-columns:240px 1fr;gap:48px;align-items:start}
+  .wrap{min-width:0}
+
+  /* 사이드바 TOC */
+  .toc{
+    position:sticky;top:32px;align-self:start;
+    background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg-card-2) 100%);
+    border:1px solid var(--line);border-radius:16px;padding:22px 18px;
+    max-height:calc(100vh - 64px);overflow-y:auto;
+  }
+  .toc::-webkit-scrollbar{width:6px}
+  .toc::-webkit-scrollbar-thumb{background:var(--purple-4);border-radius:3px}
+  .toc-title{
+    font-size:11px;letter-spacing:0.12em;color:var(--purple-1);font-weight:700;
+    padding:0 8px 12px;border-bottom:1px solid var(--line);margin-bottom:10px;text-transform:uppercase;
+  }
+  .toc ul{list-style:none;padding:0}
+  .toc li{margin:1px 0}
+  .toc a{
+    display:block;padding:8px 10px 8px 14px;border-radius:8px;
+    color:var(--text-mute);font-size:13.5px;line-height:1.4;
+    border-left:2px solid transparent;transition:all .15s ease;
+  }
+  .toc a:hover{background:rgba(139,92,246,0.08);color:var(--text)}
+  .toc a.active{
+    background:linear-gradient(90deg,rgba(180,142,255,0.18),rgba(139,92,246,0.04));
+    color:var(--purple-1);border-left-color:var(--purple-1);font-weight:600;
+  }
+  .toc .sub{padding-left:22px;font-size:12.5px;color:var(--text-mute)}
+  .toc .sub:hover{color:var(--text)}
+  .toc .sub.active{color:var(--purple-1)}
+  .toc .num{
+    display:inline-block;width:22px;font-family:"JetBrains Mono",monospace;
+    font-size:11px;color:var(--purple-3);font-weight:600;
+  }
+  .toc a.active .num{color:var(--purple-1)}
+
+  /* 모바일 토글 */
+  .toc-toggle{display:none}
+  @media(max-width:1024px){
+    .layout{grid-template-columns:1fr;padding:24px 20px 96px}
+    .toc{
+      position:fixed;top:auto;bottom:20px;right:20px;left:auto;
+      width:260px;max-height:60vh;z-index:100;
+      box-shadow:0 12px 40px -8px rgba(0,0,0,0.6);
+      transform:translateX(calc(100% + 30px));transition:transform .25s ease;
+    }
+    .toc.open{transform:translateX(0)}
+    .toc-toggle{
+      display:flex;position:fixed;bottom:20px;right:20px;z-index:101;
+      width:52px;height:52px;border-radius:50%;border:none;
+      background:linear-gradient(135deg,var(--purple-2),var(--purple-4));
+      color:#fff;font-size:22px;cursor:pointer;align-items:center;justify-content:center;
+      box-shadow:0 8px 24px -4px rgba(139,92,246,0.5);
+    }
+  }
+
+  /* 표지 */
+  .cover{
+    position:relative;
+    background:radial-gradient(1200px 600px at 80% -10%,rgba(139,92,246,0.35),transparent 60%),
+               radial-gradient(900px 500px at 10% 110%,rgba(72,54,153,0.45),transparent 55%),
+               linear-gradient(180deg,#15121E 0%,#0B0B0F 100%);
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:72px 56px;
+    overflow:hidden;
+    margin-bottom:48px;
+  }
+  .cover::before{
+    content:"";position:absolute;right:-80px;top:-80px;width:360px;height:360px;
+    background:conic-gradient(from 120deg,#B48EFF,#6B3FA0,#2B1F5C,#B48EFF);
+    filter:blur(80px);opacity:0.45;border-radius:50%;
+  }
+  .badge{
+    display:inline-block;padding:6px 14px;border:1px solid var(--purple-3);
+    border-radius:999px;color:var(--purple-1);font-size:12px;letter-spacing:0.08em;
+    text-transform:uppercase;background:rgba(139,92,246,0.08);margin-bottom:24px;
+  }
+  .cover h1{
+    font-size:56px;font-weight:800;letter-spacing:-0.02em;
+    background:linear-gradient(135deg,#E8E6F0 0%,#B48EFF 60%,#8B5CF6 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin-bottom:18px;line-height:1.15;
+  }
+  .cover .sub{font-size:22px;color:var(--text-mute);max-width:760px}
+  .cover .meta{margin-top:36px;display:flex;gap:24px;flex-wrap:wrap;color:var(--text-mute);font-size:14px}
+  .cover .meta span b{color:var(--purple-1);font-weight:600}
+  .cover-head{display:flex;align-items:center;gap:20px;margin-bottom:28px;position:relative;z-index:1}
+  .cover-head .logo-box{
+    width:84px;height:84px;border-radius:20px;
+    background:linear-gradient(180deg,#1F1A2A,#13101C);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px -4px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
+    flex-shrink:0;
+  }
+  .cover-head .logo-box svg{width:54px;height:54px;filter:drop-shadow(0 4px 12px rgba(139,92,246,0.4))}
+  .cover-head .brand{font-size:30px;font-weight:800;letter-spacing:-0.02em;color:#fff}
+  .cover-head .brand small{display:block;font-size:12px;font-weight:500;color:var(--text-mute);letter-spacing:0.1em;margin-top:2px;text-transform:uppercase}
+
+  /* TOC 로고 */
+  .toc-brand{display:flex;align-items:center;gap:10px;padding:0 8px 14px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+  .toc-brand svg{width:28px;height:28px;flex-shrink:0}
+  .toc-brand .name{font-size:14px;font-weight:700;color:var(--text);letter-spacing:-0.01em}
+  .toc-brand .name small{display:block;font-size:10px;color:var(--text-mute);font-weight:500;letter-spacing:0.08em;margin-top:1px}
+
+  /* 인라인 아이콘 (강조용) */
+  .ico-mini{display:inline-block;width:14px;height:14px;vertical-align:-2px;margin-right:4px}
+
+  /* 섹션 공통 */
+  section{margin-bottom:56px}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .sec-num{font-family:"JetBrains Mono",monospace;color:var(--purple-2);font-size:14px;letter-spacing:0.1em}
+  .sec-head h2{font-size:30px;font-weight:700;letter-spacing:-0.01em}
+  .sec-head .tag{margin-left:auto;font-size:12px;color:var(--text-mute);padding:4px 10px;border:1px solid var(--line);border-radius:6px}
+
+  h3{font-size:18px;font-weight:600;margin:18px 0 10px;color:var(--text)}
+  h4{font-size:15px;font-weight:600;margin:12px 0 6px;color:var(--purple-1)}
+  p{color:var(--text);margin-bottom:10px}
+  .mute{color:var(--text-mute)}
+
+  /* 카드 */
+  .grid{display:grid;gap:18px}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:880px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+  .card{
+    background:linear-gradient(180deg,var(--bg-card) 0%,var(--bg-card-2) 100%);
+    border:1px solid var(--line);border-radius:16px;padding:24px;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .card:hover{border-color:var(--purple-3)}
+  .card .ico{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:38px;height:38px;border-radius:10px;
+    background:linear-gradient(135deg,rgba(180,142,255,0.18),rgba(72,54,153,0.18));
+    border:1px solid var(--purple-4);color:var(--purple-1);font-weight:700;margin-bottom:14px;
+  }
+  .card .ttl{font-size:17px;font-weight:600;margin-bottom:8px}
+  .card .body{color:var(--text-mute);font-size:14px;line-height:1.7}
+
+  /* 강의 모듈 */
+  .module{
+    background:var(--bg-card);border:1px solid var(--line);border-radius:18px;
+    padding:28px 28px 24px;margin-bottom:18px;position:relative;overflow:hidden;
+  }
+  .module::before{
+    content:"";position:absolute;left:0;top:0;width:4px;height:100%;
+    background:linear-gradient(180deg,var(--purple-1),var(--purple-3));
+  }
+  .module-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .module-no{
+    width:44px;height:44px;border-radius:12px;
+    background:linear-gradient(135deg,var(--purple-2),var(--purple-4));
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:#fff;
+    box-shadow:0 8px 24px -8px rgba(139,92,246,0.6);
+  }
+  .module-head .name{font-size:20px;font-weight:700}
+  .module-head .dur{margin-left:auto;font-size:12px;color:var(--purple-1);padding:4px 10px;border:1px solid var(--purple-3);border-radius:999px}
+  .module ul{list-style:none;padding-left:0}
+  .module ul li{
+    padding:8px 0 8px 22px;position:relative;color:var(--text-mute);font-size:14.5px;
+    border-bottom:1px dashed rgba(106,99,135,0.25);
+  }
+  .module ul li:last-child{border-bottom:none}
+  .module ul li::before{
+    content:"▸";position:absolute;left:4px;color:var(--purple-2);
+  }
+  .module ul li b{color:var(--text);font-weight:600}
+
+  /* 차트 박스 */
+  .chartbox{
+    background:var(--bg-card);border:1px solid var(--line);border-radius:16px;padding:24px;
+  }
+  .chartbox h3{margin-bottom:6px}
+  .chartbox .note{color:var(--text-mute);font-size:13px;margin-bottom:16px}
+  .chart-wrap{position:relative;height:320px}
+  .chart-tall{height:380px}
+
+  /* 표 */
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+  th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:rgba(139,92,246,0.08);color:var(--purple-1);font-weight:600;font-size:13px;letter-spacing:0.02em}
+  tbody tr:hover{background:rgba(139,92,246,0.04)}
+  td.center{text-align:center}
+  .pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600}
+  .pill-good{background:rgba(125,211,160,0.12);color:var(--good);border:1px solid rgba(125,211,160,0.35)}
+  .pill-warn{background:rgba(244,184,96,0.12);color:var(--warn);border:1px solid rgba(244,184,96,0.35)}
+  .pill-bad{background:rgba(240,113,120,0.12);color:var(--bad);border:1px solid rgba(240,113,120,0.35)}
+  .pill-muted{background:rgba(154,147,176,0.12);color:var(--text-mute);border:1px solid var(--line)}
+
+  /* 인용 */
+  .quote{
+    background:linear-gradient(180deg,rgba(139,92,246,0.08),rgba(139,92,246,0.02));
+    border-left:3px solid var(--purple-2);
+    padding:18px 22px;border-radius:0 12px 12px 0;color:var(--text);font-size:15px;
+    margin:14px 0;font-style:italic;
+  }
+  .quote .src{display:block;margin-top:8px;font-size:12px;color:var(--text-mute);font-style:normal}
+
+  /* 강조 박스 */
+  .callout{
+    background:radial-gradient(600px 300px at 0% 0%,rgba(139,92,246,0.15),transparent 60%),var(--bg-card);
+    border:1px solid var(--purple-4);border-radius:16px;padding:24px 28px;margin:18px 0;
+  }
+  .callout .lbl{display:inline-block;background:var(--purple-2);color:#fff;font-size:11px;font-weight:700;
+    padding:3px 10px;border-radius:6px;letter-spacing:0.06em;margin-bottom:10px}
+
+  /* 풋터 */
+  footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:var(--text-mute);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  /* KPI */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:880px){.kpi-row{grid-template-columns:repeat(2,1fr)}}
+  .kpi{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .kpi .v{font-size:30px;font-weight:800;background:linear-gradient(135deg,#E8E6F0,#B48EFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .kpi .l{font-size:12px;color:var(--text-mute);margin-top:4px;letter-spacing:0.02em}
+
+  /* 흐름도 */
+  .flow{display:flex;align-items:stretch;gap:10px;flex-wrap:wrap;margin:14px 0}
+  .flow .step{flex:1;min-width:160px;background:var(--bg-card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;position:relative}
+  .flow .step b{display:block;color:var(--purple-1);font-size:12px;margin-bottom:4px;letter-spacing:0.06em}
+  .flow .arrow{display:flex;align-items:center;color:var(--purple-3);font-size:20px}
+  @media(max-width:880px){.flow .arrow{transform:rotate(90deg)}}
+</style>
+</head>
+<body>
+
+<!-- 모바일 토글 -->
+<button class="toc-toggle" onclick="document.getElementById('toc').classList.toggle('open')" aria-label="목차 열기">≡</button>
+
+<div class="layout">
+
+<!-- ============ 사이드바 목차 ============ -->
+<aside class="toc" id="toc">
+  <div class="toc-brand">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="ob-toc-light" x1="20%" y1="0%" x2="80%" y2="100%">
+          <stop offset="0%" stop-color="#E0CCFF"/>
+          <stop offset="100%" stop-color="#9B6FE8"/>
+        </linearGradient>
+        <linearGradient id="ob-toc-mid" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#9B6FE8"/>
+          <stop offset="100%" stop-color="#6B3FA0"/>
+        </linearGradient>
+        <linearGradient id="ob-toc-dark" x1="0%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" stop-color="#5E37A8"/>
+          <stop offset="100%" stop-color="#2E1A5C"/>
+        </linearGradient>
+      </defs>
+      <path d="M50 6 L24 34 L20 68 L46 94 L50 52 Z" fill="url(#ob-toc-light)"/>
+      <path d="M50 6 L78 36 L84 70 L54 94 L50 52 Z" fill="url(#ob-toc-mid)"/>
+      <path d="M46 94 L54 94 L84 70 L66 86 L34 86 L20 68 Z" fill="url(#ob-toc-dark)"/>
+    </svg>
+    <div class="name">
+      Obsidian
+      <small>Vibe</small>
+    </div>
+  </div>
+  <div class="toc-title">Contents</div>
+  <ul>
+    <li><a href="#cover"><span class="num">00</span>표지</a></li>
+    <li><a href="#overview"><span class="num">01</span>강의 개요</a></li>
+    <li><a href="#concept"><span class="num">02</span>핵심 개념</a></li>
+    <li><a href="#curriculum"><span class="num">03</span>강의 구성</a></li>
+    <li><a class="sub" href="#m1">└ 1. 일단 봅시다</a></li>
+    <li><a class="sub" href="#m2">└ 2. 나도 해봅시다</a></li>
+    <li><a class="sub" href="#m3">└ 3. 설치</a></li>
+    <li><a class="sub" href="#m4">└ 4. raw·wiki·그래프</a></li>
+    <li><a class="sub" href="#m5">└ 5. 자동화</a></li>
+    <li><a class="sub" href="#m6">└ 6. 트러블슈팅</a></li>
+    <li><a class="sub" href="#m7">└ 7. PKM 유저</a></li>
+    <li><a href="#ref-compare"><span class="num">A1</span>5개 개념 비교</a></li>
+    <li><a href="#ref-tradeoff"><span class="num">A2</span>장단점</a></li>
+    <li><a href="#ref-discipline"><span class="num">A3</span>디시플린</a></li>
+    <li><a href="#outcomes"><span class="num">04</span>수강 결과물</a></li>
+  </ul>
+</aside>
+
+<div class="wrap">
+
+<!-- ============ 표지 ============ -->
+<a id="cover"></a>
+<div class="cover">
+  <div class="cover-head">
+    <div class="logo-box">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Obsidian">
+        <defs>
+          <linearGradient id="ob-light" x1="20%" y1="0%" x2="80%" y2="100%">
+            <stop offset="0%" stop-color="#E0CCFF"/>
+            <stop offset="100%" stop-color="#9B6FE8"/>
+          </linearGradient>
+          <linearGradient id="ob-mid" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#9B6FE8"/>
+            <stop offset="100%" stop-color="#6B3FA0"/>
+          </linearGradient>
+          <linearGradient id="ob-dark" x1="0%" y1="0%" x2="50%" y2="100%">
+            <stop offset="0%" stop-color="#5E37A8"/>
+            <stop offset="100%" stop-color="#2E1A5C"/>
+          </linearGradient>
+          <radialGradient id="ob-shine" cx="35%" cy="25%" r="40%">
+            <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- 왼쪽 면 (밝은) -->
+        <path d="M50 6 L24 34 L20 68 L46 94 L50 52 Z" fill="url(#ob-light)"/>
+        <!-- 오른쪽 면 (중간) -->
+        <path d="M50 6 L78 36 L84 70 L54 94 L50 52 Z" fill="url(#ob-mid)"/>
+        <!-- 하단 면 (어두운) -->
+        <path d="M46 94 L54 94 L84 70 L66 86 L34 86 L20 68 Z" fill="url(#ob-dark)"/>
+        <!-- 광택 -->
+        <path d="M50 6 L24 34 L20 68 L46 94 L50 52 Z" fill="url(#ob-shine)"/>
+      </svg>
+    </div>
+    <div class="brand">
+      Obsidian
+      <small>Vibe · Knowledge Compiler</small>
+    </div>
+  </div>
+  <span class="badge">Lecture Proposal · 2026</span>
+  <h1>바이브 옵시디언<br/>나만의 PKM, 허들을 넘다</h1>
+  <p class="sub">생성형 AI가 옵시디언 커뮤니티 플러그인에 연결되면서, 노동 집약적이던 PKM 구축이 "일단 해보는" 영역으로 바뀌었다. 복잡한 개념과 명령어는 잠시 미뤄두자. 내가 가진 자료로 그래프 뷰부터 만들어본다.</p>
+  <div class="meta">
+    <span>강의 시간 <b>4H · 실습형</b></span>
+    <span>대상 <b>PKM 입문~중급</b></span>
+    <span>도구 <b>Obsidian · Claude · Codex</b></span>
+    <span>작성일 <b>2026-05-18</b></span>
+  </div>
+</div>
+
+<!-- ============ 강의 개요 (PKM 분포) ============ -->
+<section id="overview">
+  <div class="sec-head">
+    <span class="sec-num">00 / OVERVIEW</span>
+    <h2>왜 지금, 바이브 옵시디언인가</h2>
+  </div>
+
+  <p>PKM(개인지식관리체계)은 전문가들의 전유물이었다. 다양한 도구들이 존재했고, 사용자 분포는 대체로 다음과 같다.</p>
+
+  <div class="grid grid-2" style="margin-top:18px">
+    <div class="chartbox">
+      <h3>PKM 사용자 분포</h3>
+      <p class="note">허들을 넘지 못한 70% · 넘었지만 유지 못 한 20% · 유지하지만 갈 길 잃은 5% · 프론티어 5%</p>
+      <div class="chart-wrap"><canvas id="pkmDist"></canvas></div>
+    </div>
+    <div class="chartbox">
+      <h3>강의의 목표 지점</h3>
+      <p class="note">프론티어 5%는 동경의 대상. 이 강의가 다루는 구간은 "허들 넘기"와 "유지하기".</p>
+      <div class="chart-wrap"><canvas id="targetSegment"></canvas></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="lbl">강의 포지셔닝</span>
+    <p>옵시디언은 자유도가 높고 좋은 기능을 가지고 있지만, 의미 있는 수준에 도달하기까지 작업자의 <b>노동 집약적 요소</b>가 많았다. 그것이 실제로 허들로 작용했다. 옵시디언의 커뮤니티 플러그인에 생성형 AI가 연결되면서, 기존과 다른 접근으로 옵시디언을 사용할 계기가 마련되었다. 이른바 <b>바이브 옵시디언</b>.</p>
+  </div>
+</section>
+
+<!-- ============ 핵심 개념: 무엇이 달라지는가 ============ -->
+<section id="concept">
+  <div class="sec-head">
+    <span class="sec-num">01 / CONCEPT</span>
+    <h2>무엇이 달라지는가</h2>
+    <span class="tag">근거: Karpathy LLM Wiki Gist (2026-04-04)</span>
+  </div>
+
+  <p>핵심은 합성 시점의 이동. RAG/NotebookLM은 질문이 들어올 때마다 원본을 다시 합성하지만, LLM Wiki는 ingest 시점에 합성을 끝낸다. 답변은 다시 위키로 저장된다 — Karpathy 표현으로 <b>compounding</b>.</p>
+
+  <div class="grid grid-2" style="margin-top:18px">
+    <div class="chartbox">
+      <h3>시간 경과에 따른 가치 곡선</h3>
+      <p class="note">RAG는 6개월 뒤에도 1일차와 동일 출발선. LLM Wiki는 페이지·교차 참조가 누적될수록 가속.</p>
+      <div class="chart-wrap chart-tall"><canvas id="valueCurve"></canvas></div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:14px">
+        <span class="ico">R</span>
+        <div class="ttl">RAG / NotebookLM</div>
+        <div class="body">원본 → 질문 → 청크 검색 + 합성 (매번 처음부터) → 답변 (휘발). 누적되는 것이 없음.</div>
+      </div>
+      <div class="card">
+        <span class="ico">W</span>
+        <div class="ttl">LLM Wiki (바이브 옵시디언)</div>
+        <div class="body">원본 → ingest 시점 합성 → 영속 위키 → 질문 시 위키 읽음 → 답변 + 위키 추가. 사용할수록 가치가 커지는 자산.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kpi-row" style="margin-top:18px">
+    <div class="kpi"><div class="v">17K+</div><div class="l">Karpathy 원문 트윗 좋아요</div></div>
+    <div class="kpi"><div class="v">100</div><div class="l">Karpathy 본인 위키 페이지 수</div></div>
+    <div class="kpi"><div class="v">400K</div><div class="l">동 위키 총 단어 수</div></div>
+    <div class="kpi"><div class="v">95%</div><div class="l">개인 스케일 토큰 사용 절감(보고치)</div></div>
+  </div>
+</section>
+
+<!-- ============ 강의 구성 7개 모듈 ============ -->
+<section id="curriculum">
+  <div class="sec-head">
+    <span class="sec-num">02 / CURRICULUM</span>
+    <h2>강의 구성 · 7개 모듈</h2>
+    <span class="tag">총 4시간 · 실습 비중 60%</span>
+  </div>
+
+  <!-- 모듈 1 -->
+  <div class="module" id="m1">
+    <div class="module-head">
+      <div class="module-no">1</div>
+      <div class="name">일단 봅시다</div>
+      <span class="dur">25분</span>
+    </div>
+    <ul>
+      <li><b>강사의 옵시디언으로 만든 결과물 시연</b> — vault, 그래프 뷰, 자동 생성 인덱스</li>
+      <li><b>결과물로 무엇을 할 수 있는가</b> — 제안서 작성, 강의안 합성, 리포트 출력</li>
+      <li><b>지식의 복리 효과</b> — 질문 → 답변 → 위키 누적의 양방향 흐름</li>
+    </ul>
+  </div>
+
+  <!-- 모듈 2 -->
+  <div class="module" id="m2">
+    <div class="module-head">
+      <div class="module-no">2</div>
+      <div class="name">나도 해봅시다</div>
+      <span class="dur">15분</span>
+    </div>
+    <ul>
+      <li><b>준비물 1</b> — Claude / Codex / Copilot 유료 계정 또는 API 사용료</li>
+      <li><b>준비물 2</b> — 노트북 (Claude 사용 시 CLI 설치 환경)</li>
+      <li><b>자료 준비</b> — PDF, TXT, HTML, JSON, MD 등 정제된 소스</li>
+    </ul>
+    <div class="quote" style="margin-top:14px">정제된 소스를 넣지 않으면 오류가 위키에 baked-in되어 미래 답변까지 오염된다. 조건이 가벼운 게 아니라 시스템 성패의 핵심 변수.<span class="src">— 강의 자료 3.3 개선 흐름</span></div>
+  </div>
+
+  <!-- 모듈 3 -->
+  <div class="module" id="m3">
+    <div class="module-head">
+      <div class="module-no">3</div>
+      <div class="name">따라해봅시다 (설치)</div>
+      <span class="dur">35분</span>
+    </div>
+    <ul>
+      <li><b>옵시디언 설치</b> — 1 PC, 1 vault 원칙</li>
+      <li><b>화면 구성</b> — Editor, Graph View, File Explorer, Side Panel</li>
+      <li><b>커뮤니티 플러그인 설치</b> — Claudian (Claude Code/Codex를 사이드바에 embed)</li>
+      <li><b>Claude Code 사용자</b> — CLI 설치 과정 추가</li>
+      <li><b>Codex 사용자</b> — 별도 설치 없음</li>
+      <li><b>유료 계정 인증 과정</b> — 토큰/세션 설정</li>
+    </ul>
+  </div>
+
+  <!-- 모듈 4 -->
+  <div class="module" id="m4">
+    <div class="module-head">
+      <div class="module-no">4</div>
+      <div class="name">따라해봅시다 (raw · wiki · 그래프 뷰)</div>
+      <span class="dur">45분</span>
+    </div>
+    <ul>
+      <li><b>폴더 지정</b> — 로컬 기본, 하드 용량·백업·Cloud Drive 동기화 고려</li>
+      <li><b>자료가 준비되었는가</b> — raw/ 폴더 입력 형식 점검</li>
+      <li><b>나는 무엇을 하고 싶은가</b> — 지식 욕구의 방향성 정의 (스키마 CLAUDE.md에 반영)</li>
+    </ul>
+    <div class="flow">
+      <div class="step"><b>STEP 1</b>raw/ 입력</div>
+      <div class="arrow">→</div>
+      <div class="step"><b>STEP 2</b>LLM 컴파일</div>
+      <div class="arrow">→</div>
+      <div class="step"><b>STEP 3</b>wiki/ 생성</div>
+      <div class="arrow">→</div>
+      <div class="step"><b>STEP 4</b>그래프 뷰 반영</div>
+    </div>
+  </div>
+
+  <!-- 모듈 5 -->
+  <div class="module" id="m5">
+    <div class="module-head">
+      <div class="module-no">5</div>
+      <div class="name">따라해봅시다 (자동화)</div>
+      <span class="dur">40분</span>
+    </div>
+    <ul>
+      <li><b>스케줄 수집</b> — 매일 / 12시간 간격으로 A 주제 조사하여 특정 폴더 저장</li>
+      <li><b>폴더 감시</b> — 파일 유입 시 옵시디언이 자동 확인 후 wiki로 등록, 그래프 뷰 반영</li>
+      <li><b>3가지 운영(Operations)</b> — Ingest · Query · Lint 주기 설계</li>
+    </ul>
+  </div>
+
+  <!-- 모듈 6 -->
+  <div class="module" id="m6">
+    <div class="module-head">
+      <div class="module-no">6</div>
+      <div class="name">문제가 생겼어 (트러블슈팅)</div>
+      <span class="dur">30분</span>
+    </div>
+    <ul>
+      <li><b>커뮤니티 플러그인이 동작하지 않아요</b> — CLI 미설치 / 포트 충돌(27124) / 인증 만료</li>
+      <li><b>자동화가 멈추었어요</b> — 토큰 한도 / 폴더 권한 / 스케줄러 비활성</li>
+      <li><b>위키가 이상해요</b> — Referential Integrity 깨짐, Lint 미실행, 모순 페이지</li>
+    </ul>
+  </div>
+
+  <!-- 모듈 7 -->
+  <div class="module" id="m7">
+    <div class="module-head">
+      <div class="module-no">7</div>
+      <div class="name">나도 이제 PKM 유저</div>
+      <span class="dur">30분</span>
+    </div>
+    <ul>
+      <li><b>이제부터 뭐하지</b> — 스스로 큐레이션, 자동 수집과의 균형</li>
+      <li><b>외부에서 확인하고 싶어</b> — Slack 연동, Sync, Obsidian Publish</li>
+      <li><b>다음 단계</b> — 부서/팀 vault 분리, 도메인별 그래프</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 부록 1: 5개 개념 비교 ============ -->
+<section id="ref-compare">
+  <div class="sec-head">
+    <span class="sec-num">A1 / REFERENCE</span>
+    <h2>부록 · 5개 개념 비교 (PKM · RAG · Wiki · LLM Wiki · GraphRAG)</h2>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="chartbox">
+      <h3>축별 우위 비교 (높을수록 우위)</h3>
+      <p class="note">스케일 한계 · 구축 단순성 · 답변 품질 · 유지보수 부담(역) · 오염 위험(역) · 다중 사용자</p>
+      <div class="chart-wrap chart-tall"><canvas id="conceptRadar"></canvas></div>
+    </div>
+    <div class="chartbox">
+      <h3>기업 규모별 1차 권장 솔루션</h3>
+      <p class="note">S1 개인 → S5 대기업 (자료 6장·8장 기준)</p>
+      <div class="chart-wrap chart-tall"><canvas id="sizeChart"></canvas></div>
+    </div>
+  </div>
+
+  <div style="margin-top:18px">
+    <table>
+      <thead>
+        <tr>
+          <th>구간</th><th>데이터 규모</th><th>사용자</th><th>1차 권장</th><th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><b>S1</b></td><td>150 페이지 미만 · 50k 토큰 미만</td><td>1명</td><td><span class="pill pill-good">PKM + LLM Wiki</span></td><td>바이브 옵시디언 최적 구간</td></tr>
+        <tr><td><b>S2</b></td><td>150–500 페이지 · 50–200k</td><td>1–10명</td><td><span class="pill pill-good">LLM Wiki</span></td><td>큐레이터 1인 필요</td></tr>
+        <tr><td><b>S3</b></td><td>500–5,000 페이지 · 200k–2M</td><td>10–50명</td><td><span class="pill pill-warn">RAG</span></td><td>부서별 LLM Wiki 병행</td></tr>
+        <tr><td><b>S4</b></td><td>5,000–50,000 · 2M–20M</td><td>50–300명</td><td><span class="pill pill-warn">RAG + GraphRAG</span></td><td>거버넌스 레이어 별도</td></tr>
+        <tr><td><b>S5</b></td><td>50,000+ · 20M+</td><td>300명+</td><td><span class="pill pill-bad">GraphRAG + 카탈로그</span></td><td>도구 네이티브 인제스천</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 부록 2: 바이브 옵시디언 장단 ============ -->
+<section id="ref-tradeoff">
+  <div class="sec-head">
+    <span class="sec-num">A2 / TRADE-OFF</span>
+    <h2>부록 · 바이브 옵시디언 장단점</h2>
+    <span class="tag">근거: 바이브옵시디언_분석.md</span>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="ico">+</span>
+      <div class="ttl">장점 (확인된 자료 기준)</div>
+      <div class="body">
+        · 자동 링킹/백링크 생성, 자동 인덱스<br/>
+        · 3개 이상 토픽 교차 패턴 → wiki/concepts/ 자동 글<br/>
+        · 그래프 뷰 임계점(200+ 노트) 초기부터 충족<br/>
+        · 세션 간 컨텍스트 보존 (100+ 파일 재독 불필요)
+      </div>
+    </div>
+    <div class="card">
+      <span class="ico">−</span>
+      <div class="ttl">한계 (확인된 자료 기준)</div>
+      <div class="body">
+        · 위키 페이지 직접 편집 비권장 (재컴파일 충돌)<br/>
+        · 의존성: Node 18+, Git, 포트 27124, MCP 서버<br/>
+        · 플러그인별 명령어 분산<br/>
+        · 외부 API 의존 → 로컬 우선·데이터 소유권 약화<br/>
+        · 기존 Dataview/Templater/Zettelkasten 자산 통합 방식 미정의
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 부록 3: 디시플린 ============ -->
+<section id="ref-discipline">
+  <div class="sec-head">
+    <span class="sec-num">A3 / DISCIPLINE</span>
+    <h2>부록 · 디시플린의 자리</h2>
+  </div>
+
+  <p>Notion이 무덤이 되는 4가지 이유 중 자유도 부담·디시플린 의존성·사일로 사후 정리는 LLM이 대신 처리. 거버넌스만 인간 영역으로 남는다 (자료 9.5).</p>
+
+  <div class="grid grid-3" style="margin-top:14px">
+    <div class="card"><div class="ttl">정기 리뷰</div><div class="body">주간/월간/분기 점검 시점 고정</div></div>
+    <div class="card"><div class="ttl">일관된 규칙</div><div class="body">캡처 형식·태그·파일명 매번 동일</div></div>
+    <div class="card"><div class="ttl">미루지 않기</div><div class="body">유입 즉시 처리 또는 inbox 분류</div></div>
+    <div class="card"><div class="ttl">아카이브 실행</div><div class="body">안 쓰는 항목 주기적 정리</div></div>
+    <div class="card"><div class="ttl">오너십 유지</div><div class="body">자기 영역 책임 의식</div></div>
+    <div class="card"><div class="ttl">LLM 외주 영역</div><div class="body">위 1–4번 → LLM Wiki가 대행</div></div>
+  </div>
+</section>
+
+<!-- ============ 강의 산출 ============ -->
+<section id="outcomes">
+  <div class="sec-head">
+    <span class="sec-num">03 / OUTCOMES</span>
+    <h2>수강 후 결과물</h2>
+  </div>
+  <div class="grid grid-4">
+    <div class="card"><span class="ico">1</span><div class="ttl">개인 vault</div><div class="body">raw·wiki·output 3 레이어 구성</div></div>
+    <div class="card"><span class="ico">2</span><div class="ttl">자동 수집 파이프라인</div><div class="body">주기 스케줄 + 폴더 감시 ingest</div></div>
+    <div class="card"><span class="ico">3</span><div class="ttl">그래프 뷰 PKM</div><div class="body">교차 참조와 개념 페이지 포함</div></div>
+    <div class="card"><span class="ico">4</span><div class="ttl">운영 루틴</div><div class="body">Ingest · Query · Lint 주기 정의</div></div>
+  </div>
+</section>
+
+<footer>
+  <div>바이브 옵시디언 강의 제안서 · 2026-05-18</div>
+  <div>근거 자료: Karpathy LLM Wiki Gist · 강의 연구 정리 10장 · 바이브 옵시디언 분석 5섹션</div>
+</footer>
+
+</div>
+</div>
+
+<script>
+// ============ Scroll Spy ============
+(function(){
+  const tocLinks = document.querySelectorAll('.toc a');
+  const targets = Array.from(tocLinks).map(a=>{
+    const id = a.getAttribute('href').slice(1);
+    return {link:a, el:document.getElementById(id)};
+  }).filter(t=>t.el);
+
+  function update(){
+    const scrollY = window.scrollY + 120;
+    let current = targets[0];
+    for(const t of targets){
+      if(t.el.offsetTop <= scrollY) current = t;
+    }
+    tocLinks.forEach(a=>a.classList.remove('active'));
+    if(current) current.link.classList.add('active');
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  window.addEventListener('load', update);
+
+  // 모바일에서 링크 클릭 시 닫기
+  tocLinks.forEach(a=>{
+    a.addEventListener('click',()=>{
+      if(window.innerWidth<=1024) document.getElementById('toc').classList.remove('open');
+    });
+  });
+})();
+</script>
+
+<script>
+// 옵시디언 컬러 팔레트
+const C = {
+  p1:'#B48EFF', p2:'#8B5CF6', p3:'#6B3FA0', p4:'#483699', pd:'#2B1F5C',
+  text:'#E8E6F0', mute:'#9A93B0', line:'#2A2833', card:'#16151C'
+};
+
+Chart.defaults.color = C.mute;
+Chart.defaults.borderColor = C.line;
+Chart.defaults.font.family = '"Pretendard","Noto Sans KR",sans-serif';
+
+// 1) PKM 사용자 분포
+new Chart(document.getElementById('pkmDist'),{
+  type:'doughnut',
+  data:{
+    labels:['허들 넘지 못함 (70%)','넘었지만 유지 못함 (20%)','유지하지만 갈 길 잃음 (5%)','프론티어 (5%)'],
+    datasets:[{
+      data:[70,20,5,5],
+      backgroundColor:['#3D2966','#6B3FA0','#8B5CF6','#B48EFF'],
+      borderColor:C.card, borderWidth:3
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    cutout:'62%',
+    plugins:{
+      legend:{position:'bottom',labels:{padding:14,boxWidth:12,font:{size:12}}}
+    }
+  }
+});
+
+// 2) 강의 목표 구간
+new Chart(document.getElementById('targetSegment'),{
+  type:'bar',
+  data:{
+    labels:['허들 미진입','허들 넘기','유지하기','방향 잡기','프론티어'],
+    datasets:[{
+      label:'강의 커버리지',
+      data:[40,95,90,55,15],
+      backgroundColor:(ctx)=>{
+        const v=ctx.parsed?.y ?? 0;
+        if(v>=85) return '#B48EFF';
+        if(v>=50) return '#8B5CF6';
+        return '#483699';
+      },
+      borderRadius:8, barThickness:36
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{
+      y:{beginAtZero:true,max:100,ticks:{callback:v=>v+'%'},grid:{color:C.line}},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+// 3) 시간 경과 가치 곡선
+const months = ['1M','2M','3M','4M','5M','6M','9M','12M'];
+new Chart(document.getElementById('valueCurve'),{
+  type:'line',
+  data:{
+    labels:months,
+    datasets:[
+      {
+        label:'RAG / NotebookLM',
+        data:[10,10,11,10,11,10,11,10],
+        borderColor:'#9A93B0', backgroundColor:'rgba(154,147,176,0.08)',
+        tension:0.3, fill:true, borderWidth:2, pointRadius:3
+      },
+      {
+        label:'LLM Wiki (바이브 옵시디언)',
+        data:[10,14,20,29,42,58,82,110],
+        borderColor:'#B48EFF', backgroundColor:'rgba(180,142,255,0.18)',
+        tension:0.35, fill:true, borderWidth:3, pointRadius:4, pointBackgroundColor:'#B48EFF'
+      }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'bottom',labels:{padding:14,boxWidth:14}},
+      tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+' 지표'}}
+    },
+    scales:{
+      y:{title:{display:true,text:'누적 가치 (상대값)',color:C.mute},grid:{color:C.line}},
+      x:{title:{display:true,text:'경과 시간',color:C.mute},grid:{display:false}}
+    }
+  }
+});
+
+// 4) 5개 개념 레이더
+new Chart(document.getElementById('conceptRadar'),{
+  type:'radar',
+  data:{
+    labels:['스케일 한계','구축 단순성','답변 품질','유지보수 부담(역)','오염 위험(역)','다중 사용자'],
+    datasets:[
+      {label:'PKM',           data:[1,5,1,1,5,1], borderColor:'#9A93B0', backgroundColor:'rgba(154,147,176,0.12)', borderWidth:2},
+      {label:'RAG',           data:[4,2,3,4,4,4], borderColor:'#6B3FA0', backgroundColor:'rgba(107,63,160,0.15)',  borderWidth:2},
+      {label:'Wiki',          data:[2,3,2,2,5,3], borderColor:'#C4B5FD', backgroundColor:'rgba(196,181,253,0.10)', borderWidth:2},
+      {label:'LLM Wiki',      data:[2,4,4,5,1,1], borderColor:'#B48EFF', backgroundColor:'rgba(180,142,255,0.22)', borderWidth:3},
+      {label:'GraphRAG',      data:[5,1,5,3,3,5], borderColor:'#8B5CF6', backgroundColor:'rgba(139,92,246,0.15)',  borderWidth:2}
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'bottom',labels:{padding:12,boxWidth:12,font:{size:11}}}},
+    scales:{
+      r:{
+        suggestedMin:0,suggestedMax:5,
+        angleLines:{color:C.line},
+        grid:{color:C.line},
+        pointLabels:{color:C.text,font:{size:11}},
+        ticks:{color:C.mute,backdropColor:'transparent',stepSize:1}
+      }
+    }
+  }
+});
+
+// 5) 기업 규모별 권장 솔루션
+new Chart(document.getElementById('sizeChart'),{
+  type:'bar',
+  data:{
+    labels:['S1\n개인 1명','S2\n팀 1-10','S3\n중소 10-50','S4\n중견 50-300','S5\n대기업 300+'],
+    datasets:[
+      {label:'LLM Wiki', data:[100,90,40,15,5],   backgroundColor:'#B48EFF', stack:'a', borderRadius:6},
+      {label:'RAG',      data:[10,30,80,90,60],   backgroundColor:'#8B5CF6', stack:'a', borderRadius:6},
+      {label:'GraphRAG', data:[0,5,20,60,100],    backgroundColor:'#483699', stack:'a', borderRadius:6}
+    ]
+  },
+  options:{
+    indexAxis:'y',
+    responsive:true, maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'bottom',labels:{padding:12,boxWidth:14}},
+      tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x+' 적합도'}}
+    },
+    scales:{
+      x:{stacked:true,max:200,grid:{color:C.line},ticks:{display:false}},
+      y:{stacked:true,grid:{display:false}}
+    }
+  }
+});
+</script>
+</body>
+</html>
