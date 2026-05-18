@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모듈 1 · 일단 봅시다 — 바이브 옵시디언 워크북</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 8 L25 35 L22 70 L48 92 L50 50 Z' fill='%23B48EFF'/><path d='M50 8 L78 38 L82 68 L52 92 L50 50 Z' fill='%236B3FA0'/></svg>">
+<link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+<div class="wb-wrap">
+
+<!-- 상단 네비 -->
+<nav class="wb-nav">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="lg1" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#E0CCFF"/><stop offset="100%" stop-color="#9B6FE8"/></linearGradient>
+      <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9B6FE8"/><stop offset="100%" stop-color="#6B3FA0"/></linearGradient>
+    </defs>
+    <path d="M50 6 L24 34 L20 68 L46 94 L50 52 Z" fill="url(#lg1)"/>
+    <path d="M50 6 L78 36 L84 70 L54 94 L50 52 Z" fill="url(#lg2)"/>
+  </svg>
+  <div class="brand">바이브 옵시디언 워크북<small>VIBE OBSIDIAN · WORKBOOK</small></div>
+  <div class="pages">
+    <a href="index.html" class="hub">목차</a>
+    <a href="module1.html" class="cur">M1</a>
+    <a href="module2.html">M2</a>
+    <a href="module3.html">M3</a>
+    <a href="module4.html">M4</a>
+    <a href="module5.html">M5</a>
+    <a href="module6.html">M6</a>
+    <a href="module7.html">M7</a>
+  </div>
+</nav>
+
+<!-- 표지 -->
+<div class="m-cover">
+  <span class="badge">Module 1 · Demonstration</span>
+  <h1>일단 봅시다</h1>
+  <p class="desc">강사의 완성된 Vault를 화면 위에 그대로 띄워 본다. 폴더 구조, 그래프 뷰, raw 노트, Claudian 호출까지 4개 화면을 차례로 본다.</p>
+  <div class="meta">
+    <span>소요 <b>25분</b></span>
+    <span>방식 <b>강사 시연 / 수강생 관찰</b></span>
+    <span>준비물 <b>화면 + 노트</b></span>
+  </div>
+</div>
+
+<!-- 학습 목표 -->
+<div class="goals">
+  <span class="lbl">LEARNING GOALS</span>
+  <ol>
+    <li>바이브 옵시디언으로 도달 가능한 결과물의 <b>형태</b>를 본다.</li>
+    <li>기존 PKM과 무엇이 다른지 <b>관찰 단위</b>로 기록한다.</li>
+    <li>이후 모듈에서 본인이 만들 결과물의 <b>목표 이미지</b>를 잡는다.</li>
+  </ol>
+</div>
+
+<!-- 1. 시연 흐름 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">01 / FLOW</span>
+    <h2>시연 흐름 4단계</h2>
+    <span class="tag">총 25분 / 1단계당 5~7분</span>
+  </div>
+
+  <ol class="step-list">
+    <li class="step">
+      <div class="ttl">Vault 폴더 구조 보기 <span class="dur-tag" style="margin-left:8px">5분</span></div>
+      <div class="body">강사 Vault의 좌측 파일 트리. 폴더 분류 규칙(00_inbox → 10_atomic → 20_wiki → 30_publish)을 확인한다.</div>
+    </li>
+    <li class="step">
+      <div class="ttl">그래프 뷰 펼치기 <span class="dur-tag" style="margin-left:8px">7분</span></div>
+      <div class="body">노트 간 연결을 시각화. 색상은 폴더 기준, 노드 크기는 백링크 수 기준. 클러스터 3~4개 식별.</div>
+    </li>
+    <li class="step">
+      <div class="ttl">raw 노트 → wiki 노트 비교 <span class="dur-tag" style="margin-left:8px">6분</span></div>
+      <div class="body">동일 주제의 raw(수집 원문)와 wiki(정제 노트)를 좌우로 띄워 차이를 본다.</div>
+    </li>
+    <li class="step">
+      <div class="ttl">Claudian 호출 <span class="dur-tag" style="margin-left:8px">7분</span></div>
+      <div class="body">옵시디언 안에서 Claudian 명령으로 <code>요약</code> · <code>링크 제안</code> · <code>중복 탐지</code> 3개 명령 시연.</div>
+    </li>
+  </ol>
+</section>
+
+<!-- 2. 더미 Vault 구조 시각화 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">02 / VAULT</span>
+    <h2>시연용 Vault 구조 (예시)</h2>
+    <span class="tag">더미 데이터</span>
+  </div>
+
+  <p class="mute" style="margin-bottom:12px">강사 화면에서 실제로 표시되는 폴더 트리 예시. 5개 최상위 폴더 · 노트 총 312개.</p>
+
+  <pre class="code">
+<span class="hl">📁 vault_2026/</span>
+├─ 00_inbox/                      <span class="mute"># 수집 원문 (raw)</span>
+│   ├─ 2026-05-15_arxiv-clip.md
+│   ├─ 2026-05-16_meeting-note.md
+│   └─ 2026-05-17_book-highlight.md
+├─ 10_atomic/                     <span class="mute"># 단일 개념 노트</span>
+│   ├─ rag-retrieval.md
+│   ├─ context-window.md
+│   └─ embedding-dim.md
+├─ 20_wiki/                       <span class="mute"># 정제된 위키 (Karpathy 패턴)</span>
+│   ├─ llm-architecture.md
+│   ├─ pkm-workflow.md
+│   └─ obsidian-plugins.md
+├─ 30_publish/                    <span class="mute"># 외부 공유 후보</span>
+│   └─ blog-drafts/
+├─ 99_meta/                       <span class="mute"># 템플릿, 자동화 스크립트</span>
+│   ├─ templates/
+│   └─ automation/
+
+<span class="hl">총 312 notes · 1,847 internal links · 23 orphan</span>
+</pre>
+</section>
+
+<!-- 3. 더미 그래프 뷰 SVG -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03 / GRAPH</span>
+    <h2>그래프 뷰 시연 (예시)</h2>
+    <span class="tag">더미 데이터 · 4 클러스터</span>
+  </div>
+
+  <div class="gview">
+    <svg viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg" aria-label="더미 그래프 뷰">
+      <defs>
+        <radialGradient id="bg-grad" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stop-color="#16151C"/>
+          <stop offset="100%" stop-color="#0A0910"/>
+        </radialGradient>
+        <linearGradient id="edge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#6B3FA0" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#B48EFF" stop-opacity="0.6"/>
+        </linearGradient>
+      </defs>
+      <rect width="700" height="360" fill="url(#bg-grad)"/>
+
+      <!-- 엣지(연결선) -->
+      <g stroke="url(#edge-grad)" stroke-width="1" fill="none" opacity="0.55">
+        <!-- 클러스터 1 (LLM) -->
+        <line x1="160" y1="100" x2="220" y2="80"/>
+        <line x1="160" y1="100" x2="200" y2="140"/>
+        <line x1="220" y1="80" x2="280" y2="110"/>
+        <line x1="200" y1="140" x2="260" y2="170"/>
+        <line x1="280" y1="110" x2="260" y2="170"/>
+        <!-- 클러스터 2 (PKM) -->
+        <line x1="490" y1="90" x2="540" y2="120"/>
+        <line x1="490" y1="90" x2="450" y2="140"/>
+        <line x1="540" y1="120" x2="580" y2="170"/>
+        <line x1="450" y1="140" x2="510" y2="180"/>
+        <!-- 클러스터 3 (Obsidian) -->
+        <line x1="180" y1="260" x2="230" y2="290"/>
+        <line x1="230" y1="290" x2="290" y2="270"/>
+        <line x1="290" y1="270" x2="250" y2="230"/>
+        <line x1="250" y1="230" x2="180" y2="260"/>
+        <!-- 클러스터 4 (Project) -->
+        <line x1="500" y1="280" x2="560" y2="260"/>
+        <line x1="560" y1="260" x2="600" y2="300"/>
+        <line x1="500" y1="280" x2="540" y2="310"/>
+        <!-- 클러스터 간 브릿지 -->
+        <line x1="280" y1="110" x2="450" y2="140" stroke-dasharray="2,3"/>
+        <line x1="260" y1="170" x2="250" y2="230" stroke-dasharray="2,3"/>
+        <line x1="510" y1="180" x2="500" y2="280" stroke-dasharray="2,3"/>
+      </g>
+
+      <!-- 노드 -->
+      <g>
+        <!-- 클러스터 1 (보라 1) -->
+        <circle cx="160" cy="100" r="10" fill="#B48EFF"/>
+        <circle cx="220" cy="80" r="8" fill="#B48EFF"/>
+        <circle cx="200" cy="140" r="7" fill="#B48EFF"/>
+        <circle cx="280" cy="110" r="12" fill="#B48EFF"/>
+        <circle cx="260" cy="170" r="6" fill="#B48EFF"/>
+        <!-- 클러스터 2 (보라 2) -->
+        <circle cx="490" cy="90" r="9" fill="#8B5CF6"/>
+        <circle cx="540" cy="120" r="11" fill="#8B5CF6"/>
+        <circle cx="450" cy="140" r="7" fill="#8B5CF6"/>
+        <circle cx="580" cy="170" r="6" fill="#8B5CF6"/>
+        <circle cx="510" cy="180" r="8" fill="#8B5CF6"/>
+        <!-- 클러스터 3 (보라 3) -->
+        <circle cx="180" cy="260" r="9" fill="#6B3FA0"/>
+        <circle cx="230" cy="290" r="7" fill="#6B3FA0"/>
+        <circle cx="290" cy="270" r="11" fill="#6B3FA0"/>
+        <circle cx="250" cy="230" r="6" fill="#6B3FA0"/>
+        <!-- 클러스터 4 (보라 4) -->
+        <circle cx="500" cy="280" r="10" fill="#483699"/>
+        <circle cx="560" cy="260" r="8" fill="#483699"/>
+        <circle cx="600" cy="300" r="7" fill="#483699"/>
+        <circle cx="540" cy="310" r="6" fill="#483699"/>
+        <!-- 고아 노드 (orphan) -->
+        <circle cx="80" cy="180" r="5" fill="#9A93B0" opacity="0.6"/>
+        <circle cx="650" cy="60" r="5" fill="#9A93B0" opacity="0.6"/>
+        <circle cx="370" cy="320" r="5" fill="#9A93B0" opacity="0.6"/>
+      </g>
+
+      <!-- 라벨 -->
+      <g font-family="Pretendard,sans-serif" font-size="11" fill="#B48EFF">
+        <text x="280" y="100" text-anchor="middle">LLM</text>
+        <text x="540" y="110" text-anchor="middle">PKM</text>
+        <text x="290" y="260" text-anchor="middle">Obsidian</text>
+        <text x="560" y="250" text-anchor="middle">Project</text>
+      </g>
+      <g font-family="Pretendard,sans-serif" font-size="10" fill="#9A93B0">
+        <text x="20" y="345">노드: 노트 · 색: 폴더 · 크기: 백링크 수</text>
+        <text x="680" y="345" text-anchor="end">orphan 3</text>
+      </g>
+    </svg>
+    <span class="cap">▲ 시연 화면 캡처 예시 — 4 클러스터 / 19 노드 / orphan 3</span>
+  </div>
+</section>
+
+<!-- 4. raw vs wiki 비교 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">04 / RAW vs WIKI</span>
+    <h2>raw 노트 → wiki 노트 변환 예시</h2>
+    <span class="tag">동일 주제 좌우 비교</span>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="ttl">📥 raw — 00_inbox/2026-05-15_arxiv-clip.md</div>
+      <pre class="code" style="margin-top:10px;font-size:11.5px"><span class="mute"># 원문 클립 (수집 그대로)</span>
+
+<span class="hl">Title:</span> Retrieval-Augmented Generation
+<span class="hl">Source:</span> arXiv 2020.11401
+<span class="hl">Date:</span> 2026-05-15
+
+"... we introduce RAG models where
+the parametric memory is a pre-trained
+seq2seq model and the non-parametric
+memory is a dense vector index of
+Wikipedia..."
+
+<span class="hl">tags:</span> #raw #unread</pre>
+    </div>
+    <div class="card">
+      <div class="ttl">📚 wiki — 20_wiki/rag-retrieval.md</div>
+      <pre class="code" style="margin-top:10px;font-size:11.5px"><span class="mute"># 정제된 위키 노트</span>
+
+<span class="hl"># RAG (Retrieval-Augmented Generation)</span>
+
+## 한 문장 요약
+질문 시점에 외부 인덱스에서
+관련 문서를 끌어와 LLM 입력에
+붙이는 방식.
+
+## 구성
+- parametric: seq2seq 모델
+- non-parametric: 벡터 인덱스
+
+## 관련
+- [[context-window]]
+- [[embedding-dim]]
+- [[llm-architecture]]
+
+<span class="hl">tags:</span> #wiki #atomic</pre>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="lbl">관찰 포인트</span>
+    <p>raw는 출처와 원문이 보존된다. wiki는 한 문장 요약 + 구조 + 백링크가 추가된다. 두 노트는 분리된 상태로 공존한다.</p>
+  </div>
+</section>
+
+<!-- 5. Claudian 호출 흐름 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">05 / CLAUDIAN</span>
+    <h2>옵시디언 안에서 Claudian 호출</h2>
+    <span class="tag">3개 명령 시연</span>
+  </div>
+
+  <table class="ws">
+    <thead>
+      <tr><th style="width:140px">명령</th><th>입력</th><th>출력 형태</th><th style="width:80px">시간</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code class="inline">/summarize</code></td>
+        <td>00_inbox/arxiv-clip.md 선택</td>
+        <td>한 문장 요약 + 키워드 3개 + 인용</td>
+        <td>≈ 4s</td>
+      </tr>
+      <tr>
+        <td><code class="inline">/link</code></td>
+        <td>현재 노트와 유사한 wiki 후보</td>
+        <td>백링크 후보 5건 + 유사도 점수</td>
+        <td>≈ 6s</td>
+      </tr>
+      <tr>
+        <td><code class="inline">/dedupe</code></td>
+        <td>20_wiki 폴더 스캔</td>
+        <td>중복 의심 페어 목록</td>
+        <td>≈ 12s</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 6. 관찰 워크시트 (빈칸) -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">06 / OBSERVE</span>
+    <h2>시연 관찰 노트 (수강생 작성)</h2>
+    <span class="tag">강의 중 작성</span>
+  </div>
+
+  <p class="mute" style="margin-bottom:14px">강사 화면을 보면서 떠오르는 점을 그대로 적는다. 결론을 내지 않아도 된다.</p>
+
+  <table class="ws">
+    <thead>
+      <tr><th style="width:160px">시연 단계</th><th>본 것 (사실)</th><th>의문점 / 메모</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Vault 폴더 구조</td><td class="fill-md"></td><td class="fill-md"></td></tr>
+      <tr><td>그래프 뷰</td><td class="fill-md"></td><td class="fill-md"></td></tr>
+      <tr><td>raw → wiki 변환</td><td class="fill-md"></td><td class="fill-md"></td></tr>
+      <tr><td>Claudian 명령</td><td class="fill-md"></td><td class="fill-md"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="fill tall" style="margin-top:18px">
+    <div class="q">시연 후 가장 먼저 따라 해보고 싶은 것 하나만 적는다.</div>
+    <div class="lines"><span></span><span></span><span></span></div>
+  </div>
+</section>
+
+<!-- 7. 셀프 체크 -->
+<div class="self">
+  <h3>셀프 체크 (모듈 종료 전)</h3>
+  <ul class="check">
+    <li><b>4개 시연 단계</b>가 무엇이었는지 말로 설명할 수 있다.</li>
+    <li>강사 Vault에서 <b>raw 폴더와 wiki 폴더의 역할 차이</b>를 한 문장으로 적었다.</li>
+    <li>그래프 뷰에서 본 <b>클러스터 개수</b>를 기록했다.</li>
+    <li>Claudian 호출 시 <b>응답 시간 범위</b>를 봤다 (한 자리 초 ~ 두 자리 초).</li>
+  </ul>
+</div>
+
+<!-- 풋터 -->
+<div class="wb-foot">
+  <a class="nav-prev" href="index.html">← 워크북 목차</a>
+  <span>모듈 1 / 7 · 일단 봅시다</span>
+  <a class="nav-next" href="module2.html">모듈 2 · 나도 해봅시다 →</a>
+</div>
+
+</div>
+</body>
+</html>

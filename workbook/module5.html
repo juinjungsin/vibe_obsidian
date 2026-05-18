@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모듈 5 · 자동화 — 바이브 옵시디언 워크북</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 8 L25 35 L22 70 L48 92 L50 50 Z' fill='%23B48EFF'/><path d='M50 8 L78 38 L82 68 L52 92 L50 50 Z' fill='%236B3FA0'/></svg>">
+<link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+<div class="wb-wrap">
+
+<nav class="wb-nav">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="lg1" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#E0CCFF"/><stop offset="100%" stop-color="#9B6FE8"/></linearGradient>
+      <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9B6FE8"/><stop offset="100%" stop-color="#6B3FA0"/></linearGradient>
+    </defs>
+    <path d="M50 6 L24 34 L20 68 L46 94 L50 52 Z" fill="url(#lg1)"/>
+    <path d="M50 6 L78 36 L84 70 L54 94 L50 52 Z" fill="url(#lg2)"/>
+  </svg>
+  <div class="brand">바이브 옵시디언 워크북<small>VIBE OBSIDIAN · WORKBOOK</small></div>
+  <div class="pages">
+    <a href="index.html" class="hub">목차</a>
+    <a href="module1.html">M1</a>
+    <a href="module2.html">M2</a>
+    <a href="module3.html">M3</a>
+    <a href="module4.html">M4</a>
+    <a href="module5.html" class="cur">M5</a>
+    <a href="module6.html">M6</a>
+    <a href="module7.html">M7</a>
+  </div>
+</nav>
+
+<div class="m-cover">
+  <span class="badge">Module 5 · Automation</span>
+  <h1>따라해봅시다 — 자동화</h1>
+  <p class="desc">inbox 폴더 감시(파일 추가 시 자동 변환) + 매일 정해진 시각 스케줄 실행(중복 검사, 백링크 제안)을 설정한다. 2개 자동화 시나리오를 본인 Vault에 적용한다.</p>
+  <div class="meta">
+    <span>소요 <b>40분</b></span>
+    <span>방식 <b>설정 + 트리거 확인</b></span>
+    <span>완료 시점 <b>자동 변환 1건 + 스케줄 1건</b></span>
+  </div>
+</div>
+
+<div class="goals">
+  <span class="lbl">LEARNING GOALS</span>
+  <ol>
+    <li><b>폴더 감시 자동화</b>를 통해 raw 1건이 wiki 1건으로 변환되는 흐름을 만든다.</li>
+    <li><b>스케줄 자동화</b>로 매일 정해진 시각에 1개 작업이 실행되도록 한다.</li>
+    <li>자동화 <b>로그</b>를 어디서 보는지 확인한다.</li>
+  </ol>
+</div>
+
+<!-- 1. 자동화 흐름도 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">01 / FLOW</span>
+    <h2>자동화 흐름 (2 시나리오)</h2>
+    <span class="tag">파일 감시 · 스케줄</span>
+  </div>
+
+  <div class="gview">
+    <svg viewBox="0 0 740 260" xmlns="http://www.w3.org/2000/svg" aria-label="자동화 흐름도">
+      <rect width="740" height="260" fill="#0A0910"/>
+      <!-- 시나리오 1: 파일 감시 -->
+      <text x="20" y="30" font-family="Pretendard,sans-serif" font-size="12" fill="#B48EFF" font-weight="700">A. 폴더 감시</text>
+      <!-- 박스들 -->
+      <g font-family="Pretendard,sans-serif" font-size="11" fill="#E8E6F0">
+        <rect x="20" y="50" width="120" height="50" rx="8" fill="#16151C" stroke="#2A2833"/>
+        <text x="80" y="74" text-anchor="middle">📥 00_inbox</text>
+        <text x="80" y="90" text-anchor="middle" fill="#9A93B0" font-size="10">파일 추가 감지</text>
+
+        <rect x="190" y="50" width="120" height="50" rx="8" fill="#16151C" stroke="#6B3FA0"/>
+        <text x="250" y="74" text-anchor="middle" fill="#B48EFF">⚡ Trigger</text>
+        <text x="250" y="90" text-anchor="middle" fill="#9A93B0" font-size="10">on:create *.md</text>
+
+        <rect x="360" y="50" width="120" height="50" rx="8" fill="#16151C" stroke="#6B3FA0"/>
+        <text x="420" y="74" text-anchor="middle" fill="#B48EFF">🤖 Claudian</text>
+        <text x="420" y="90" text-anchor="middle" fill="#9A93B0" font-size="10">summarize + link</text>
+
+        <rect x="530" y="50" width="190" height="50" rx="8" fill="#16151C" stroke="#2A2833"/>
+        <text x="625" y="74" text-anchor="middle">📚 20_wiki/[제목].md</text>
+        <text x="625" y="90" text-anchor="middle" fill="#9A93B0" font-size="10">생성 또는 업데이트</text>
+      </g>
+      <g stroke="#6B3FA0" stroke-width="1.5" fill="none">
+        <path d="M140 75 L190 75" marker-end="url(#arr)"/>
+        <path d="M310 75 L360 75" marker-end="url(#arr)"/>
+        <path d="M480 75 L530 75" marker-end="url(#arr)"/>
+      </g>
+
+      <!-- 시나리오 2: 스케줄 -->
+      <text x="20" y="155" font-family="Pretendard,sans-serif" font-size="12" fill="#B48EFF" font-weight="700">B. 스케줄 (매일 09:00)</text>
+      <g font-family="Pretendard,sans-serif" font-size="11" fill="#E8E6F0">
+        <rect x="20" y="175" width="120" height="50" rx="8" fill="#16151C" stroke="#2A2833"/>
+        <text x="80" y="199" text-anchor="middle">⏰ Cron 09:00</text>
+        <text x="80" y="215" text-anchor="middle" fill="#9A93B0" font-size="10">매일 1회</text>
+
+        <rect x="190" y="175" width="120" height="50" rx="8" fill="#16151C" stroke="#6B3FA0"/>
+        <text x="250" y="199" text-anchor="middle" fill="#B48EFF">📂 20_wiki 스캔</text>
+        <text x="250" y="215" text-anchor="middle" fill="#9A93B0" font-size="10">전체 노트</text>
+
+        <rect x="360" y="175" width="120" height="50" rx="8" fill="#16151C" stroke="#6B3FA0"/>
+        <text x="420" y="199" text-anchor="middle" fill="#B48EFF">🔍 중복 / 후보</text>
+        <text x="420" y="215" text-anchor="middle" fill="#9A93B0" font-size="10">유사도 0.85+</text>
+
+        <rect x="530" y="175" width="190" height="50" rx="8" fill="#16151C" stroke="#2A2833"/>
+        <text x="625" y="199" text-anchor="middle">📋 99_meta/daily_report.md</text>
+        <text x="625" y="215" text-anchor="middle" fill="#9A93B0" font-size="10">결과 누적</text>
+      </g>
+      <g stroke="#6B3FA0" stroke-width="1.5" fill="none">
+        <path d="M140 200 L190 200" marker-end="url(#arr)"/>
+        <path d="M310 200 L360 200" marker-end="url(#arr)"/>
+        <path d="M480 200 L530 200" marker-end="url(#arr)"/>
+      </g>
+      <defs>
+        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#B48EFF"/>
+        </marker>
+      </defs>
+    </svg>
+    <span class="cap">▲ A) inbox 파일 감시 · B) 스케줄 기반 일일 스캔</span>
+  </div>
+</section>
+
+<!-- 2. 폴더 감시 설정 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">02 / WATCH</span>
+    <h2>A. 폴더 감시 설정</h2>
+    <span class="tag">Claudian → Automations</span>
+  </div>
+
+  <p class="mute" style="margin-bottom:10px">Claudian Settings → Automations → New rule.</p>
+
+  <pre class="code">
+<span class="hl">rule:</span> auto-summarize-inbox
+<span class="hl">trigger:</span>
+  type: file_create
+  path: 00_inbox/**/*.md
+<span class="hl">action:</span>
+  - run: claudian.summarize
+    output: 20_wiki/{filename_slug}.md
+  - run: claudian.suggest_links
+    limit: 5
+<span class="hl">debounce:</span> 3s   <span class="mute"># 같은 파일 연속 저장 방지</span>
+<span class="hl">on_error:</span> log  <span class="mute"># 또는 notify</span></pre>
+
+  <table class="ws" style="margin-top:14px">
+    <thead>
+      <tr><th style="width:200px">필드</th><th>본인 입력</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>rule name</td><td class="fill-sm"></td></tr>
+      <tr><td>trigger path</td><td class="fill-sm"></td></tr>
+      <tr><td>action 1</td><td class="fill-sm"></td></tr>
+      <tr><td>action 2 (선택)</td><td class="fill-sm"></td></tr>
+      <tr><td>debounce 초</td><td class="fill-sm"></td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:18px">동작 확인 절차</h3>
+  <ul class="check">
+    <li><code>00_inbox/</code>에 새 노트 <code>test-watch.md</code> 작성 후 저장</li>
+    <li>3~10초 대기 → <code>20_wiki/test-watch.md</code> 생성 확인</li>
+    <li>Claudian 로그 패널에서 <b>summarize · suggest_links</b> 실행 기록 확인</li>
+  </ul>
+</section>
+
+<!-- 3. 스케줄 설정 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03 / SCHEDULE</span>
+    <h2>B. 스케줄 설정 (매일 09:00)</h2>
+    <span class="tag">Cron 형식</span>
+  </div>
+
+  <pre class="code">
+<span class="hl">rule:</span> daily-wiki-scan
+<span class="hl">trigger:</span>
+  type: schedule
+  cron: "0 9 * * *"   <span class="mute"># 매일 09:00</span>
+<span class="hl">action:</span>
+  - run: claudian.dedupe
+    folder: 20_wiki
+    threshold: 0.85
+  - run: claudian.suggest_links
+    folder: 20_wiki
+    limit_per_note: 3
+  - run: claudian.report
+    output: 99_meta/daily_report_{YYYY-MM-DD}.md</pre>
+
+  <h3 style="margin-top:14px">Cron 표기 예시</h3>
+  <table class="ws">
+    <thead>
+      <tr><th>식</th><th>의미</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code class="inline">0 9 * * *</code></td><td>매일 09:00</td></tr>
+      <tr><td><code class="inline">0 9 * * 1-5</code></td><td>평일 09:00</td></tr>
+      <tr><td><code class="inline">0 */6 * * *</code></td><td>6시간마다</td></tr>
+      <tr><td><code class="inline">30 22 * * 0</code></td><td>매주 일요일 22:30</td></tr>
+    </tbody>
+  </table>
+
+  <div class="fill" style="margin-top:14px">
+    <div class="q">본인이 적용하고 싶은 스케줄 표기 (Cron)</div>
+    <div class="lines"><span></span></div>
+  </div>
+</section>
+
+<!-- 4. 로그 확인 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">04 / LOG</span>
+    <h2>자동화 로그 확인</h2>
+    <span class="tag">디버깅 기본 경로</span>
+  </div>
+
+  <table class="ws">
+    <thead>
+      <tr><th style="width:200px">로그 위치</th><th>내용</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code class="inline">99_meta/claudian.log</code></td><td>모든 실행 이력 (timestamp · rule · result · 소요 ms)</td></tr>
+      <tr><td>Claudian 패널 → Log 탭</td><td>최근 50건 실시간 표시</td></tr>
+      <tr><td>Obsidian Developer Tools (Cmd/Ctrl+Shift+I)</td><td>오류 stack trace</td></tr>
+    </tbody>
+  </table>
+
+  <pre class="code" style="margin-top:12px">
+<span class="mute"># claudian.log 샘플</span>
+<span class="hl">2026-05-18 09:00:01</span> [INFO]  daily-wiki-scan started
+<span class="hl">2026-05-18 09:00:08</span> [INFO]  dedupe scanned=47 candidates=3
+<span class="hl">2026-05-18 09:00:14</span> [INFO]  suggest_links generated=12 (4 notes touched)
+<span class="hl">2026-05-18 09:00:15</span> [INFO]  report saved 99_meta/daily_report_2026-05-18.md
+<span class="hl">2026-05-18 09:00:15</span> [DONE]  duration=14.2s tokens_used=3,418</pre>
+</section>
+
+<!-- 5. 본인 자동화 설계 워크시트 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">05 / DESIGN</span>
+    <h2>본인 자동화 1건 설계</h2>
+    <span class="tag">설계 → 실행 → 확인</span>
+  </div>
+
+  <table class="ws">
+    <thead>
+      <tr><th style="width:150px">설계 항목</th><th>본인 입력</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>자동화 이름</td><td class="fill-sm"></td></tr>
+      <tr><td>트리거 (감시/스케줄)</td><td class="fill-sm"></td></tr>
+      <tr><td>대상 폴더 / 파일 패턴</td><td class="fill-sm"></td></tr>
+      <tr><td>실행 액션 1</td><td class="fill-sm"></td></tr>
+      <tr><td>실행 액션 2 (선택)</td><td class="fill-sm"></td></tr>
+      <tr><td>출력 위치</td><td class="fill-sm"></td></tr>
+      <tr><td>실패 시 대응</td><td class="fill-sm"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="memo">
+    <div class="q">설계한 자동화를 실행한 결과 기록 (실행 시각 · 성공 여부 · 처리된 노트 수 · 소요 시간)</div>
+  </div>
+</section>
+
+<!-- 셀프 체크 -->
+<div class="self">
+  <h3>모듈 5 종료 시 셀프 체크</h3>
+  <ul class="check">
+    <li><b>폴더 감시 규칙 1건</b>이 활성화되어 있다.</li>
+    <li>inbox에 테스트 파일을 넣었을 때 <b>wiki에 자동 생성</b>되는 것을 확인했다.</li>
+    <li><b>스케줄 규칙 1건</b>이 등록되어 있다.</li>
+    <li><code>99_meta/claudian.log</code> 또는 Log 탭에서 <b>실행 이력</b>을 봤다.</li>
+  </ul>
+</div>
+
+<div class="wb-foot">
+  <a class="nav-prev" href="module4.html">← 모듈 4 · raw·wiki·그래프</a>
+  <span>모듈 5 / 7 · 자동화</span>
+  <a class="nav-next" href="module6.html">모듈 6 · 트러블슈팅 →</a>
+</div>
+
+</div>
+</body>
+</html>

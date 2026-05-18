@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모듈 6 · 트러블슈팅 — 바이브 옵시디언 워크북</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 8 L25 35 L22 70 L48 92 L50 50 Z' fill='%23B48EFF'/><path d='M50 8 L78 38 L82 68 L52 92 L50 50 Z' fill='%236B3FA0'/></svg>">
+<link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+<div class="wb-wrap">
+
+<nav class="wb-nav">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="lg1" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#E0CCFF"/><stop offset="100%" stop-color="#9B6FE8"/></linearGradient>
+      <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9B6FE8"/><stop offset="100%" stop-color="#6B3FA0"/></linearGradient>
+    </defs>
+    <path d="M50 6 L24 34 L20 68 L46 94 L50 52 Z" fill="url(#lg1)"/>
+    <path d="M50 6 L78 36 L84 70 L54 94 L50 52 Z" fill="url(#lg2)"/>
+  </svg>
+  <div class="brand">바이브 옵시디언 워크북<small>VIBE OBSIDIAN · WORKBOOK</small></div>
+  <div class="pages">
+    <a href="index.html" class="hub">목차</a>
+    <a href="module1.html">M1</a>
+    <a href="module2.html">M2</a>
+    <a href="module3.html">M3</a>
+    <a href="module4.html">M4</a>
+    <a href="module5.html">M5</a>
+    <a href="module6.html" class="cur">M6</a>
+    <a href="module7.html">M7</a>
+  </div>
+</nav>
+
+<div class="m-cover">
+  <span class="badge">Module 6 · Troubleshooting</span>
+  <h1>트러블슈팅</h1>
+  <p class="desc">설치·인증·호출·동기화·자동화 5개 영역에서 자주 발생하는 오류를 분류하고, 본인 환경에서 재현되는 오류를 워크시트로 추적한다.</p>
+  <div class="meta">
+    <span>소요 <b>30분</b></span>
+    <span>방식 <b>오류 분류 + 본인 사례 추적</b></span>
+    <span>결과물 <b>해결 기록 1건 + 미해결 1건 큐</b></span>
+  </div>
+</div>
+
+<div class="goals">
+  <span class="lbl">LEARNING GOALS</span>
+  <ol>
+    <li>오류를 <b>5개 영역</b>으로 분류해서 본다.</li>
+    <li>본인 환경 오류 <b>1건 이상</b>을 워크시트에 기록·해결한다.</li>
+    <li>해결 못한 오류는 <b>미해결 큐</b>로 옮겨 강사·동료에 공유한다.</li>
+  </ol>
+</div>
+
+<!-- 1. 오류 5개 영역 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">01 / TAXONOMY</span>
+    <h2>오류 5개 영역</h2>
+    <span class="tag">분류 기준</span>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card"><div class="ttl">① 설치 · 실행</div><div class="body">Obsidian이 켜지지 않음. 플러그인이 목록에 없음.</div></div>
+    <div class="card"><div class="ttl">② 인증 · API</div><div class="body">API 키 거부. 401/403 응답. 결제 한도 초과.</div></div>
+    <div class="card"><div class="ttl">③ 호출 · 응답</div><div class="body">타임아웃. 응답 빈 문자열. 한국어가 영어로 나옴.</div></div>
+    <div class="card"><div class="ttl">④ 파일 · 동기화</div><div class="body">노트가 두 개로 쪼개짐. .conflict 파일 생성.</div></div>
+    <div class="card"><div class="ttl">⑤ 자동화</div><div class="body">트리거가 발화 안 됨. 동일 파일 무한 루프.</div></div>
+    <div class="card"><div class="ttl">⑥ 기타</div><div class="body">한글 파일명 깨짐. 그래프 뷰 멈춤.</div></div>
+  </div>
+</section>
+
+<!-- 2. 자주 발생 오류 표 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">02 / COMMON</span>
+    <h2>자주 발생 오류 · 원인 · 해결</h2>
+    <span class="tag">레퍼런스 표</span>
+  </div>
+
+  <table class="ws">
+    <thead>
+      <tr><th style="width:60px">영역</th><th style="width:230px">증상 / 메시지</th><th>원인</th><th>해결</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>①</b></td><td>Community plugins 메뉴 없음</td><td>Restricted mode ON</td><td>Settings → Community plugins → Turn off restricted mode</td></tr>
+      <tr><td><b>①</b></td><td>Claudian 검색 결과 없음</td><td>검색어 오타 / 사내망 차단</td><td>정확히 <code>Claudian</code> 입력 / 외부 네트워크 확인</td></tr>
+      <tr><td><b>②</b></td><td><code>401 unauthorized</code></td><td>API 키 만료 또는 오타</td><td>키 재발급 → 설정 패널 재입력 → Save</td></tr>
+      <tr><td><b>②</b></td><td><code>429 rate_limit</code></td><td>분당 호출 한도 초과</td><td>요청 간격 늘리기 · 플랜 업그레이드</td></tr>
+      <tr><td><b>②</b></td><td><code>403 insufficient_credit</code></td><td>결제 잔액 부족</td><td>콘솔에서 결제 정보 확인</td></tr>
+      <tr><td><b>③</b></td><td>응답 30초 후 타임아웃</td><td>max tokens 과대 · 네트워크 지연</td><td>tokens 1024로 낮춤 · 핫스팟 테스트</td></tr>
+      <tr><td><b>③</b></td><td>응답이 영어로만 나옴</td><td>Language 미설정</td><td>설정 패널 Language → <code>ko</code></td></tr>
+      <tr><td><b>③</b></td><td>응답 빈 문자열</td><td>입력 노트가 빈 본문</td><td>본문 200자 이상 후 재시도</td></tr>
+      <tr><td><b>④</b></td><td><code>*.conflict-2026-05-18.md</code> 생성</td><td>iCloud / OneDrive 동기화 지연</td><td>로컬 폴더로 Vault 이전 / Obsidian Sync 사용</td></tr>
+      <tr><td><b>④</b></td><td>노트 저장은 되는데 그래프 미반영</td><td>인덱스 캐시 지연</td><td><code>Cmd/Ctrl+P</code> → <code>Reload app</code></td></tr>
+      <tr><td><b>⑤</b></td><td>자동화 트리거가 발화하지 않음</td><td>경로 패턴 불일치 / debounce 미설정</td><td>경로 점검 · 로그에서 매칭 여부 확인</td></tr>
+      <tr><td><b>⑤</b></td><td>같은 파일 무한 루프 변환</td><td>출력이 다시 입력 폴더에 저장됨</td><td>출력 경로를 입력 패턴 밖으로 이동</td></tr>
+      <tr><td><b>⑥</b></td><td>한글 파일명 깨짐 (macOS↔Win)</td><td>유니코드 정규화 (NFD vs NFC)</td><td>파일명에 영문 슬러그 사용 권장</td></tr>
+      <tr><td><b>⑥</b></td><td>그래프 뷰가 5초+ 멈춤</td><td>노드 1000+ · forces 과부하</td><td>필터로 표시 노드 축소 / forces 기본값</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 3. 로그 분석 빈칸 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03 / LOG READ</span>
+    <h2>로그 읽기 연습 (더미)</h2>
+    <span class="tag">분류 → 원인 → 해결</span>
+  </div>
+
+  <pre class="code">
+<span class="mute"># claudian.log 발췌</span>
+<span class="hl">2026-05-18 14:02:11</span> [ERROR] auto-summarize-inbox failed
+  rule=auto-summarize-inbox
+  file=00_inbox/회의록_2026-05-18.md
+  error=API_401
+  message="invalid x-api-key"
+  retry=0/3</pre>
+
+  <table class="ws" style="margin-top:14px">
+    <thead><tr><th style="width:170px">분석 항목</th><th>본인 답</th></tr></thead>
+    <tbody>
+      <tr><td>영역 (①~⑥)</td><td class="fill-sm"></td></tr>
+      <tr><td>핵심 메시지</td><td class="fill-sm"></td></tr>
+      <tr><td>원인 (한 문장)</td><td class="fill-sm"></td></tr>
+      <tr><td>해결 절차 1</td><td class="fill-sm"></td></tr>
+      <tr><td>해결 절차 2</td><td class="fill-sm"></td></tr>
+      <tr><td>예방책</td><td class="fill-sm"></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 4. 본인 사례 워크시트 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">04 / MY CASE</span>
+    <h2>본인이 만난 오류 1건 추적</h2>
+    <span class="tag">최대 3건까지</span>
+  </div>
+
+  <table class="ws">
+    <thead>
+      <tr><th style="width:36px">#</th><th style="width:60px">영역</th><th>증상</th><th>원인</th><th>해결</th><th style="width:60px">상태</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="center">1</td><td class="fill-sm"></td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
+      <tr><td class="center">2</td><td class="fill-sm"></td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
+      <tr><td class="center">3</td><td class="fill-sm"></td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
+    </tbody>
+  </table>
+  <p class="mute" style="font-size:12.5px;margin-top:6px">상태 표기: <b>OK</b> 해결 · <b>WIP</b> 진행중 · <b>PEND</b> 미해결</p>
+</section>
+
+<!-- 5. 미해결 큐 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">05 / QUEUE</span>
+    <h2>미해결 큐 (강사·동료 공유용)</h2>
+    <span class="tag">강의 후 후속 대응</span>
+  </div>
+
+  <table class="ws">
+    <thead>
+      <tr><th style="width:36px">#</th><th>요약</th><th style="width:170px">재현 단계 요약</th><th style="width:110px">우선순위</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="center">1</td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
+      <tr><td class="center">2</td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="lbl">공유 양식 (강사 채널)</span>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--ink)">[환경] OS / Obsidian 버전 / Claudian 버전<br>[증상] 한 줄<br>[재현] 1) ... 2) ... 3) ...<br>[로그] 마지막 5줄</p>
+  </div>
+</section>
+
+<!-- 셀프 체크 -->
+<div class="self">
+  <h3>모듈 6 종료 시 셀프 체크</h3>
+  <ul class="check">
+    <li>오류 5개 영역의 <b>이름</b>을 말로 답할 수 있다.</li>
+    <li><code>claudian.log</code>에서 ERROR 라인 한 건을 <b>해석해 분류</b>했다.</li>
+    <li>본인 환경에서 만난 오류 <b>1건 이상</b>을 워크시트에 기록했다.</li>
+    <li>해결 못한 오류는 <b>미해결 큐</b>로 옮겼다.</li>
+  </ul>
+</div>
+
+<div class="wb-foot">
+  <a class="nav-prev" href="module5.html">← 모듈 5 · 자동화</a>
+  <span>모듈 6 / 7 · 트러블슈팅</span>
+  <a class="nav-next" href="module7.html">모듈 7 · PKM 유저 →</a>
+</div>
+
+</div>
+</body>
+</html>

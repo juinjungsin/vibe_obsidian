@@ -202,6 +202,16 @@
     content:"▸";position:absolute;left:4px;color:var(--purple-2);
   }
   .module ul li b{color:var(--text);font-weight:600}
+  .module .wb-link{
+    margin-top:14px;display:inline-flex;align-items:center;gap:8px;
+    padding:8px 14px;font-size:12.5px;font-weight:600;
+    background:linear-gradient(135deg,rgba(180,142,255,0.18),rgba(72,54,153,0.18));
+    border:1px solid var(--purple-3);border-radius:8px;color:var(--purple-1);
+    transition:all .2s ease;
+  }
+  .module .wb-link:hover{background:linear-gradient(135deg,var(--purple-2),var(--purple-4));color:#fff;border-color:transparent}
+  .module .wb-link svg{width:13px;height:13px}
+  .module .wb-link .arrow{margin-left:2px}
 
   /* 차트 박스 */
   .chartbox{
@@ -310,6 +320,7 @@
     <li><a href="#ref-tradeoff"><span class="num">A2</span>장단점</a></li>
     <li><a href="#ref-discipline"><span class="num">A3</span>디시플린</a></li>
     <li><a href="#outcomes"><span class="num">04</span>수강 결과물</a></li>
+    <li style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line)"><a href="workbook/index.html" style="background:linear-gradient(90deg,rgba(180,142,255,0.18),rgba(139,92,246,0.04));color:var(--purple-1);border-left-color:var(--purple-1);font-weight:600"><span class="num">WB</span>워크북 (7개)</a></li>
   </ul>
 </aside>
 
@@ -451,6 +462,7 @@
       <li><b>결과물로 무엇을 할 수 있는가</b> — 제안서 작성, 강의안 합성, 리포트 출력</li>
       <li><b>지식의 복리 효과</b> — 질문 → 답변 → 위키 누적의 양방향 흐름</li>
     </ul>
+    <a class="wb-link" href="workbook/module1.html">📘 모듈 1 워크북 · 일단 봅시다<span class="arrow">→</span></a>
   </div>
 
   <!-- 모듈 2 -->
@@ -466,6 +478,7 @@
       <li><b>자료 준비</b> — PDF, TXT, HTML, JSON, MD 등 정제된 소스</li>
     </ul>
     <div class="quote" style="margin-top:14px">정제된 소스를 넣지 않으면 오류가 위키에 baked-in되어 미래 답변까지 오염된다. 조건이 가벼운 게 아니라 시스템 성패의 핵심 변수.<span class="src">— 강의 자료 3.3 개선 흐름</span></div>
+    <a class="wb-link" href="workbook/module2.html">📘 모듈 2 워크북 · 나도 해봅시다<span class="arrow">→</span></a>
   </div>
 
   <!-- 모듈 3 -->
@@ -483,6 +496,7 @@
       <li><b>Codex 사용자</b> — 별도 설치 없음</li>
       <li><b>유료 계정 인증 과정</b> — 토큰/세션 설정</li>
     </ul>
+    <a class="wb-link" href="workbook/module3.html">📘 모듈 3 워크북 · 설치<span class="arrow">→</span></a>
   </div>
 
   <!-- 모듈 4 -->
@@ -506,6 +520,7 @@
       <div class="arrow">→</div>
       <div class="step"><b>STEP 4</b>그래프 뷰 반영</div>
     </div>
+    <a class="wb-link" href="workbook/module4.html">📘 모듈 4 워크북 · raw·wiki·그래프<span class="arrow">→</span></a>
   </div>
 
   <!-- 모듈 5 -->
@@ -520,6 +535,7 @@
       <li><b>폴더 감시</b> — 파일 유입 시 옵시디언이 자동 확인 후 wiki로 등록, 그래프 뷰 반영</li>
       <li><b>3가지 운영(Operations)</b> — Ingest · Query · Lint 주기 설계</li>
     </ul>
+    <a class="wb-link" href="workbook/module5.html">📘 모듈 5 워크북 · 자동화<span class="arrow">→</span></a>
   </div>
 
   <!-- 모듈 6 -->
@@ -534,6 +550,7 @@
       <li><b>자동화가 멈추었어요</b> — 토큰 한도 / 폴더 권한 / 스케줄러 비활성</li>
       <li><b>위키가 이상해요</b> — Referential Integrity 깨짐, Lint 미실행, 모순 페이지</li>
     </ul>
+    <a class="wb-link" href="workbook/module6.html">📘 모듈 6 워크북 · 트러블슈팅<span class="arrow">→</span></a>
   </div>
 
   <!-- 모듈 7 -->
@@ -548,6 +565,11 @@
       <li><b>외부에서 확인하고 싶어</b> — Slack 연동, Sync, Obsidian Publish</li>
       <li><b>다음 단계</b> — 부서/팀 vault 분리, 도메인별 그래프</li>
     </ul>
+    <a class="wb-link" href="workbook/module7.html">📘 모듈 7 워크북 · 나도 이제 PKM 유저<span class="arrow">→</span></a>
+  </div>
+
+  <div style="margin-top:18px;text-align:center">
+    <a href="workbook/index.html" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;font-size:14px;font-weight:700;background:linear-gradient(135deg,var(--purple-2),var(--purple-4));color:#fff;border-radius:10px;box-shadow:0 8px 24px -8px rgba(139,92,246,0.5)">📚 워크북 전체 목차 열기 →</a>
   </div>
 </section>
 

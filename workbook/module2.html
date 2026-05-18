@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모듈 2 · 나도 해봅시다 — 바이브 옵시디언 워크북</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 8 L25 35 L22 70 L48 92 L50 50 Z' fill='%23B48EFF'/><path d='M50 8 L78 38 L82 68 L52 92 L50 50 Z' fill='%236B3FA0'/></svg>">
+<link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+<div class="wb-wrap">
+
+<nav class="wb-nav">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="lg1" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#E0CCFF"/><stop offset="100%" stop-color="#9B6FE8"/></linearGradient>
+      <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9B6FE8"/><stop offset="100%" stop-color="#6B3FA0"/></linearGradient>
+    </defs>
+    <path d="M50 6 L24 34 L20 68 L46 94 L50 52 Z" fill="url(#lg1)"/>
+    <path d="M50 6 L78 36 L84 70 L54 94 L50 52 Z" fill="url(#lg2)"/>
+  </svg>
+  <div class="brand">바이브 옵시디언 워크북<small>VIBE OBSIDIAN · WORKBOOK</small></div>
+  <div class="pages">
+    <a href="index.html" class="hub">목차</a>
+    <a href="module1.html">M1</a>
+    <a href="module2.html" class="cur">M2</a>
+    <a href="module3.html">M3</a>
+    <a href="module4.html">M4</a>
+    <a href="module5.html">M5</a>
+    <a href="module6.html">M6</a>
+    <a href="module7.html">M7</a>
+  </div>
+</nav>
+
+<!-- 표지 -->
+<div class="m-cover">
+  <span class="badge">Module 2 · Preparation</span>
+  <h1>나도 해봅시다</h1>
+  <p class="desc">실습을 시작하기 전에 계정·하드웨어·자료 3개 영역을 한 줄씩 점검한다. 결제 계정이 살아 있는지, 노트북 사양이 최소 요건을 넘는지, 강의 자료가 손에 들어와 있는지.</p>
+  <div class="meta">
+    <span>소요 <b>15분</b></span>
+    <span>방식 <b>개별 점검 + 강사 확인</b></span>
+    <span>결과 <b>실습 진입 가능 여부 판정</b></span>
+  </div>
+</div>
+
+<!-- 학습 목표 -->
+<div class="goals">
+  <span class="lbl">LEARNING GOALS</span>
+  <ol>
+    <li>실습에 필요한 <b>3개 영역 준비물</b>을 본인 기기에서 확인한다.</li>
+    <li>막힐 가능성이 큰 항목을 <b>강의 시작 전 식별</b>한다.</li>
+    <li>이후 모듈에서 사용할 <b>강의 자료 파일</b>을 본인 폴더에 둔다.</li>
+  </ol>
+</div>
+
+<!-- 1. 준비물 3개 영역 개요 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">01 / SCOPE</span>
+    <h2>3개 영역 점검</h2>
+    <span class="tag">계정 · 하드웨어 · 자료</span>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="ttl">① AI 계정 (유료)</div>
+      <div class="body">Claude / Codex / Copilot 중 <b>최소 1개 유료 계정</b>. 워크북은 Claude 기준 진행.</div>
+    </div>
+    <div class="card">
+      <div class="ttl">② 노트북 환경</div>
+      <div class="body">Obsidian 설치 가능 OS + 인터넷. RAM 8GB · 저장공간 2GB 여유.</div>
+    </div>
+    <div class="card">
+      <div class="ttl">③ 강의 자료</div>
+      <div class="body">근거 문서 2종 + 본인 raw 자료 5~10건 (txt, md, pdf 중 하나).</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. 계정 체크리스트 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">02 / ACCOUNT</span>
+    <h2>AI 계정 체크</h2>
+    <span class="tag">3개 중 1개 이상</span>
+  </div>
+
+  <table class="ws">
+    <thead>
+      <tr><th style="width:120px">서비스</th><th style="width:120px">필요 플랜</th><th>확인 항목</th><th style="width:90px">상태</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Claude</b><span class="ex">Anthropic</span></td>
+        <td>Pro 이상</td>
+        <td>로그인 후 claude.ai에서 새 대화 1회 성공 / API 키는 선택</td>
+        <td class="fill-sm"></td>
+      </tr>
+      <tr>
+        <td><b>Codex</b><span class="ex">OpenAI</span></td>
+        <td>ChatGPT Plus 이상</td>
+        <td>chat.openai.com 로그인 / Codex CLI는 선택</td>
+        <td class="fill-sm"></td>
+      </tr>
+      <tr>
+        <td><b>Copilot</b><span class="ex">GitHub/Microsoft</span></td>
+        <td>Individual 이상</td>
+        <td>GitHub 계정에 Copilot 활성 / VSCode 확장 설치는 선택</td>
+        <td class="fill-sm"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="lbl">강사 확인 포인트</span>
+    <p>1인당 1개만 활성이면 실습 진입 가능. Claudian 플러그인은 Claude를 기본으로 가정한다.</p>
+  </div>
+</section>
+
+<!-- 3. 노트북 환경 체크 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03 / HARDWARE</span>
+    <h2>노트북 환경 체크</h2>
+    <span class="tag">최소 요건</span>
+  </div>
+
+  <ul class="check">
+    <li><b>OS</b> · macOS 12 이상 / Windows 10 이상 / Linux (Obsidian 공식 지원)
+      <span class="mt">본인 OS: ___________________</span></li>
+    <li><b>RAM</b> · 8GB 이상 (그래프 뷰 노드 1000+에서 권장 16GB)
+      <span class="mt">본인 RAM: ___________________</span></li>
+    <li><b>저장공간</b> · 여유 2GB 이상 (Obsidian 본체 + Vault + 플러그인)
+      <span class="mt">현재 여유 공간: ___________________</span></li>
+    <li><b>인터넷</b> · Claudian API 호출 시 안정 연결 필요 (회사 방화벽 환경은 사전 확인)
+      <span class="mt">방화벽/프록시 여부: ___________________</span></li>
+    <li><b>관리자 권한</b> · Obsidian 설치, 커뮤니티 플러그인 활성화에 필요</li>
+  </ul>
+</section>
+
+<!-- 4. 강의 자료 체크 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">04 / MATERIALS</span>
+    <h2>강의 자료 / 본인 자료</h2>
+    <span class="tag">고정 자료 2 + 본인 자료 5~10</span>
+  </div>
+
+  <h3>강사 배포 자료 (고정)</h3>
+  <table class="ws">
+    <thead>
+      <tr><th style="width:280px">파일</th><th>내용</th><th style="width:90px">수령</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code class="inline">llm_wiki_lecture_research.md</code></td>
+        <td>Karpathy LLM Wiki 패턴 · RAG 비교 · GraphRAG · Notion 분석 · 디시플린 정의 (10장 + 부록)</td>
+        <td class="fill-sm"></td>
+      </tr>
+      <tr>
+        <td><code class="inline">바이브옵시디언_분석.md</code></td>
+        <td>기존 Obsidian vs 바이브 옵시디언 5섹션 비교</td>
+        <td class="fill-sm"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:24px">본인이 가져올 raw 자료</h3>
+  <p class="mute">실습에서 본인의 Vault를 만들 때 ingest할 raw. 텍스트로 추출 가능한 형식이면 OK.</p>
+  <table class="ws">
+    <thead>
+      <tr><th style="width:42px">#</th><th>파일명 / 출처</th><th style="width:90px">형식</th><th style="width:90px">분량</th><th style="width:80px">준비</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="center">1</td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-sm"></td></tr>
+      <tr><td class="center">2</td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-sm"></td></tr>
+      <tr><td class="center">3</td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-sm"></td></tr>
+      <tr><td class="center">4</td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-sm"></td></tr>
+      <tr><td class="center">5</td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-sm"></td></tr>
+    </tbody>
+  </table>
+  <p class="mute" style="font-size:12.5px;margin-top:8px">예시 형식: md · txt · pdf · docx · 웹 스크랩 · 회의록 · 책 발췌</p>
+</section>
+
+<!-- 5. 막힘 예상 지점 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">05 / RISK</span>
+    <h2>막힘 예상 지점 사전 표시</h2>
+    <span class="tag">강의 전 본인 표시</span>
+  </div>
+
+  <table class="ws">
+    <thead>
+      <tr><th>예상 막힘</th><th style="width:120px">가능성</th><th>대응안</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>회사 방화벽으로 Claude API 호출 차단</td><td><span class="pill pill-warn" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(244,184,96,0.12);color:#F4B860;border:1px solid rgba(244,184,96,0.35)">중</span></td><td>휴대폰 핫스팟 · 개인 노트북 사용</td></tr>
+      <tr><td>유료 결제 카드 미등록</td><td><span class="pill pill-bad" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(240,113,120,0.12);color:#F07178;border:1px solid rgba(240,113,120,0.35)">상</span></td><td>강의 전날까지 등록 / 트라이얼 활용</td></tr>
+      <tr><td>관리자 권한 없는 회사 노트북</td><td><span class="pill pill-warn" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(244,184,96,0.12);color:#F4B860;border:1px solid rgba(244,184,96,0.35)">중</span></td><td>Portable 버전 사용 · 개인기기 지참</td></tr>
+      <tr><td>raw 자료가 PDF만 있고 텍스트 추출 안 됨</td><td><span class="pill pill-warn" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(244,184,96,0.12);color:#F4B860;border:1px solid rgba(244,184,96,0.35)">중</span></td><td>OCR 사전 처리 · md로 일부 수기 변환</td></tr>
+      <tr><td>본인 raw 자료 5건 미확보</td><td><span class="pill pill-muted" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(154,147,176,0.12);color:#9A93B0;border:1px solid #2A2833">하</span></td><td>강사 더미 자료 세트로 대체 가능</td></tr>
+    </tbody>
+  </table>
+
+  <div class="fill tall" style="margin-top:18px">
+    <div class="q">본인에게 해당하는 막힘 예상 지점을 한 줄로 기록한다.</div>
+    <div class="lines"><span></span><span></span><span></span></div>
+  </div>
+</section>
+
+<!-- 셀프 체크 -->
+<div class="self">
+  <h3>모듈 2 종료 시 셀프 체크</h3>
+  <ul class="check">
+    <li>AI 계정 <b>1개 이상</b>이 로그인된 상태로 화면에 떠 있다.</li>
+    <li>Obsidian 다운로드 페이지 <b>obsidian.md</b>를 본인 OS 기준으로 열 수 있다.</li>
+    <li>강사 배포 자료 <b>2종</b>이 본인 폴더에 있다.</li>
+    <li>본인 raw 자료 <b>5건 또는 대체 더미 세트</b>가 준비되었다.</li>
+    <li>예상 막힘 1건을 <b>강사 또는 옆자리</b>에 공유했다.</li>
+  </ul>
+</div>
+
+<div class="wb-foot">
+  <a class="nav-prev" href="module1.html">← 모듈 1 · 일단 봅시다</a>
+  <span>모듈 2 / 7 · 나도 해봅시다</span>
+  <a class="nav-next" href="module3.html">모듈 3 · 설치 →</a>
+</div>
+
+</div>
+</body>
+</html>

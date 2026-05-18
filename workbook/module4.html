@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>모듈 4 · raw·wiki·그래프 뷰 — 바이브 옵시디언 워크북</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 8 L25 35 L22 70 L48 92 L50 50 Z' fill='%23B48EFF'/><path d='M50 8 L78 38 L82 68 L52 92 L50 50 Z' fill='%236B3FA0'/></svg>">
+<link rel="stylesheet" href="_shared.css">
+</head>
+<body>
+
+<div class="wb-wrap">
+
+<nav class="wb-nav">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="lg1" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#E0CCFF"/><stop offset="100%" stop-color="#9B6FE8"/></linearGradient>
+      <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9B6FE8"/><stop offset="100%" stop-color="#6B3FA0"/></linearGradient>
+    </defs>
+    <path d="M50 6 L24 34 L20 68 L46 94 L50 52 Z" fill="url(#lg1)"/>
+    <path d="M50 6 L78 36 L84 70 L54 94 L50 52 Z" fill="url(#lg2)"/>
+  </svg>
+  <div class="brand">바이브 옵시디언 워크북<small>VIBE OBSIDIAN · WORKBOOK</small></div>
+  <div class="pages">
+    <a href="index.html" class="hub">목차</a>
+    <a href="module1.html">M1</a>
+    <a href="module2.html">M2</a>
+    <a href="module3.html">M3</a>
+    <a href="module4.html" class="cur">M4</a>
+    <a href="module5.html">M5</a>
+    <a href="module6.html">M6</a>
+    <a href="module7.html">M7</a>
+  </div>
+</nav>
+
+<div class="m-cover">
+  <span class="badge">Module 4 · Three Views</span>
+  <h1>raw · wiki · 그래프 뷰</h1>
+  <p class="desc">실제 본인 자료 5건을 inbox에 넣고, Claudian으로 wiki로 변환한 뒤, 그래프 뷰에서 연결을 확인한다. 3개 뷰가 무엇을 보여주는지 직접 다룬다.</p>
+  <div class="meta">
+    <span>소요 <b>45분</b></span>
+    <span>방식 <b>실습 중심 + 강사 순회</b></span>
+    <span>완료 시점 <b>wiki 노트 3건 + 그래프 1개</b></span>
+  </div>
+</div>
+
+<div class="goals">
+  <span class="lbl">LEARNING GOALS</span>
+  <ol>
+    <li>raw → wiki <b>변환 1사이클</b>을 본인 손으로 돌린다.</li>
+    <li>wiki 노트에 <b>백링크 [[...]]</b>를 직접 적어 노드 간 연결을 만든다.</li>
+    <li>그래프 뷰의 <b>필터 · 색상 · 깊이</b> 3개 옵션을 조작한다.</li>
+  </ol>
+</div>
+
+<!-- 1. 3개 뷰 개요 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">01 / 3 VIEWS</span>
+    <h2>raw · wiki · 그래프 뷰 — 한 줄 정의</h2>
+    <span class="tag">개념 정리</span>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="ttl">raw 뷰</div>
+      <div class="body">수집 원문 그대로. 변환·요약하지 않는다. <b>출처 보존</b>이 목적.</div>
+    </div>
+    <div class="card">
+      <div class="ttl">wiki 뷰</div>
+      <div class="body">한 문장 요약 + 구조 + 백링크가 추가된 노트. <b>재검색·재활용</b>이 목적.</div>
+    </div>
+    <div class="card">
+      <div class="ttl">그래프 뷰</div>
+      <div class="body">노트 간 백링크를 노드 그래프로 시각화. <b>주제 클러스터 확인</b>이 목적.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. 실습 사이클 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">02 / CYCLE</span>
+    <h2>실습 사이클 (45분)</h2>
+    <span class="tag">3 라운드 × 15분</span>
+  </div>
+
+  <ol class="step-list">
+    <li class="step">
+      <div class="ttl">라운드 1 · raw 1건을 wiki 1건으로 <span class="dur-tag" style="margin-left:8px">15분</span></div>
+      <div class="body">inbox에 raw 노트 1건 작성 → Claudian: Summarize → 결과를 <code>20_wiki/</code>에 새 노트로 저장 → 본인이 한 번 더 정제.</div>
+    </li>
+    <li class="step">
+      <div class="ttl">라운드 2 · wiki 3건 + 백링크 연결 <span class="dur-tag" style="margin-left:8px">15분</span></div>
+      <div class="body">동일 절차로 wiki 2건 추가 → 노트 본문에 <code>[[다른노트제목]]</code> 형태로 3~5개 백링크 추가.</div>
+    </li>
+    <li class="step">
+      <div class="ttl">라운드 3 · 그래프 뷰 조작 <span class="dur-tag" style="margin-left:8px">15분</span></div>
+      <div class="body">그래프 뷰 열기 → 필터 · 색상 · 깊이 조작 → 본인 화면 캡처 또는 메모.</div>
+    </li>
+  </ol>
+</section>
+
+<!-- 3. 더미 raw 예시 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03 / SAMPLE</span>
+    <h2>실습 더미 자료 (본인 자료가 없을 때)</h2>
+    <span class="tag">3건 세트</span>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="ttl">📥 raw-1.md</div>
+      <pre class="code" style="font-size:11px"><span class="hl">제목:</span> 컨텍스트 윈도우
+<span class="hl">출처:</span> 사내 공유 메모
+
+LLM은 한 번에 처리 가능한
+토큰 수가 정해져 있다. 이를
+컨텍스트 윈도우라 부른다.
+모델별로 8K, 32K, 200K 등
+다양하다. 윈도우가 커지면
+한 번에 더 많은 자료를 넣을
+수 있지만 비용도 올라간다.
+
+#raw #llm</pre>
+    </div>
+    <div class="card">
+      <div class="ttl">📥 raw-2.md</div>
+      <pre class="code" style="font-size:11px"><span class="hl">제목:</span> 임베딩 차원
+<span class="hl">출처:</span> 블로그 스크랩
+
+임베딩은 텍스트를 벡터로
+바꾼 결과다. 차원 수는
+보통 384, 768, 1536 사이.
+차원이 클수록 표현력은
+높지만 저장·검색 비용이
+증가한다.
+
+#raw #embedding</pre>
+    </div>
+    <div class="card">
+      <div class="ttl">📥 raw-3.md</div>
+      <pre class="code" style="font-size:11px"><span class="hl">제목:</span> RAG 기본
+<span class="hl">출처:</span> 회의록 발췌
+
+RAG는 질문 시점에 외부
+인덱스에서 관련 문서를
+가져와 LLM 입력에 붙이는
+방식. 인덱스는 보통 벡터
+저장소를 쓴다.
+
+#raw #rag</pre>
+    </div>
+  </div>
+</section>
+
+<!-- 4. 변환 결과 예시 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">04 / RESULT</span>
+    <h2>변환 결과 예시 (wiki 1건)</h2>
+    <span class="tag">강사 시연용 더미</span>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="ttl">변환 전 (raw)</div>
+      <pre class="code" style="font-size:11.5px">제목: 컨텍스트 윈도우
+출처: 사내 공유 메모
+
+LLM은 한 번에 처리 가능한
+토큰 수가 정해져 있다.
+이를 컨텍스트 윈도우라
+부른다. 모델별로 8K, 32K,
+200K 등 다양하다. ...
+
+#raw #llm</pre>
+    </div>
+    <div class="card">
+      <div class="ttl">변환 후 (wiki) — 20_wiki/context-window.md</div>
+      <pre class="code" style="font-size:11.5px"># 컨텍스트 윈도우
+
+## 한 문장 요약
+LLM이 한 번에 처리 가능한
+토큰 수 한도.
+
+## 사실
+- 단위: 토큰
+- 범위: 8K ~ 200K (모델별)
+- 비용과 비례
+
+## 관련
+- [[embedding-dim]]
+- [[rag-retrieval]]
+- [[llm-architecture]]
+
+#wiki #atomic</pre>
+    </div>
+  </div>
+</section>
+
+<!-- 5. 본인 변환 워크시트 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">05 / WORKSHEET</span>
+    <h2>본인 변환 워크시트 (3건)</h2>
+    <span class="tag">실습 기록</span>
+  </div>
+
+  <table class="ws">
+    <thead>
+      <tr><th style="width:36px">#</th><th style="width:200px">raw 파일명</th><th>wiki 제목</th><th>백링크 [[...]]</th><th style="width:70px">소요</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="center">1</td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
+      <tr><td class="center">2</td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
+      <tr><td class="center">3</td><td class="fill-sm"></td><td class="fill-sm"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 6. 그래프 뷰 옵션 워크시트 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">06 / GRAPH OPTS</span>
+    <h2>그래프 뷰 옵션 조작</h2>
+    <span class="tag">실습</span>
+  </div>
+
+  <table class="ws">
+    <thead>
+      <tr><th style="width:140px">옵션</th><th>설명</th><th>본인 설정값</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><b>필터</b><span class="ex">Search filter</span></td><td>특정 태그/폴더만 표시 (예: <code>path:20_wiki</code>)</td><td class="fill-sm"></td></tr>
+      <tr><td><b>색상</b><span class="ex">Groups</span></td><td>폴더별로 노드 색상 지정 (예: 00_inbox=회색, 20_wiki=보라)</td><td class="fill-md"></td></tr>
+      <tr><td><b>깊이</b><span class="ex">Depth</span></td><td>현재 노트 기준 N단계 백링크까지 표시</td><td class="fill-sm"></td></tr>
+      <tr><td><b>힘</b><span class="ex">Forces</span></td><td>중심력 · 척력 · 링크 거리 (보통 기본값)</td><td class="fill-sm"></td></tr>
+      <tr><td><b>고아 표시</b><span class="ex">Orphans</span></td><td>백링크 0인 노트 ON/OFF</td><td class="fill-sm"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="gview" style="margin-top:18px">
+    <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg" aria-label="그래프 뷰 옵션 예시">
+      <rect width="700" height="280" fill="#0A0910"/>
+      <!-- 좌: filter off -->
+      <g transform="translate(20,20)">
+        <text x="0" y="0" font-family="Pretendard,sans-serif" font-size="11" fill="#9A93B0">FILTER: off · all folders</text>
+        <g stroke="#6B3FA0" stroke-width="1" opacity="0.5">
+          <line x1="60" y1="80" x2="120" y2="60"/>
+          <line x1="120" y1="60" x2="180" y2="100"/>
+          <line x1="180" y1="100" x2="100" y2="140"/>
+          <line x1="100" y1="140" x2="60" y2="80"/>
+          <line x1="40" y1="180" x2="100" y2="140"/>
+        </g>
+        <circle cx="60" cy="80" r="8" fill="#9A93B0"/>
+        <circle cx="120" cy="60" r="7" fill="#9A93B0"/>
+        <circle cx="180" cy="100" r="9" fill="#B48EFF"/>
+        <circle cx="100" cy="140" r="8" fill="#B48EFF"/>
+        <circle cx="40" cy="180" r="6" fill="#483699"/>
+        <circle cx="200" cy="200" r="5" fill="#9A93B0" opacity="0.5"/>
+      </g>
+      <!-- 우: filter path:20_wiki -->
+      <g transform="translate(380,20)">
+        <text x="0" y="0" font-family="Pretendard,sans-serif" font-size="11" fill="#B48EFF">FILTER: path:20_wiki</text>
+        <g stroke="#B48EFF" stroke-width="1.2" opacity="0.7">
+          <line x1="60" y1="80" x2="120" y2="60"/>
+          <line x1="120" y1="60" x2="180" y2="100"/>
+          <line x1="180" y1="100" x2="100" y2="140"/>
+        </g>
+        <circle cx="60" cy="80" r="10" fill="#B48EFF"/>
+        <circle cx="120" cy="60" r="9" fill="#B48EFF"/>
+        <circle cx="180" cy="100" r="11" fill="#B48EFF"/>
+        <circle cx="100" cy="140" r="10" fill="#B48EFF"/>
+      </g>
+      <line x1="350" y1="20" x2="350" y2="260" stroke="#2A2833" stroke-dasharray="2,3"/>
+      <text x="20" y="270" font-family="Pretendard,sans-serif" font-size="10" fill="#9A93B0">▲ 필터 OFF · 18 nodes</text>
+      <text x="380" y="270" font-family="Pretendard,sans-serif" font-size="10" fill="#9A93B0">▲ 필터 ON · 8 nodes</text>
+    </svg>
+    <span class="cap">▲ 필터 적용 전/후 비교 예시</span>
+  </div>
+
+  <div class="memo">
+    <div class="q">본인 그래프 뷰에서 발견한 클러스터를 자유롭게 적는다 (이름 · 노드 수 · 어떤 노트들이 묶였는지)</div>
+  </div>
+</section>
+
+<!-- 셀프 체크 -->
+<div class="self">
+  <h3>모듈 4 종료 시 셀프 체크</h3>
+  <ul class="check">
+    <li><code>20_wiki/</code> 폴더에 본인이 만든 wiki 노트 <b>3건 이상</b>이 있다.</li>
+    <li>wiki 노트 본문에 <code>[[...]]</code> 형태의 <b>백링크 5개 이상</b>이 들어 있다.</li>
+    <li>그래프 뷰에서 <b>필터 · 색상 · 깊이</b>를 각 1회 이상 조작했다.</li>
+    <li>본인 그래프에서 <b>클러스터 1개 이상</b>을 이름 붙여 기록했다.</li>
+  </ul>
+</div>
+
+<div class="wb-foot">
+  <a class="nav-prev" href="module3.html">← 모듈 3 · 설치</a>
+  <span>모듈 4 / 7 · raw·wiki·그래프</span>
+  <a class="nav-next" href="module5.html">모듈 5 · 자동화 →</a>
+</div>
+
+</div>
+</body>
+</html>

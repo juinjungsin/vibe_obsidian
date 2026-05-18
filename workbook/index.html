@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>바이브 옵시디언 워크북 — 7개 모듈 목차</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 8 L25 35 L22 70 L48 92 L50 50 Z' fill='%23B48EFF'/><path d='M50 8 L78 38 L82 68 L52 92 L50 50 Z' fill='%236B3FA0'/></svg>">
+<link rel="stylesheet" href="_shared.css">
+<style>
+  /* 허브 페이지 전용 */
+  .mod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}
+  @media(max-width:760px){.mod-grid{grid-template-columns:1fr}}
+  .mod-card{
+    background:linear-gradient(180deg,var(--bg-card),var(--bg-card-2));
+    border:1px solid var(--line);border-radius:16px;
+    padding:22px 24px;position:relative;overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .mod-card::before{
+    content:"";position:absolute;left:0;top:0;width:3px;height:100%;
+    background:linear-gradient(180deg,var(--purple-1),var(--purple-3));
+  }
+  .mod-card:hover{border-color:var(--purple-3);transform:translateY(-2px)}
+  .mod-card .head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .mod-card .num{
+    width:36px;height:36px;border-radius:10px;
+    background:linear-gradient(135deg,var(--purple-2),var(--purple-4));
+    display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:15px;
+  }
+  .mod-card .ttl{font-size:18px;font-weight:700;color:var(--text)}
+  .mod-card .dur{margin-left:auto;font-size:11px;color:var(--purple-1);padding:3px 9px;border:1px solid var(--purple-3);border-radius:999px}
+  .mod-card .desc{color:var(--text-mute);font-size:13.5px;line-height:1.65;margin-bottom:14px}
+  .mod-card .meta{display:flex;flex-wrap:wrap;gap:8px;font-size:11.5px;color:var(--text-mute)}
+  .mod-card .meta b{color:var(--purple-1);font-weight:600;margin-right:2px}
+  .mod-card .open{
+    margin-top:14px;display:inline-block;padding:8px 16px;
+    background:linear-gradient(135deg,var(--purple-2),var(--purple-4));
+    color:#fff;font-size:13px;font-weight:600;border-radius:8px;
+  }
+  .mod-card .open:hover{filter:brightness(1.1)}
+
+  /* 시간표 */
+  .schedule{
+    background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:18px;
+  }
+  .schedule h3{margin:0 0 10px;color:var(--purple-1);font-size:14px}
+  .schedule table{width:100%;border-collapse:collapse;font-size:13px}
+  .schedule th,.schedule td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  .schedule th{color:var(--purple-1);font-weight:600;font-size:12px}
+  .schedule .b{font-weight:600;color:var(--text)}
+</style>
+</head>
+<body>
+
+<div class="wb-wrap">
+
+<nav class="wb-nav">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="lg1" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#E0CCFF"/><stop offset="100%" stop-color="#9B6FE8"/></linearGradient>
+      <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9B6FE8"/><stop offset="100%" stop-color="#6B3FA0"/></linearGradient>
+    </defs>
+    <path d="M50 6 L24 34 L20 68 L46 94 L50 52 Z" fill="url(#lg1)"/>
+    <path d="M50 6 L78 36 L84 70 L54 94 L50 52 Z" fill="url(#lg2)"/>
+  </svg>
+  <div class="brand">바이브 옵시디언 워크북<small>VIBE OBSIDIAN · WORKBOOK</small></div>
+  <div class="pages">
+    <a href="../index.html" class="hub">강의 제안서</a>
+    <a href="index.html" class="cur">목차</a>
+  </div>
+</nav>
+
+<div class="m-cover">
+  <span class="badge">Workbook · 4 Hours · 7 Modules</span>
+  <h1>바이브 옵시디언 워크북</h1>
+  <p class="desc">강의 본 강의 4시간을 따라가는 실습 워크북. 7개 모듈 각 페이지를 펼쳐 빈칸을 채우면 본인의 첫 Vault가 완성된다.</p>
+  <div class="meta">
+    <span>총 시간 <b>4H (240분)</b></span>
+    <span>모듈 <b>7개</b></span>
+    <span>출력 <b>HTML · 인쇄 가능</b></span>
+    <span>업데이트 <b>2026-05-18</b></span>
+  </div>
+</div>
+
+<!-- 모듈 카드 그리드 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">01 / MODULES</span>
+    <h2>모듈 목차</h2>
+    <span class="tag">클릭하여 열기</span>
+  </div>
+
+  <div class="mod-grid">
+
+    <div class="mod-card">
+      <div class="head"><div class="num">1</div><div class="ttl">일단 봅시다</div><div class="dur">25분</div></div>
+      <div class="desc">강사 결과물 시연. Vault 구조 · 그래프 뷰 · raw/wiki · Claudian 호출 4단계 관찰.</div>
+      <div class="meta"><span><b>방식</b>강사 시연</span><span><b>결과</b>관찰 노트</span></div>
+      <a class="open" href="module1.html">모듈 1 열기 →</a>
+    </div>
+
+    <div class="mod-card">
+      <div class="head"><div class="num">2</div><div class="ttl">나도 해봅시다</div><div class="dur">15분</div></div>
+      <div class="desc">계정 · 노트북 · 자료 3개 영역 사전 점검. 막힘 예상 지점 식별.</div>
+      <div class="meta"><span><b>방식</b>개별 점검</span><span><b>결과</b>실습 진입 판정</span></div>
+      <a class="open" href="module2.html">모듈 2 열기 →</a>
+    </div>
+
+    <div class="mod-card">
+      <div class="head"><div class="num">3</div><div class="ttl">따라해봅시다 — 설치</div><div class="dur">35분</div></div>
+      <div class="desc">Obsidian + Claudian 설치 6단계. Vault 생성 · API 키 연결 · 첫 호출 확인.</div>
+      <div class="meta"><span><b>방식</b>동시 실습</span><span><b>결과</b>Claudian 응답 1건</b></span></div>
+      <a class="open" href="module3.html">모듈 3 열기 →</a>
+    </div>
+
+    <div class="mod-card">
+      <div class="head"><div class="num">4</div><div class="ttl">raw · wiki · 그래프 뷰</div><div class="dur">45분</div></div>
+      <div class="desc">실제 자료 5건을 wiki로 변환. 백링크 추가 후 그래프 뷰 옵션 조작.</div>
+      <div class="meta"><span><b>방식</b>실습 + 강사 순회</span><span><b>결과</b>wiki 3건 + 그래프 1개</span></div>
+      <a class="open" href="module4.html">모듈 4 열기 →</a>
+    </div>
+
+    <div class="mod-card">
+      <div class="head"><div class="num">5</div><div class="ttl">따라해봅시다 — 자동화</div><div class="dur">40분</div></div>
+      <div class="desc">inbox 폴더 감시 + 매일 09:00 스케줄 자동화 2개 시나리오 설정.</div>
+      <div class="meta"><span><b>방식</b>설정 + 트리거 확인</span><span><b>결과</b>자동 변환 1건</span></div>
+      <a class="open" href="module5.html">모듈 5 열기 →</a>
+    </div>
+
+    <div class="mod-card">
+      <div class="head"><div class="num">6</div><div class="ttl">트러블슈팅</div><div class="dur">30분</div></div>
+      <div class="desc">오류 5개 영역 분류 표 · 로그 읽기 연습 · 본인 사례 추적 · 미해결 큐.</div>
+      <div class="meta"><span><b>방식</b>분류 + 본인 사례</span><span><b>결과</b>해결 1건 + 큐 1건</span></div>
+      <a class="open" href="module6.html">모듈 6 열기 →</a>
+    </div>
+
+    <div class="mod-card">
+      <div class="head"><div class="num">7</div><div class="ttl">나도 이제 PKM 유저</div><div class="dur">30분</div></div>
+      <div class="desc">디시플린 한 줄 · 30일 플랜 4 지점 · 주간 리듬 · 후속 학습 경로.</div>
+      <div class="meta"><span><b>방식</b>개별 계획 + 페어</span><span><b>결과</b>30일 플랜</span></div>
+      <a class="open" href="module7.html">모듈 7 열기 →</a>
+    </div>
+
+    <div class="mod-card" style="background:radial-gradient(500px 240px at 0% 0%,rgba(139,92,246,0.10),transparent 60%),var(--bg-card);border-color:var(--purple-4)">
+      <div class="head"><div class="num" style="background:#0E0D14;border:1px solid var(--purple-3);color:var(--purple-1)">＋</div><div class="ttl">강의 제안서 본문</div></div>
+      <div class="desc">강의 전체 구성 · 핵심 개념 · 차트 · 디시플린 정의를 담은 원본 제안서.</div>
+      <div class="meta"><span><b>분량</b>1 페이지 (스크롤)</span></div>
+      <a class="open" href="../index.html" style="background:#0E0D14;border:1px solid var(--purple-3);color:var(--purple-1)">제안서 열기 →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- 강의 타임라인 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">02 / TIMELINE</span>
+    <h2>4시간 타임라인</h2>
+    <span class="tag">기준안</span>
+  </div>
+
+  <div class="schedule">
+    <table>
+      <thead><tr><th style="width:90px">시간</th><th style="width:60px">모듈</th><th>내용</th><th style="width:80px">분</th><th style="width:80px">누적</th></tr></thead>
+      <tbody>
+        <tr><td>0:00 ~</td><td class="b">M1</td><td>일단 봅시다 — 강사 시연 4단계</td><td>25</td><td>25</td></tr>
+        <tr><td>0:25 ~</td><td class="b">M2</td><td>나도 해봅시다 — 준비물 점검</td><td>15</td><td>40</td></tr>
+        <tr><td>0:40 ~</td><td class="b">M3</td><td>설치 (Obsidian + Claudian)</td><td>35</td><td>1:15</td></tr>
+        <tr><td>1:15 ~</td><td>—</td><td>휴식</td><td>10</td><td>1:25</td></tr>
+        <tr><td>1:25 ~</td><td class="b">M4</td><td>raw · wiki · 그래프 뷰</td><td>45</td><td>2:10</td></tr>
+        <tr><td>2:10 ~</td><td>—</td><td>휴식</td><td>10</td><td>2:20</td></tr>
+        <tr><td>2:20 ~</td><td class="b">M5</td><td>자동화 (폴더 감시 · 스케줄)</td><td>40</td><td>3:00</td></tr>
+        <tr><td>3:00 ~</td><td class="b">M6</td><td>트러블슈팅</td><td>30</td><td>3:30</td></tr>
+        <tr><td>3:30 ~</td><td class="b">M7</td><td>나도 이제 PKM 유저</td><td>30</td><td>4:00</td></tr>
+      </tbody>
+    </table>
+    <p class="mute" style="font-size:12px;margin-top:8px">합계 본 강의 220분 + 휴식 20분 = 240분. 휴식은 강사 재량.</p>
+  </div>
+</section>
+
+<!-- 사용 가이드 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03 / HOW TO USE</span>
+    <h2>워크북 사용 가이드</h2>
+    <span class="tag">3 가지 모드</span>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="ttl">🖥️ 화면에서 보기</div>
+      <div class="body">각 모듈을 브라우저에서 열고 메모는 외부 도구(예: Obsidian 본인 Vault)에 기록.</div>
+    </div>
+    <div class="card">
+      <div class="ttl">🖨️ 인쇄해서 쓰기</div>
+      <div class="body">Cmd/Ctrl + P → PDF로 저장 또는 인쇄. 빈칸과 워크시트는 인쇄용 스타일 적용됨.</div>
+    </div>
+    <div class="card">
+      <div class="ttl">📥 fork해서 편집</div>
+      <div class="body">HTML 파일을 본인 리포지토리에 복사 후 직접 수정. 기관/팀 단위 커스텀 가능.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 풋터 -->
+<div class="wb-foot">
+  <span>바이브 옵시디언 워크북 · 2026-05-18</span>
+  <span>총 7 모듈 · 4시간</span>
+  <a class="nav-next" href="module1.html">모듈 1부터 시작 →</a>
+</div>
+
+</div>
+</body>
+</html>
