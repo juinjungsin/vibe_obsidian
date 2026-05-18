@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>바이브 옵시디언 — 4시간 × 2일 강의 구성</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='a' x1='20%25' y1='0%25' x2='80%25' y2='100%25'><stop offset='0%25' stop-color='%23D4BBFF'/><stop offset='100%25' stop-color='%239B6FE8'/></linearGradient><linearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%237C4ECF'/><stop offset='100%25' stop-color='%234A2D7E'/></linearGradient></defs><path d='M50 8 L25 35 L22 70 L48 92 L50 50 Z' fill='url(%23a)'/><path d='M50 8 L78 38 L82 68 L52 92 L50 50 Z' fill='url(%23b)'/></svg>">
+<style>
+:root{
+  --bg:#0B0B0F;
+  --bg-card:#16151C;
+  --bg-card-2:#1C1B24;
+  --line:#2A2833;
+  --purple-1:#B48EFF;
+  --purple-2:#8B5CF6;
+  --purple-3:#6B3FA0;
+  --purple-4:#483699;
+  --purple-deep:#2B1F5C;
+  --text:#E8E6F0;
+  --text-mute:#9A93B0;
+  --good:#7DD3A0;
+  --warn:#F4B860;
+  --bad:#F07178;
+  --day1:#B48EFF;
+  --day2:#7DD3A0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",-apple-system,sans-serif;line-height:1.65;font-feature-settings:"tnum"}
+html{scroll-behavior:smooth}
+a{color:var(--purple-1);text-decoration:none}
+
+.wrap{max-width:1080px;margin:0 auto;padding:40px 32px 96px}
+
+/* 상단 네비 */
+.topnav{display:flex;align-items:center;gap:14px;padding:14px 18px;border:1px solid var(--line);background:var(--bg-card);border-radius:14px;margin-bottom:28px;font-size:13px;color:var(--text-mute)}
+.topnav svg{width:24px;height:24px;flex-shrink:0}
+.topnav .brand{font-weight:700;color:var(--text);letter-spacing:-0.01em}
+.topnav .brand small{display:block;font-size:10px;color:var(--text-mute);font-weight:500;letter-spacing:0.08em}
+.topnav .links{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.topnav .links a{padding:5px 12px;border:1px solid var(--line);border-radius:6px;color:var(--text-mute);font-size:12px}
+.topnav .links a:hover{border-color:var(--purple-3);color:var(--purple-1)}
+.topnav .links a.cur{background:linear-gradient(135deg,var(--purple-2),var(--purple-4));color:#fff;border-color:transparent}
+
+/* 표지 */
+.cover{
+  position:relative;
+  background:radial-gradient(900px 480px at 80% -20%,rgba(139,92,246,0.30),transparent 60%),
+             radial-gradient(700px 400px at 10% 110%,rgba(72,54,153,0.35),transparent 55%),
+             linear-gradient(180deg,#15121E 0%,#0B0B0F 100%);
+  border:1px solid var(--line);border-radius:22px;
+  padding:54px 48px;overflow:hidden;margin-bottom:40px;
+}
+.cover::before{
+  content:"";position:absolute;right:-60px;top:-60px;width:340px;height:340px;
+  background:conic-gradient(from 120deg,#B48EFF,#6B3FA0,#2B1F5C,#B48EFF);
+  filter:blur(80px);opacity:0.4;border-radius:50%;
+}
+.cover .badge{display:inline-block;padding:5px 14px;border:1px solid var(--purple-3);border-radius:999px;color:var(--purple-1);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;background:rgba(139,92,246,0.08);margin-bottom:16px}
+.cover h1{font-size:46px;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,#E8E6F0 0%,#B48EFF 60%,#8B5CF6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15;margin-bottom:14px}
+.cover .desc{color:var(--text-mute);font-size:16px;max-width:720px;position:relative;z-index:1}
+.cover .meta{margin-top:24px;display:flex;gap:24px;flex-wrap:wrap;color:var(--text-mute);font-size:13px;position:relative;z-index:1}
+.cover .meta b{color:var(--purple-1);font-weight:600}
+
+/* 섹션 */
+section{margin-bottom:48px}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-num{font-family:"JetBrains Mono",monospace;color:var(--purple-2);font-size:13px;letter-spacing:0.1em}
+.sec-head h2{font-size:26px;font-weight:700;letter-spacing:-0.01em}
+.sec-head .tag{margin-left:auto;font-size:12px;color:var(--text-mute);padding:4px 10px;border:1px solid var(--line);border-radius:6px}
+
+h3{font-size:18px;font-weight:600;margin:18px 0 10px;color:var(--text)}
+p{color:var(--text);margin-bottom:10px;font-size:14.5px}
+.mute{color:var(--text-mute)}
+
+/* 콜아웃 */
+.callout{
+  background:radial-gradient(600px 280px at 0% 0%,rgba(139,92,246,0.12),transparent 60%),var(--bg-card);
+  border:1px solid var(--purple-4);border-radius:16px;padding:22px 26px;margin:14px 0;
+}
+.callout .lbl{display:inline-block;background:var(--purple-2);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;letter-spacing:0.06em;margin-bottom:10px}
+
+/* 그리드 */
+.grid{display:grid;gap:18px}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:880px){.grid-2,.grid-3{grid-template-columns:1fr}}
+
+/* Day 카드 */
+.day{
+  background:var(--bg-card);border:1px solid var(--line);border-radius:18px;
+  padding:0;margin-bottom:18px;position:relative;overflow:hidden;
+}
+.day .day-head{
+  padding:24px 28px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:16px;
+  background:linear-gradient(90deg,rgba(180,142,255,0.05),transparent);
+}
+.day.d1 .day-head{background:linear-gradient(90deg,rgba(180,142,255,0.10),transparent)}
+.day.d2 .day-head{background:linear-gradient(90deg,rgba(125,211,160,0.08),transparent)}
+.day-no{
+  width:54px;height:54px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#fff;
+}
+.day.d1 .day-no{background:linear-gradient(135deg,var(--purple-1),var(--purple-3));box-shadow:0 8px 24px -8px rgba(180,142,255,0.5)}
+.day.d2 .day-no{background:linear-gradient(135deg,#7DD3A0,#4A8B68);box-shadow:0 8px 24px -8px rgba(125,211,160,0.5)}
+.day-head .name{flex:1}
+.day-head .name .ttl{font-size:22px;font-weight:700}
+.day-head .name .sub{font-size:13px;color:var(--text-mute);margin-top:2px}
+.day-head .dur{font-size:12px;color:var(--purple-1);padding:5px 12px;border:1px solid var(--purple-3);border-radius:999px}
+.day.d2 .day-head .dur{color:var(--good);border-color:rgba(125,211,160,0.4)}
+
+.day-body{padding:24px 28px}
+
+/* 학습자 상태 박스 */
+.outcome{
+  background:linear-gradient(180deg,rgba(125,211,160,0.06),transparent);
+  border:1px solid rgba(125,211,160,0.25);border-radius:12px;
+  padding:14px 18px;margin:12px 0;
+}
+.outcome .lbl{display:inline-block;background:var(--good);color:#0B0B0F;font-size:10px;font-weight:800;padding:3px 9px;border-radius:5px;letter-spacing:0.08em;margin-bottom:8px}
+.outcome ul{list-style:none;padding:0}
+.outcome ul li{padding:4px 0 4px 20px;position:relative;color:var(--text);font-size:14px}
+.outcome ul li::before{content:"✓";position:absolute;left:0;color:var(--good);font-weight:700}
+.outcome ul li b{color:var(--good)}
+
+/* 시간표 */
+.schedule{margin-top:14px}
+.schedule table{width:100%;border-collapse:collapse;font-size:13.5px}
+.schedule th,.schedule td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.schedule th{background:rgba(139,92,246,0.06);color:var(--purple-1);font-weight:600;font-size:12px;letter-spacing:0.02em}
+.day.d2 .schedule th{background:rgba(125,211,160,0.06);color:var(--good)}
+.schedule td.t{font-family:"JetBrains Mono",monospace;color:var(--text-mute);font-size:12.5px;width:90px}
+.schedule td.m{width:80px}
+.schedule td.d{width:80px;color:var(--text-mute)}
+.schedule .b{font-weight:600;color:var(--text)}
+.schedule .new{color:var(--good);font-weight:600}
+.schedule .br{color:var(--text-mute);font-style:italic}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600}
+.pill-m{background:rgba(180,142,255,0.12);color:var(--purple-1);border:1px solid rgba(180,142,255,0.35)}
+.pill-n{background:rgba(125,211,160,0.12);color:var(--good);border:1px solid rgba(125,211,160,0.35)}
+.pill-r{background:rgba(154,147,176,0.12);color:var(--text-mute);border:1px solid var(--line)}
+
+/* 사이 기간 박스 */
+.between{
+  background:linear-gradient(90deg,rgba(180,142,255,0.08),rgba(125,211,160,0.08));
+  border:1px solid var(--line);border-radius:18px;
+  padding:24px 28px;margin:24px 0;text-align:center;
+  position:relative;
+}
+.between .lbl{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.12em;color:var(--purple-1);text-transform:uppercase;margin-bottom:8px}
+.between h3{font-size:18px;margin:4px 0 12px}
+.between .acts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+@media(max-width:760px){.between .acts{grid-template-columns:repeat(2,1fr)}}
+.between .acts .act{
+  background:var(--bg-card);border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;font-size:12.5px;color:var(--text-mute);text-align:left;
+}
+.between .acts .act b{color:var(--purple-1);font-size:11px;letter-spacing:0.06em;display:block;margin-bottom:4px}
+
+/* 모듈 매핑 */
+.modmap{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:14px 0}
+@media(max-width:760px){.modmap{grid-template-columns:repeat(4,1fr)}}
+.modmap .m{
+  padding:10px 8px;border:1px solid var(--line);border-radius:10px;
+  text-align:center;font-size:12px;color:var(--text-mute);
+}
+.modmap .m b{display:block;color:var(--text);font-size:13px;margin-bottom:2px}
+.modmap .m.d1{border-color:rgba(180,142,255,0.45);background:rgba(180,142,255,0.06)}
+.modmap .m.d1 b{color:var(--purple-1)}
+.modmap .m.d2{border-color:rgba(125,211,160,0.45);background:rgba(125,211,160,0.06)}
+.modmap .m.d2 b{color:var(--good)}
+.modmap .m .dur{display:block;font-size:10px;margin-top:4px;font-family:"JetBrains Mono",monospace}
+
+/* 비교 표 */
+table.cmp{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:14px}
+table.cmp th,table.cmp td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+table.cmp th{background:rgba(139,92,246,0.08);color:var(--purple-1);font-weight:600;font-size:12.5px}
+table.cmp td:first-child{color:var(--text-mute);width:160px}
+
+/* 풋터 */
+footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:var(--text-mute);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<!-- 상단 네비 -->
+<nav class="topnav">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <linearGradient id="lg1" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#E0CCFF"/><stop offset="100%" stop-color="#9B6FE8"/></linearGradient>
+      <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9B6FE8"/><stop offset="100%" stop-color="#6B3FA0"/></linearGradient>
+    </defs>
+    <path d="M50 6 L24 34 L20 68 L46 94 L50 52 Z" fill="url(#lg1)"/>
+    <path d="M50 6 L78 36 L84 70 L54 94 L50 52 Z" fill="url(#lg2)"/>
+  </svg>
+  <div class="brand">바이브 옵시디언 · 4H × 2일 구성<small>VIBE OBSIDIAN · 2-DAY EDITION</small></div>
+  <div class="links">
+    <a href="index.html">강의 제안서 (1일)</a>
+    <a href="2days.html" class="cur">2일 구성</a>
+    <a href="workbook/index.html">워크북</a>
+  </div>
+</nav>
+
+<!-- 표지 -->
+<div class="cover">
+  <span class="badge">Lecture Plan · 2-Day Edition · 2026</span>
+  <h1>4시간 × 2일<br/>천천히, 본인 vault로</h1>
+  <p class="desc">1일 압축본(4H 55M)을 2일(각 4H)로 분할. 단순 시간 배분이 아니라 학습자 경험 단위로 분할한다. <b style="color:var(--purple-1)">Day 1 — 시작</b> · <b style="color:var(--good)">사이 1주 — 체험</b> · <b style="color:var(--good)">Day 2 — 정착</b>.</p>
+  <div class="meta">
+    <span>구성 <b>Day 1 (4H) + Day 2 (4H)</b></span>
+    <span>사이 간격 <b>1~2주</b></span>
+    <span>총 학습 시간 <b>8H + 본인 실전 1주</b></span>
+    <span>작성일 <b>2026-05-18</b></span>
+  </div>
+</div>
+
+<!-- 1. 왜 2일로 나누는가 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">01 / WHY</span>
+    <h2>왜 2일로 나누는가</h2>
+  </div>
+
+  <p>1일 압축본(4H 55M)에서 학습자는 강사 시연을 보고 본인 손으로 Vault를 만들지만, 직후 일상으로 돌아가면 정착률이 떨어진다. 2일 구성은 다음을 추가로 확보한다.</p>
+
+  <div class="grid grid-3" style="margin-top:14px">
+    <div class="callout" style="margin:0">
+      <span class="lbl" style="background:var(--purple-1);color:#0B0B0F">Day 1</span>
+      <p style="font-size:14px;margin:0"><b>가시적 결과물 1건</b>을 손에 들고 강의장을 나가게 한다. Vault · wiki 3건 · 그래프 1개.</p>
+    </div>
+    <div class="callout" style="margin:0;border-color:var(--line)">
+      <span class="lbl" style="background:#9A93B0;color:#0B0B0F">사이 1주</span>
+      <p style="font-size:14px;margin:0">본인 자료로 <b>실전 운용</b>. 막힌 부분을 미해결 큐에 적어 Day 2에 가져온다.</p>
+    </div>
+    <div class="callout" style="margin:0;border-color:rgba(125,211,160,0.4)">
+      <span class="lbl" style="background:var(--good);color:#0B0B0F">Day 2</span>
+      <p style="font-size:14px;margin:0"><b>본인 사례</b>로 자동화·트러블슈팅·30일 플랜을 완성한다. 강사 1:1 코칭 시간 확보.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. 모듈 7개 → 2일 매핑 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">02 / MAPPING</span>
+    <h2>모듈 7개를 2일로 매핑</h2>
+    <span class="tag">시간 분할 아님 · 경험 분할</span>
+  </div>
+
+  <p class="mute">학습자가 강의장을 나갈 때 손에 무엇을 들고 있는가를 기준으로 나눈다. Day 1 = "보고 만든다", Day 2 = "키우고 유지한다".</p>
+
+  <div class="modmap">
+    <div class="m d1"><b>M1</b>일단 봅시다<span class="dur">45분</span></div>
+    <div class="m d1"><b>M2</b>나도 해봅시다<span class="dur">25분</span></div>
+    <div class="m d1"><b>M3</b>설치<span class="dur">50분</span></div>
+    <div class="m d1"><b>M4</b>raw·wiki·그래프<span class="dur">70분</span></div>
+    <div class="m d2"><b>M5</b>자동화<span class="dur">25분 + α</span></div>
+    <div class="m d2"><b>M6</b>트러블슈팅<span class="dur">30분 + α</span></div>
+    <div class="m d2"><b>M7</b>PKM 유저<span class="dur">30분 + α</span></div>
+  </div>
+
+  <p class="mute" style="font-size:12.5px;margin-top:10px">+α 표시: 2일 구성에서 본인 사례 실습 시간이 추가됨. 워크북 자체는 1일 구성과 동일하게 사용한다.</p>
+</section>
+
+<!-- 3. Day 1 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03 / DAY 1</span>
+    <h2>Day 1 — 시작 (4시간)</h2>
+    <span class="tag">학습자: 일단 만들어본다</span>
+  </div>
+
+  <div class="day d1">
+    <div class="day-head">
+      <div class="day-no">1</div>
+      <div class="name">
+        <div class="ttl">시작: 내 Vault가 손에 들어온다</div>
+        <div class="sub">강사 시연 → 환경 점검 → 설치 → 첫 결과물(wiki 3건 + 그래프 1개)</div>
+      </div>
+      <span class="dur">4H · 240분</span>
+    </div>
+    <div class="day-body">
+
+      <h3>학습자 동선</h3>
+      <p class="mute" style="font-size:13.5px">강의장에서 4시간 안에 "보고 → 준비 → 설치 → 첫 결과물" 1사이클을 한 번 통과한다. 본인 자료가 없어도 강사 더미 자료로 따라간다.</p>
+
+      <div class="schedule">
+        <table>
+          <thead><tr><th>시간</th><th>모듈</th><th>내용</th><th>분</th><th>비고</th></tr></thead>
+          <tbody>
+            <tr><td class="t">0:00 ~</td><td class="m"><span class="pill pill-r">도입</span></td><td class="b">강의 맵 · 2일 흐름 안내</td><td class="d">5</td><td class="mute">왜 2일 구성인지 설명</td></tr>
+            <tr><td class="t">0:05 ~</td><td class="m"><span class="pill pill-m">M1</span></td><td class="b">일단 봅시다 · 강사 시연 4단계</td><td class="d">45</td><td class="mute">Vault·그래프·raw/wiki·Claudian</td></tr>
+            <tr><td class="t">0:50 ~</td><td class="m"><span class="pill pill-m">M2</span></td><td class="b">나도 해봅시다 · 준비물 점검</td><td class="d">25</td><td class="mute">3개 영역 · 막힘 예상 지점</td></tr>
+            <tr><td class="t">1:15 ~</td><td class="m"><span class="pill pill-r">휴식</span></td><td class="br">휴식</td><td class="d">10</td><td></td></tr>
+            <tr><td class="t">1:25 ~</td><td class="m"><span class="pill pill-m">M3</span></td><td class="b">설치 · Obsidian + Claudian 6단계</td><td class="d">50</td><td class="mute">완료 시점 = Claudian 응답 1건</td></tr>
+            <tr><td class="t">2:15 ~</td><td class="m"><span class="pill pill-r">휴식</span></td><td class="br">휴식</td><td class="d">10</td><td></td></tr>
+            <tr><td class="t">2:25 ~</td><td class="m"><span class="pill pill-m">M4</span></td><td class="b">raw·wiki·그래프 (라운드 3×15분)</td><td class="d">70</td><td class="mute">wiki 3건 + 그래프 클러스터 1개</td></tr>
+            <tr><td class="t">3:35 ~</td><td class="m"><span class="pill pill-r">마무리</span></td><td class="b new">Day 1 회고 · 1주 과제 안내</td><td class="d">15</td><td class="mute">★ 2일 구성 추가</td></tr>
+            <tr><td class="t">3:50 ~</td><td class="m"><span class="pill pill-r">QnA</span></td><td class="br">자유 질문</td><td class="d">10</td><td></td></tr>
+            <tr style="background:rgba(180,142,255,0.04)"><td colspan="3" style="text-align:right;color:var(--purple-1)"><b>합계</b></td><td class="d"><b>240분</b></td><td><b>= 4시간</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="outcome">
+        <span class="lbl">DAY 1 종료 시 학습자 상태</span>
+        <ul>
+          <li>Obsidian + Claudian이 본인 노트북에서 <b>동작</b>한다</li>
+          <li><b>본인 또는 더미 자료</b>로 wiki 노트 3건 이상 작성됨</li>
+          <li>그래프 뷰에서 <b>클러스터 1개</b> 이상 식별됨</li>
+          <li><b>1주 과제</b>가 손에 들렸다 (raw 10~20건 ingest, 트러블슈팅 큐 작성)</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 4. 사이 1주 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">04 / BETWEEN</span>
+    <h2>사이 1~2주 — 체험</h2>
+    <span class="tag">강의장 밖 · 본인 자료</span>
+  </div>
+
+  <div class="between">
+    <span class="lbl">학습자가 일상에서 실행</span>
+    <h3>본인 자료로 운용해보면서 막힌 지점을 큐로 모은다</h3>
+    <p class="mute" style="font-size:13.5px;max-width:680px;margin:0 auto">1주~2주 권장. Day 2에 이 기간의 결과물·미해결 큐를 그대로 가져온다.</p>
+
+    <div class="acts">
+      <div class="act"><b>📥 INGEST</b>raw 자료 10~20건을 inbox에 추가</div>
+      <div class="act"><b>📚 CONVERT</b>최소 5건을 wiki로 변환 시도</div>
+      <div class="act"><b>🐛 QUEUE</b>막힌 부분·오류 메시지를 미해결 큐에 적기</div>
+      <div class="act"><b>📈 OBSERVE</b>본인 그래프 변화 매일 1회 캡처</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="lbl">강사 채널</span>
+    <p>이 기간 동안 학습자는 강사 채널(Slack/Discord/이메일)에 질문을 올린다. 강사는 답하지 않아도 OK — 질문 목록 자체가 Day 2 트러블슈팅 시간의 입력이 된다.</p>
+  </div>
+</section>
+
+<!-- 5. Day 2 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">05 / DAY 2</span>
+    <h2>Day 2 — 정착 (4시간)</h2>
+    <span class="tag">학습자: 본인 vault를 키우고 유지한다</span>
+  </div>
+
+  <div class="day d2">
+    <div class="day-head">
+      <div class="day-no">2</div>
+      <div class="name">
+        <div class="ttl">정착: 내 Vault가 알아서 굴러간다</div>
+        <div class="sub">1주 회고 → 자동화 본인 사례 → 트러블슈팅 본인 사례 → 30일 플랜 1:1 코칭</div>
+      </div>
+      <span class="dur">4H · 240분</span>
+    </div>
+    <div class="day-body">
+
+      <h3>학습자 동선</h3>
+      <p class="mute" style="font-size:13.5px">Day 1에서 만든 vault를 본인 자료로 키워온 상태로 입장한다. Day 2의 핵심은 강사가 1:1로 본인 vault를 본다는 점.</p>
+
+      <div class="schedule">
+        <table>
+          <thead><tr><th>시간</th><th>모듈</th><th>내용</th><th>분</th><th>비고</th></tr></thead>
+          <tbody>
+            <tr><td class="t">0:00 ~</td><td class="m"><span class="pill pill-n">회고</span></td><td class="b new">1주 회고 · 본인 vault 공유 (5명 × 4분)</td><td class="d">20</td><td class="mute">★ 2일 구성 핵심</td></tr>
+            <tr><td class="t">0:20 ~</td><td class="m"><span class="pill pill-m">M5</span></td><td class="b">자동화 · 폴더 감시 + 스케줄</td><td class="d">25</td><td class="mute">기본 룰 설계</td></tr>
+            <tr><td class="t">0:45 ~</td><td class="m"><span class="pill pill-n">M5+</span></td><td class="b new">본인 자동화 1건 구축 실습</td><td class="d">40</td><td class="mute">★ 강사 순회</td></tr>
+            <tr><td class="t">1:25 ~</td><td class="m"><span class="pill pill-r">휴식</span></td><td class="br">휴식</td><td class="d">10</td><td></td></tr>
+            <tr><td class="t">1:35 ~</td><td class="m"><span class="pill pill-m">M6</span></td><td class="b">트러블슈팅 · 분류 + 로그 읽기</td><td class="d">30</td><td class="mute">5개 영역 표·로그 연습</td></tr>
+            <tr><td class="t">2:05 ~</td><td class="m"><span class="pill pill-n">M6+</span></td><td class="b new">본인 사례 트러블슈팅 (1주 큐 처리)</td><td class="d">30</td><td class="mute">★ 페어 + 강사 코칭</td></tr>
+            <tr><td class="t">2:35 ~</td><td class="m"><span class="pill pill-r">휴식</span></td><td class="br">휴식</td><td class="d">10</td><td></td></tr>
+            <tr><td class="t">2:45 ~</td><td class="m"><span class="pill pill-m">M7</span></td><td class="b">나도 이제 PKM 유저</td><td class="d">30</td><td class="mute">디시플린 · 30일 플랜 · 주간 리듬</td></tr>
+            <tr><td class="t">3:15 ~</td><td class="m"><span class="pill pill-n">M7+</span></td><td class="b new">30일 플랜 1:1 코칭</td><td class="d">30</td><td class="mute">★ 강사 개별 검토</td></tr>
+            <tr><td class="t">3:45 ~</td><td class="m"><span class="pill pill-r">회고</span></td><td class="br">페어 공유 · 강의 회고</td><td class="d">15</td><td></td></tr>
+            <tr style="background:rgba(125,211,160,0.04)"><td colspan="3" style="text-align:right;color:var(--good)"><b>합계</b></td><td class="d"><b>240분</b></td><td><b>= 4시간</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="outcome">
+        <span class="lbl">DAY 2 종료 시 학습자 상태</span>
+        <ul>
+          <li>본인 vault에 <b>자동화 1건 가동</b> (폴더 감시 또는 스케줄)</li>
+          <li>1주 큐에서 <b>트러블슈팅 1건</b>을 강사·페어 도움으로 해결</li>
+          <li><b>30일 플랜</b>이 본인 일정에 맞게 완성됨 (강사 1:1 검토 통과)</li>
+          <li><b>디시플린 한 줄</b>과 <b>강사·페어 연락 채널</b> 확보</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 6. 1일 vs 2일 비교 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">06 / COMPARE</span>
+    <h2>1일 vs 2일 비교</h2>
+    <span class="tag">어떤 상황에 어떤 구성</span>
+  </div>
+
+  <table class="cmp">
+    <thead><tr><th style="width:160px">관점</th><th>1일 압축 (4H 55M)</th><th>2일 분할 (4H × 2 + 사이 1주)</th></tr></thead>
+    <tbody>
+      <tr><td>학습자 결과물</td><td>강의장 더미 자료로 wiki 3건</td><td><b style="color:var(--good)">본인 자료로 vault + 자동화 + 30일 플랜</b></td></tr>
+      <tr><td>본인 자료 실전</td><td>강의 중 일부만 가능</td><td><b style="color:var(--good)">사이 1주 동안 본인이 운용</b></td></tr>
+      <tr><td>트러블슈팅</td><td>강의 자료 사례 중심</td><td><b style="color:var(--good)">본인 사례 1건 강사 코칭</b></td></tr>
+      <tr><td>30일 플랜</td><td>학습자가 혼자 작성</td><td><b style="color:var(--good)">강사 1:1 검토</b></td></tr>
+      <tr><td>강사 부담</td><td>1회 · 4시간</td><td>2회 · 8시간 + 사이 채널 응대</td></tr>
+      <tr><td>학습자 시간 약속</td><td>4시간 1회</td><td>4시간 × 2 + 사이 1주 자율 운용</td></tr>
+      <tr><td>적합 대상</td><td>도구 빨리 보고 싶은 입문자 / 인하우스 짧은 워크숍</td><td><b style="color:var(--purple-1)">실제 PKM 도입을 결심한 학습자 · 기업 교육 정규 코스</b></td></tr>
+      <tr><td>권장 인원</td><td>15~30명</td><td>8~15명 (1:1 코칭 시간 확보)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 7. 운영 메모 -->
+<section>
+  <div class="sec-head">
+    <span class="sec-num">07 / OPS</span>
+    <h2>운영 메모</h2>
+    <span class="tag">강사용</span>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="callout" style="margin:0">
+      <span class="lbl">사이 1주 운영</span>
+      <p style="font-size:14px">강사가 매일 답하지 않아도 OK. 학습자 질문이 누적되도록만 두면 Day 2 트러블슈팅 시간에 그대로 입력이 된다. 단, "치명적 막힘"(설치 실패) 1건은 24시간 내 응대 권장.</p>
+    </div>
+    <div class="callout" style="margin:0">
+      <span class="lbl">1:1 코칭 시간 배분</span>
+      <p style="font-size:14px">Day 2의 30일 플랜 1:1 코칭은 30분 / 학습자 수로 시간 분배. 8명이면 1인당 약 3.5분. 강사는 학습자 디시플린 한 줄과 30일 플랜 첫 7일만 빠르게 확인.</p>
+    </div>
+    <div class="callout" style="margin:0">
+      <span class="lbl">워크북 재사용</span>
+      <p style="font-size:14px">워크북 7개 모듈은 1일·2일 구성 모두 동일하게 사용한다. 2일 구성에서는 <b>모듈 5/6/7 본인 사례 실습 시간이 추가</b>되므로 워크북 § 05 워크시트 부분을 더 깊이 채울 수 있다.</p>
+    </div>
+    <div class="callout" style="margin:0">
+      <span class="lbl">기업 교육 적용</span>
+      <p style="font-size:14px">2일 구성은 기업 내 정규 교육 코스로 적합. Day 1과 Day 2 사이에 학습자가 본인 업무 자료(회의록·기획서·보고서)를 ingest해보면 사내 케이스가 자연스럽게 생긴다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 풋터 -->
+<footer>
+  <span>바이브 옵시디언 · 4H × 2일 구성 · 2026-05-18</span>
+  <span>본 강의 시간 합계 480분 + 사이 1~2주 실전</span>
+  <span><a href="index.html">← 1일 구성</a> · <a href="workbook/index.html">워크북 →</a></span>
+</footer>
+
+</div>
+</body>
+</html>
