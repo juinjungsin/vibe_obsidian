@@ -1,6 +1,6 @@
-﻿# 워크북 모듈 수정용 Markdown
+# 워크북 모듈 수정용 Markdown
 
-이 폴더는 `workbook/module1.html`부터 `workbook/module7.html`까지의 실습 내용을 수정 지시용 Markdown으로 옮긴 작업 원고입니다.
+이 폴더는 워크북의 6개 핵심 모듈과 2개 보조 페이지 내용을 수정 지시용 Markdown으로 옮긴 작업 원고입니다.
 
 ## 사용 방법
 
@@ -15,6 +15,7 @@
 - `module2.md` - 나도 해봅시다
 - `module3.md` - 따라해봅시다 - 설치
 - `module4.md` - raw · wiki · 그래프 뷰
-- `module5.md` - 따라해봅시다 - 자동화
-- `module6.md` - 트러블슈팅
-- `module7.md` - 나도 이제 PKM 유저
+- `module5.md` - etc1 - 자동화
+- `module6.md` - 대량의 파일을 MD로 변환하기
+- `module7.md` - M5 - 나도 이제 PKM 유저
+- `etc2.md` - etc2 - 트러블슈팅

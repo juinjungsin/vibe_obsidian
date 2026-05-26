@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>모듈 6 · 트러블슈팅 — 바이브 옵시디언 워크북</title>
+<title>M6 · 대량의 파일을 MD로 변환하기 — 바이브 옵시디언 워크북</title>
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 8 L25 35 L22 70 L48 92 L50 50 Z' fill='%23B48EFF'/><path d='M50 8 L78 38 L82 68 L52 92 L50 50 Z' fill='%236B3FA0'/></svg>">
 <style>
 /* 바이브 옵시디언 워크북 공통 스타일 */
@@ -240,171 +240,159 @@ code.inline{background:rgba(109,66,199,0.10);color:var(--purple-1);padding:2px 7
     <a href="module2.html">M2</a>
     <a href="module3.html">M3</a>
     <a href="module4.html">M4</a>
-    <a href="module5.html">M5</a>
+    <a href="module7.html">M5</a>
     <a href="module6.html" class="cur">M6</a>
-    <a href="module7.html">M7</a>
+    <a href="module5.html">etc1</a>
+    <a href="etc2.html">etc2</a>
   </div>
 </nav>
 
 <div class="m-cover">
-  <span class="badge">Module 6 · Troubleshooting</span>
-  <h1>트러블슈팅</h1>
-  <p class="desc">설치·인증·호출·동기화·자동화 5개 영역에서 자주 발생하는 오류를 분류하고, 본인 환경에서 재현되는 오류를 워크시트로 추적한다.</p>
+  <span class="badge">Module 6 · MD Ingest</span>
+  <h1>대량의 파일을 MD로 변환하기</h1>
+  <p class="desc">MD Maker를 이용해 Obsidian에 넣기 전 다양한 문서 파일을 로컬 PC에서 Markdown으로 일괄 변환한다. ingest 폴더 기반으로 원본을 유지하고 md/csv/pdf 결과와 로그를 확인한다.</p>
   <div class="meta">
-    <span>소요 <b>30분</b><small style="color:var(--text-mute);font-size:11px;display:block;margin-top:2px">(실측 28.1분, 5분 단위)</small></span>
-    <span>방식 <b>오류 분류 + 본인 사례 추적</b></span>
-    <span>결과물 <b>해결 기록 1건 + 미해결 1건 큐</b></span>
+    <span>소요 <b>35분</b></span>
+    <span>방식 <b>도구 구조 이해 + 폴더 실습</b></span>
+    <span>완료 시점 <b>ingest → md 변환 결과 1건</b></span>
   </div>
 </div>
 
 <div class="goals">
   <span class="lbl">LEARNING GOALS</span>
   <ol>
-    <li>오류를 <b>5개 영역</b>으로 분류해서 본다.</li>
-    <li>본인 환경 오류 <b>1건 이상</b>을 워크시트에 기록·해결한다.</li>
-    <li>해결 못한 오류는 <b>미해결 큐</b>로 옮겨 강사·동료에 공유한다.</li>
+    <li>Obsidian에 넣기 전 <b>문서 전처리</b>가 필요한 이유를 설명한다.</li>
+    <li><code>ingest/</code>, <code>md/</code>, <code>failed/</code>, <code>log/</code> 폴더의 역할을 구분한다.</li>
+    <li>파일 1~3건을 <b>Markdown</b>으로 변환하고 결과와 로그를 확인한다.</li>
   </ol>
 </div>
 
-<!-- 1. 오류 5개 영역 -->
 <section>
   <div class="sec-head">
-    <span class="sec-num">01 / TAXONOMY</span>
-    <h2>오류 5개 영역</h2>
-    <span class="tag">분류 기준</span>
+    <span class="sec-num">01 / WHY</span>
+    <h2>왜 MD 변환이 필요한가</h2>
+    <span class="tag">Obsidian 전처리</span>
   </div>
-
-  <div class="grid grid-3">
-    <div class="card"><div class="ttl">① 설치 · 실행</div><div class="body">Obsidian이 켜지지 않음. 플러그인이 목록에 없음.</div></div>
-    <div class="card"><div class="ttl">② 인증 · API</div><div class="body">API 키 거부. 401/403 응답. 결제 한도 초과.</div></div>
-    <div class="card"><div class="ttl">③ 호출 · 응답</div><div class="body">타임아웃. 응답 빈 문자열. 한국어가 영어로 나옴.</div></div>
-    <div class="card"><div class="ttl">④ 파일 · 동기화</div><div class="body">노트가 두 개로 쪼개짐. .conflict 파일 생성.</div></div>
-    <div class="card"><div class="ttl">⑤ 자동화</div><div class="body">트리거가 발화 안 됨. 동일 파일 무한 루프.</div></div>
-    <div class="card"><div class="ttl">⑥ 기타</div><div class="body">한글 파일명 깨짐. 그래프 뷰 멈춤.</div></div>
+  <p>Obsidian은 Markdown 기반으로 지식 구조를 만들 때 가장 안정적이다. PDF, Word, PPT, Excel, HWP처럼 형식이 섞인 자료는 먼저 텍스트와 구조를 꺼내 <code class="inline">.md</code>로 정리해야 검색, 백링크, 그래프 뷰, AI 요약 흐름에 자연스럽게 들어온다.</p>
+  <div class="grid grid-3" style="margin-top:14px">
+    <div class="card"><div class="ttl">원본 보존</div><div class="body">원본 파일은 <code>ingest/</code>에 둔 상태로 결과 파일을 별도 폴더에 만든다.</div></div>
+    <div class="card"><div class="ttl">로컬 처리</div><div class="body">민감한 자료를 외부 서비스에 올리지 않고 내 PC에서 변환 흐름을 통제한다.</div></div>
+    <div class="card"><div class="ttl">Obsidian 입력</div><div class="body">결과 Markdown을 Vault의 raw 또는 wiki 작성 흐름에 투입한다.</div></div>
   </div>
 </section>
 
-<!-- 2. 자주 발생 오류 표 -->
 <section>
   <div class="sec-head">
-    <span class="sec-num">02 / COMMON</span>
-    <h2>자주 발생 오류 · 원인 · 해결</h2>
-    <span class="tag">레퍼런스 표</span>
+    <span class="sec-num">02 / FORMAT</span>
+    <h2>지원 파일과 출력 형식</h2>
+    <span class="tag">입력 · 출력</span>
   </div>
-
   <table class="ws">
-    <thead>
-      <tr><th style="width:60px">영역</th><th style="width:230px">증상 / 메시지</th><th>원인</th><th>해결</th></tr>
-    </thead>
+    <thead><tr><th style="width:160px">구분</th><th>형식</th><th>수업에서 확인할 점</th></tr></thead>
     <tbody>
-      <tr><td><b>①</b></td><td>Community plugins 메뉴 없음</td><td>Restricted mode ON</td><td>Settings → Community plugins → Turn off restricted mode</td></tr>
-      <tr><td><b>①</b></td><td>Claudian 검색 결과 없음</td><td>검색어 오타 / 사내망 차단</td><td>정확히 <code>Claudian</code> 입력 / 외부 네트워크 확인</td></tr>
-      <tr><td><b>②</b></td><td><code>401 unauthorized</code></td><td>API 키 만료 또는 오타</td><td>키 재발급 → 설정 패널 재입력 → Save</td></tr>
-      <tr><td><b>②</b></td><td><code>429 rate_limit</code></td><td>분당 호출 한도 초과</td><td>요청 간격 늘리기 · 플랜 업그레이드</td></tr>
-      <tr><td><b>②</b></td><td><code>403 insufficient_credit</code></td><td>결제 잔액 부족</td><td>콘솔에서 결제 정보 확인</td></tr>
-      <tr><td><b>③</b></td><td>응답 30초 후 타임아웃</td><td>max tokens 과대 · 네트워크 지연</td><td>tokens 1024로 낮춤 · 핫스팟 테스트</td></tr>
-      <tr><td><b>③</b></td><td>응답이 영어로만 나옴</td><td>Language 미설정</td><td>설정 패널 Language → <code>ko</code></td></tr>
-      <tr><td><b>③</b></td><td>응답 빈 문자열</td><td>입력 노트가 빈 본문</td><td>본문 200자 이상 후 재시도</td></tr>
-      <tr><td><b>④</b></td><td><code>*.conflict-2026-05-18.md</code> 생성</td><td>iCloud / OneDrive 동기화 지연</td><td>로컬 폴더로 Vault 이전 / Obsidian Sync 사용</td></tr>
-      <tr><td><b>④</b></td><td>노트 저장은 되는데 그래프 미반영</td><td>인덱스 캐시 지연</td><td><code>Cmd/Ctrl+P</code> → <code>Reload app</code></td></tr>
-      <tr><td><b>⑤</b></td><td>자동화 트리거가 발화하지 않음</td><td>경로 패턴 불일치 / debounce 미설정</td><td>경로 점검 · 로그에서 매칭 여부 확인</td></tr>
-      <tr><td><b>⑤</b></td><td>같은 파일 무한 루프 변환</td><td>출력이 다시 입력 폴더에 저장됨</td><td>출력 경로를 입력 패턴 밖으로 이동</td></tr>
-      <tr><td><b>⑥</b></td><td>한글 파일명 깨짐 (macOS↔Win)</td><td>유니코드 정규화 (NFD vs NFC)</td><td>파일명에 영문 슬러그 사용 권장</td></tr>
-      <tr><td><b>⑥</b></td><td>그래프 뷰가 5초+ 멈춤</td><td>노드 1000+ · forces 과부하</td><td>필터로 표시 노드 축소 / forces 기본값</td></tr>
+      <tr><td><b>텍스트/웹</b></td><td><code>.txt</code>, <code>.html</code>, <code>.htm</code></td><td>본문 텍스트가 Markdown으로 자연스럽게 옮겨지는지 확인</td></tr>
+      <tr><td><b>Office</b></td><td><code>.docx</code>, <code>.pptx</code>, <code>.xlsx</code>, <code>.doc</code>, <code>.ppt</code>, <code>.xls</code></td><td>문단, 슬라이드, 표가 읽을 수 있는 구조로 추출되는지 확인</td></tr>
+      <tr><td><b>PDF</b></td><td><code>.pdf</code></td><td>텍스트 PDF와 스캔 PDF의 결과 차이를 비교</td></tr>
+      <tr><td><b>한글 문서</b></td><td><code>.hwp</code>, <code>.hwpx</code></td><td>변환 도구 준비 여부와 실패 로그 확인</td></tr>
+      <tr><td><b>출력</b></td><td><code>md</code>, <code>csv</code>, <code>pdf</code></td><td>이번 실습은 Markdown 결과를 중심으로 확인</td></tr>
     </tbody>
   </table>
+  <p class="mute" style="font-size:12.5px;margin-top:8px">권장 기준: 파일 1개당 50MB 이하. 작은 파일부터 순차 처리하면 실패 원인을 추적하기 쉽다.</p>
 </section>
 
-<!-- 3. 로그 분석 빈칸 -->
 <section>
   <div class="sec-head">
-    <span class="sec-num">03 / LOG READ</span>
-    <h2>로그 읽기 연습 (더미)</h2>
-    <span class="tag">분류 → 원인 → 해결</span>
+    <span class="sec-num">03 / FOLDERS</span>
+    <h2>폴더 구조</h2>
+    <span class="tag">작업 위치</span>
   </div>
-
-  <pre class="code">
-<span class="mute"># claudian.log 발췌</span>
-<span class="hl">2026-05-18 14:02:11</span> [ERROR] auto-summarize-inbox failed
-  rule=auto-summarize-inbox
-  file=00_inbox/회의록_2026-05-18.md
-  error=API_401
-  message="invalid x-api-key"
-  retry=0/3</pre>
-
-  <table class="ws" style="margin-top:14px">
-    <thead><tr><th style="width:170px">분석 항목</th><th>본인 답</th></tr></thead>
-    <tbody>
-      <tr><td>영역 (①~⑥)</td><td class="fill-sm"></td></tr>
-      <tr><td>핵심 메시지</td><td class="fill-sm"></td></tr>
-      <tr><td>원인 (한 문장)</td><td class="fill-sm"></td></tr>
-      <tr><td>해결 절차 1</td><td class="fill-sm"></td></tr>
-      <tr><td>해결 절차 2</td><td class="fill-sm"></td></tr>
-      <tr><td>예방책</td><td class="fill-sm"></td></tr>
-    </tbody>
-  </table>
-</section>
-
-<!-- 4. 본인 사례 워크시트 -->
-<section>
-  <div class="sec-head">
-    <span class="sec-num">04 / MY CASE</span>
-    <h2>본인이 만난 오류 1건 추적</h2>
-    <span class="tag">최대 3건까지</span>
-  </div>
-
   <table class="ws">
-    <thead>
-      <tr><th style="width:36px">#</th><th style="width:60px">영역</th><th>증상</th><th>원인</th><th>해결</th><th style="width:60px">상태</th></tr>
-    </thead>
+    <thead><tr><th style="width:150px">폴더</th><th>역할</th><th style="width:180px">수업 체크</th></tr></thead>
     <tbody>
-      <tr><td class="center">1</td><td class="fill-sm"></td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
-      <tr><td class="center">2</td><td class="fill-sm"></td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
-      <tr><td class="center">3</td><td class="fill-sm"></td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
+      <tr><td><code>ingest/</code></td><td>변환할 원본 파일을 넣는 입력 폴더</td><td class="fill-sm"></td></tr>
+      <tr><td><code>md/</code></td><td>Markdown 결과가 저장되는 폴더</td><td class="fill-sm"></td></tr>
+      <tr><td><code>csv/</code></td><td>표 데이터 결과가 저장되는 폴더</td><td class="fill-sm"></td></tr>
+      <tr><td><code>pdf/</code></td><td>PDF 출력 결과가 저장되는 폴더</td><td class="fill-sm"></td></tr>
+      <tr><td><code>failed/</code></td><td>변환 실패 파일과 실패 사유 추적 위치</td><td class="fill-sm"></td></tr>
+      <tr><td><code>log/</code></td><td>일자별 실행 로그 저장 위치</td><td class="fill-sm"></td></tr>
+      <tr><td><code>state/</code></td><td>처리 상태와 중복 실행 방지 정보</td><td class="fill-sm"></td></tr>
+      <tr><td><code>tools/</code></td><td>보조 변환 도구 배치 위치</td><td class="fill-sm"></td></tr>
     </tbody>
   </table>
-  <p class="mute" style="font-size:12.5px;margin-top:6px">상태 표기: <b>OK</b> 해결 · <b>WIP</b> 진행중 · <b>PEND</b> 미해결</p>
 </section>
 
-<!-- 5. 미해결 큐 -->
 <section>
   <div class="sec-head">
-    <span class="sec-num">05 / QUEUE</span>
-    <h2>미해결 큐 (강사·동료 공유용)</h2>
-    <span class="tag">강의 후 후속 대응</span>
+    <span class="sec-num">04 / SETUP</span>
+    <h2>준비물</h2>
+    <span class="tag">Windows 기준</span>
   </div>
+  <div class="grid grid-2">
+    <div class="card"><div class="ttl">기본 환경</div><div class="body">Windows 10/11, Python 3.11 이상, Tkinter 실행 환경을 확인한다.</div></div>
+    <div class="card"><div class="ttl">문서 변환</div><div class="body">LibreOffice는 <code>.doc</code>, <code>.ppt</code>, <code>.xls</code> 같은 구형 Office 변환에 필요하다.</div></div>
+    <div class="card"><div class="ttl">OCR</div><div class="body">Tesseract OCR은 스캔 PDF나 이미지 기반 슬라이드의 텍스트 추출에 사용한다.</div></div>
+    <div class="card"><div class="ttl">한글 문서</div><div class="body"><code>unhwp.exe</code>를 준비하면 <code>.hwp</code>, <code>.hwpx</code> 변환 흐름을 다룰 수 있다.</div></div>
+  </div>
+  <pre class="code" style="margin-top:14px"><span class="mute"># 최초 준비 예시</span>
+git clone https://github.com/juinjungsin/obsidian-md-ingest.git
+cd obsidian-md-ingest
+python -m pip install -r requirements.txt</pre>
+</section>
 
+<section>
+  <div class="sec-head">
+    <span class="sec-num">05 / RUN</span>
+    <h2>실습 절차</h2>
+    <span class="tag">GUI · Headless</span>
+  </div>
+  <ol class="step-list">
+    <li class="step"><div class="ttl">프로그램 실행</div><div class="body"><code>python app.py</code>로 MD Maker 창을 연다.</div></li>
+    <li class="step"><div class="ttl">파일 넣기</div><div class="body"><code>ingest/</code> 폴더에 변환할 파일 1~3건을 복사한다. 첫 실습은 작은 <code>.txt</code>, <code>.docx</code>, <code>.pdf</code> 파일을 권장한다.</div></li>
+    <li class="step"><div class="ttl">목록 새로고침</div><div class="body">Refresh 또는 Ready 목록을 눌러 변환 대상이 보이는지 확인한다.</div></li>
+    <li class="step"><div class="ttl">변환 실행</div><div class="body">Ingest Ready Files를 실행하고 진행률, 현재 파일명, 로그 메시지를 확인한다.</div></li>
+    <li class="step"><div class="ttl">결과 확인</div><div class="body"><code>md/</code> 폴더에서 Markdown 결과를 열고 제목, 본문, 표, 한글 인코딩을 확인한다.</div></li>
+  </ol>
+  <pre class="code" style="margin-top:14px"><span class="mute"># 창 없이 실행하는 예시</span>
+python app.py --headless --formats md
+
+<span class="mute"># 실제 변환 전 목록만 점검하는 예시</span>
+python app.py --headless --dry-run --formats md</pre>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="sec-num">06 / CHECK</span>
+    <h2>결과와 오류 확인</h2>
+    <span class="tag">검수 기준</span>
+  </div>
   <table class="ws">
-    <thead>
-      <tr><th style="width:36px">#</th><th>요약</th><th style="width:170px">재현 단계 요약</th><th style="width:110px">우선순위</th></tr>
-    </thead>
+    <thead><tr><th style="width:190px">확인 위치</th><th>정상 기준</th><th>문제가 있으면</th></tr></thead>
     <tbody>
-      <tr><td class="center">1</td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
-      <tr><td class="center">2</td><td class="fill-md"></td><td class="fill-md"></td><td class="fill-sm"></td></tr>
+      <tr><td><code>md/</code></td><td>원본 파일명 기준의 Markdown 결과가 생성됨</td><td>파일 크기, 확장자, 권한 확인</td></tr>
+      <tr><td><code>failed/</code></td><td>실패 파일이 없거나 실패 사유가 분리되어 있음</td><td>해당 파일만 단독 재실행</td></tr>
+      <tr><td><code>log/YYYYMMDD변환log.txt</code></td><td>시작, 변환, 저장, 완료 로그가 시간순으로 기록됨</td><td>마지막 ERROR 라인부터 원인 추적</td></tr>
+      <tr><td>Ready 목록</td><td>실행 후 처리 대상이 비어 있거나 예상 파일만 남음</td><td>중복 처리 상태와 <code>state/</code> 확인</td></tr>
     </tbody>
   </table>
-
-  <div class="callout">
-    <span class="lbl">공유 양식 (강사 채널)</span>
-    <p style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--ink)">[환경] OS / Obsidian 버전 / Claudian 버전<br>[증상] 한 줄<br>[재현] 1) ... 2) ... 3) ...<br>[로그] 마지막 5줄</p>
+  <div class="memo">
+    <div class="q">이번 실습에서 변환한 파일명 · 결과 폴더 · 오류 여부를 기록한다.</div>
   </div>
 </section>
 
-<!-- 셀프 체크 -->
 <div class="self">
-  <h3>모듈 6 종료 시 셀프 체크</h3>
+  <h3>M6 종료 시 셀프 체크</h3>
   <ul class="check">
-    <li>오류 5개 영역의 <b>이름</b>을 말로 답할 수 있다.</li>
-    <li><code>claudian.log</code>에서 ERROR 라인 한 건을 <b>해석해 분류</b>했다.</li>
-    <li>본인 환경에서 만난 오류 <b>1건 이상</b>을 워크시트에 기록했다.</li>
-    <li>해결 못한 오류는 <b>미해결 큐</b>로 옮겼다.</li>
+    <li><code>ingest/</code>에 넣은 파일이 <code>md/</code> 결과로 생성되는 흐름을 확인했다.</li>
+    <li>변환 실패 시 <code>failed/</code>와 <code>log/</code>에서 원인을 찾는 위치를 안다.</li>
+    <li>Markdown 결과 1건을 Obsidian Vault에 넣을 수 있는 상태로 열어봤다.</li>
+    <li>외부 공유가 필요한 원본과 로컬 처리해야 할 원본을 구분했다.</li>
   </ul>
 </div>
 
 <div class="wb-foot">
-  <a class="nav-prev" href="module5.html">← 모듈 5 · 자동화</a>
-  <span>모듈 6 / 7 · 트러블슈팅</span>
-  <a class="nav-next" href="module7.html">모듈 7 · PKM 유저 →</a>
+  <a class="nav-prev" href="module7.html">← M5 · 나도 이제 PKM 유저</a>
+  <span>M6 · 대량의 파일을 MD로 변환하기</span>
+  <a class="nav-next" href="module5.html">etc1 · 자동화 →</a>
 </div>
 
 </div>
