@@ -249,7 +249,7 @@ code.inline{background:rgba(109,66,199,0.10);color:var(--purple-1);padding:2px 7
 <div class="m-cover">
   <span class="badge">Module 3 · Installation</span>
   <h1>따라해봅시다 — 설치</h1>
-  <p class="desc">Obsidian 본체 설치 → Vault 생성 → 커뮤니티 플러그인 활성화 → Claudian 설치 → API 키 연결 → 동작 확인. 6단계.</p>
+  <p class="desc">Obsidian 본체 설치 → Vault 생성 → 커뮤니티 플러그인 활성화 → Claudian 설치 → 동작 확인. 5단계.</p>
   <div class="meta">
     <span>소요 <b>50분</b><small style="color:var(--text-mute);font-size:11px;display:block;margin-top:2px">(실측 50.0분, 5분 단위)</small></span>
     <span>방식 <b>강사 시연 + 동시 실습</b></span>
@@ -266,11 +266,11 @@ code.inline{background:rgba(109,66,199,0.10);color:var(--purple-1);padding:2px 7
   </ol>
 </div>
 
-<!-- 1. 설치 6단계 -->
+<!-- 1. 설치 5단계 -->
 <section>
   <div class="sec-head">
     <span class="sec-num">01 / STEPS</span>
-    <h2>설치 6단계</h2>
+    <h2>설치 5단계</h2>
     <span class="tag">총 35분</span>
   </div>
 
@@ -290,10 +290,6 @@ code.inline{background:rgba(109,66,199,0.10);color:var(--purple-1);padding:2px 7
     <li class="step">
       <div class="ttl">Claudian 설치 <span class="dur-tag" style="margin-left:8px">8분</span></div>
       <div class="body">Browse → 검색 <code>Claudian</code> → Install → Enable. 사이드바에 보라색 아이콘 노출 확인.</div>
-    </li>
-    <li class="step">
-      <div class="ttl">API 키 연결 <span class="dur-tag" style="margin-left:8px">8분</span></div>
-      <div class="body">Claude 콘솔에서 API 키 발급 → Claudian 설정 패널 → <b>API Key</b> 입력 → Save → 상태 표시기 <b>green</b> 확인.</div>
     </li>
     <li class="step">
       <div class="ttl">동작 확인 <span class="dur-tag" style="margin-left:8px">4분</span></div>
@@ -329,37 +325,10 @@ code.inline{background:rgba(109,66,199,0.10);color:var(--purple-1);padding:2px 7
   </div>
 </section>
 
-<!-- 3. Claudian 설정 패널 -->
+<!-- 3. 폴더 구조 만들기 -->
 <section>
   <div class="sec-head">
-    <span class="sec-num">03 / CONFIG</span>
-    <h2>Claudian 설정 패널 입력값</h2>
-    <span class="tag">설정 → Community plugins → Claudian</span>
-  </div>
-
-  <table class="ws">
-    <thead>
-      <tr><th style="width:200px">필드</th><th style="width:170px">기본값</th><th>본인 입력</th><th style="width:90px">필수</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><code class="inline">API Key</code></td><td>(없음)</td><td class="fill-sm"></td><td><span class="pill pill-bad" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(240,113,120,0.12);color:#B43A46;border:1px solid rgba(240,113,120,0.35)">필수</span></td></tr>
-      <tr><td><code class="inline">Model</code></td><td>claude-sonnet-4-6</td><td class="fill-sm"></td><td><span class="pill pill-good" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(125,211,160,0.12);color:#23825A;border:1px solid rgba(125,211,160,0.35)">권장</span></td></tr>
-      <tr><td><code class="inline">Max tokens</code></td><td>2048</td><td class="fill-sm"></td><td><span class="pill pill-muted" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(104,113,134,0.10);color:#687186;border:1px solid #D8DEE9">선택</span></td></tr>
-      <tr><td><code class="inline">Default folder</code></td><td>20_wiki</td><td class="fill-sm"></td><td><span class="pill pill-muted" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(104,113,134,0.10);color:#687186;border:1px solid #D8DEE9">선택</span></td></tr>
-      <tr><td><code class="inline">Language</code></td><td>ko</td><td class="fill-sm"></td><td><span class="pill pill-muted" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(104,113,134,0.10);color:#687186;border:1px solid #D8DEE9">선택</span></td></tr>
-    </tbody>
-  </table>
-
-  <div class="callout">
-    <span class="lbl">보안 노트</span>
-    <p>API 키는 Vault 폴더 내 <code>.obsidian/plugins/claudian/data.json</code>에 저장된다. Vault를 외부 공유할 때는 반드시 제외.</p>
-  </div>
-</section>
-
-<!-- 4. 폴더 구조 만들기 -->
-<section>
-  <div class="sec-head">
-    <span class="sec-num">04 / FOLDERS</span>
+    <span class="sec-num">03 / FOLDERS</span>
     <h2>최초 폴더 구조 만들기</h2>
     <span class="tag">실습</span>
   </div>
@@ -382,10 +351,10 @@ code.inline{background:rgba(109,66,199,0.10);color:var(--purple-1);padding:2px 7
   </ul>
 </section>
 
-<!-- 5. 첫 호출 확인 -->
+<!-- 4. 첫 호출 확인 -->
 <section>
   <div class="sec-head">
-    <span class="sec-num">05 / FIRST CALL</span>
+    <span class="sec-num">04 / FIRST CALL</span>
     <h2>Claudian 첫 호출 확인</h2>
     <span class="tag">동작 검증</span>
   </div>
