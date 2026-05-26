@@ -8,21 +8,21 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root{
-    --bg:#0B0B0F;
-    --bg-card:#16151C;
-    --bg-card-2:#1C1B24;
-    --line:#2A2833;
-    --purple-1:#B48EFF;
-    --purple-2:#8B5CF6;
-    --purple-3:#6B3FA0;
-    --purple-4:#483699;
-    --purple-deep:#2B1F5C;
-    --text:#E8E6F0;
-    --text-mute:#9A93B0;
-    --accent:#C4B5FD;
-    --good:#7DD3A0;
-    --warn:#F4B860;
-    --bad:#F07178;
+    --bg:#F6F7FB;
+    --bg-card:#FFFFFF;
+    --bg-card-2:#F1F4F9;
+    --line:#D8DEE9;
+    --purple-1:#6D42C7;
+    --purple-2:#6D4AFF;
+    --purple-3:#7B5DE8;
+    --purple-4:#4C2FA3;
+    --purple-deep:#312060;
+    --text:#1F2430;
+    --text-mute:#687186;
+    --accent:#7B5DE8;
+    --good:#23825A;
+    --warn:#A96000;
+    --bad:#B43A46;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{background:var(--bg);color:var(--text);font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",-apple-system,sans-serif;line-height:1.65;font-feature-settings:"tnum"}
@@ -53,9 +53,9 @@
     color:var(--text-mute);font-size:13.5px;line-height:1.4;
     border-left:2px solid transparent;transition:all .15s ease;
   }
-  .toc a:hover{background:rgba(139,92,246,0.08);color:var(--text)}
+  .toc a:hover{background:rgba(109,74,255,0.08);color:var(--text)}
   .toc a.active{
-    background:linear-gradient(90deg,rgba(180,142,255,0.18),rgba(139,92,246,0.04));
+    background:linear-gradient(90deg,rgba(109,66,199,0.12),rgba(109,74,255,0.04));
     color:var(--purple-1);border-left-color:var(--purple-1);font-weight:600;
   }
   .toc .sub{padding-left:22px;font-size:12.5px;color:var(--text-mute)}
@@ -74,7 +74,7 @@
     .toc{
       position:fixed;top:auto;bottom:20px;right:20px;left:auto;
       width:260px;max-height:60vh;z-index:100;
-      box-shadow:0 12px 40px -8px rgba(0,0,0,0.6);
+      box-shadow:0 12px 40px -8px rgba(44,51,68,0.14);
       transform:translateX(calc(100% + 30px));transition:transform .25s ease;
     }
     .toc.open{transform:translateX(0)}
@@ -83,16 +83,16 @@
       width:52px;height:52px;border-radius:50%;border:none;
       background:linear-gradient(135deg,var(--purple-2),var(--purple-4));
       color:#fff;font-size:22px;cursor:pointer;align-items:center;justify-content:center;
-      box-shadow:0 8px 24px -4px rgba(139,92,246,0.5);
+      box-shadow:0 8px 24px -4px rgba(109,74,255,0.22);
     }
   }
 
   /* 표지 */
   .cover{
     position:relative;
-    background:radial-gradient(1200px 600px at 80% -10%,rgba(139,92,246,0.35),transparent 60%),
-               radial-gradient(900px 500px at 10% 110%,rgba(72,54,153,0.45),transparent 55%),
-               linear-gradient(180deg,#15121E 0%,#0B0B0F 100%);
+    background:radial-gradient(1200px 600px at 80% -10%,rgba(109,74,255,0.10),transparent 60%),
+               radial-gradient(900px 500px at 10% 110%,rgba(35,130,90,0.08),transparent 55%),
+               linear-gradient(180deg,#FFFFFF 0%,#F6F7FB 100%);
     border:1px solid var(--line);
     border-radius:24px;
     padding:72px 56px;
@@ -101,17 +101,17 @@
   }
   .cover::before{
     content:"";position:absolute;right:-80px;top:-80px;width:360px;height:360px;
-    background:conic-gradient(from 120deg,#B48EFF,#6B3FA0,#2B1F5C,#B48EFF);
+    background:conic-gradient(from 120deg,#6D42C7,#7B5DE8,#312060,#6D42C7);
     filter:blur(80px);opacity:0.45;border-radius:50%;
   }
   .badge{
     display:inline-block;padding:6px 14px;border:1px solid var(--purple-3);
     border-radius:999px;color:var(--purple-1);font-size:12px;letter-spacing:0.08em;
-    text-transform:uppercase;background:rgba(139,92,246,0.08);margin-bottom:24px;
+    text-transform:uppercase;background:rgba(109,74,255,0.08);margin-bottom:24px;
   }
   .cover h1{
     font-size:56px;font-weight:800;letter-spacing:-0.02em;
-    background:linear-gradient(135deg,#E8E6F0 0%,#B48EFF 60%,#8B5CF6 100%);
+    background:linear-gradient(135deg,#1F2430 0%,#6D42C7 60%,#6D4AFF 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
     margin-bottom:18px;line-height:1.15;
   }
@@ -127,8 +127,8 @@
     box-shadow:0 8px 24px -4px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04);
     flex-shrink:0;
   }
-  .cover-head .logo-box svg{width:54px;height:54px;filter:drop-shadow(0 4px 12px rgba(139,92,246,0.4))}
-  .cover-head .brand{font-size:30px;font-weight:800;letter-spacing:-0.02em;color:#fff}
+  .cover-head .logo-box svg{width:54px;height:54px;filter:drop-shadow(0 4px 12px rgba(109,74,255,0.18))}
+  .cover-head .brand{font-size:30px;font-weight:800;letter-spacing:-0.02em;color:var(--text)}
   .cover-head .brand small{display:block;font-size:12px;font-weight:500;color:var(--text-mute);letter-spacing:0.1em;margin-top:2px;text-transform:uppercase}
 
   /* TOC 로고 */
@@ -168,7 +168,7 @@
   .card .ico{
     display:inline-flex;align-items:center;justify-content:center;
     width:38px;height:38px;border-radius:10px;
-    background:linear-gradient(135deg,rgba(180,142,255,0.18),rgba(72,54,153,0.18));
+    background:linear-gradient(135deg,rgba(109,66,199,0.12),rgba(109,74,255,0.10));
     border:1px solid var(--purple-4);color:var(--purple-1);font-weight:700;margin-bottom:14px;
   }
   .card .ttl{font-size:17px;font-weight:600;margin-bottom:8px}
@@ -188,14 +188,14 @@
     width:44px;height:44px;border-radius:12px;
     background:linear-gradient(135deg,var(--purple-2),var(--purple-4));
     display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:#fff;
-    box-shadow:0 8px 24px -8px rgba(139,92,246,0.6);
+    box-shadow:0 8px 24px -8px rgba(109,74,255,0.20);
   }
   .module-head .name{font-size:20px;font-weight:700}
   .module-head .dur{margin-left:auto;font-size:12px;color:var(--purple-1);padding:4px 10px;border:1px solid var(--purple-3);border-radius:999px}
   .module ul{list-style:none;padding-left:0}
   .module ul li{
     padding:8px 0 8px 22px;position:relative;color:var(--text-mute);font-size:14.5px;
-    border-bottom:1px dashed rgba(106,99,135,0.25);
+    border-bottom:1px dashed rgba(104,113,134,0.22);
   }
   .module ul li:last-child{border-bottom:none}
   .module ul li::before{
@@ -215,18 +215,18 @@
   /* 표 */
   table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
   th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
-  th{background:rgba(139,92,246,0.08);color:var(--purple-1);font-weight:600;font-size:13px;letter-spacing:0.02em}
-  tbody tr:hover{background:rgba(139,92,246,0.04)}
+  th{background:rgba(109,74,255,0.08);color:var(--purple-1);font-weight:600;font-size:13px;letter-spacing:0.02em}
+  tbody tr:hover{background:rgba(109,74,255,0.04)}
   td.center{text-align:center}
   .pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600}
   .pill-good{background:rgba(125,211,160,0.12);color:var(--good);border:1px solid rgba(125,211,160,0.35)}
   .pill-warn{background:rgba(244,184,96,0.12);color:var(--warn);border:1px solid rgba(244,184,96,0.35)}
   .pill-bad{background:rgba(240,113,120,0.12);color:var(--bad);border:1px solid rgba(240,113,120,0.35)}
-  .pill-muted{background:rgba(154,147,176,0.12);color:var(--text-mute);border:1px solid var(--line)}
+  .pill-muted{background:rgba(104,113,134,0.10);color:var(--text-mute);border:1px solid var(--line)}
 
   /* 인용 */
   .quote{
-    background:linear-gradient(180deg,rgba(139,92,246,0.08),rgba(139,92,246,0.02));
+    background:linear-gradient(180deg,rgba(109,74,255,0.08),rgba(109,74,255,0.02));
     border-left:3px solid var(--purple-2);
     padding:18px 22px;border-radius:0 12px 12px 0;color:var(--text);font-size:15px;
     margin:14px 0;font-style:italic;
@@ -235,7 +235,7 @@
 
   /* 강조 박스 */
   .callout{
-    background:radial-gradient(600px 300px at 0% 0%,rgba(139,92,246,0.15),transparent 60%),var(--bg-card);
+    background:radial-gradient(600px 300px at 0% 0%,rgba(109,74,255,0.12),transparent 60%),var(--bg-card);
     border:1px solid var(--purple-4);border-radius:16px;padding:24px 28px;margin:18px 0;
   }
   .callout .lbl{display:inline-block;background:var(--purple-2);color:#fff;font-size:11px;font-weight:700;
@@ -248,7 +248,7 @@
   .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   @media(max-width:880px){.kpi-row{grid-template-columns:repeat(2,1fr)}}
   .kpi{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-  .kpi .v{font-size:30px;font-weight:800;background:linear-gradient(135deg,#E8E6F0,#B48EFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .kpi .v{font-size:30px;font-weight:800;background:linear-gradient(135deg,#1F2430,#6D42C7);-webkit-background-clip:text;background-clip:text;color:transparent}
   .kpi .l{font-size:12px;color:var(--text-mute);margin-top:4px;letter-spacing:0.02em}
 
   /* 흐름도 */
@@ -277,7 +277,7 @@
         </linearGradient>
         <linearGradient id="ob-toc-mid" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#9B6FE8"/>
-          <stop offset="100%" stop-color="#6B3FA0"/>
+          <stop offset="100%" stop-color="#7B5DE8"/>
         </linearGradient>
         <linearGradient id="ob-toc-dark" x1="0%" y1="0%" x2="50%" y2="100%">
           <stop offset="0%" stop-color="#5E37A8"/>
@@ -328,7 +328,7 @@
           </linearGradient>
           <linearGradient id="ob-mid" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#9B6FE8"/>
-            <stop offset="100%" stop-color="#6B3FA0"/>
+            <stop offset="100%" stop-color="#7B5DE8"/>
           </linearGradient>
           <linearGradient id="ob-dark" x1="0%" y1="0%" x2="50%" y2="100%">
             <stop offset="0%" stop-color="#5E37A8"/>
@@ -696,8 +696,8 @@
 <script>
 // 옵시디언 컬러 팔레트
 const C = {
-  p1:'#B48EFF', p2:'#8B5CF6', p3:'#6B3FA0', p4:'#483699', pd:'#2B1F5C',
-  text:'#E8E6F0', mute:'#9A93B0', line:'#2A2833', card:'#16151C'
+  p1:'#6D42C7', p2:'#6D4AFF', p3:'#7B5DE8', p4:'#4C2FA3', pd:'#312060',
+  text:'#1F2430', mute:'#687186', line:'#D8DEE9', card:'#FFFFFF'
 };
 
 Chart.defaults.color = C.mute;
@@ -711,7 +711,7 @@ new Chart(document.getElementById('pkmDist'),{
     labels:['허들 넘지 못함 (70%)','넘었지만 유지 못함 (20%)','유지하지만 갈 길 잃음 (5%)','프론티어 (5%)'],
     datasets:[{
       data:[70,20,5,5],
-      backgroundColor:['#3D2966','#6B3FA0','#8B5CF6','#B48EFF'],
+      backgroundColor:['#E8E2FF','#7B5DE8','#6D4AFF','#6D42C7'],
       borderColor:C.card, borderWidth:3
     }]
   },
@@ -734,9 +734,9 @@ new Chart(document.getElementById('targetSegment'),{
       data:[40,95,90,55,15],
       backgroundColor:(ctx)=>{
         const v=ctx.parsed?.y ?? 0;
-        if(v>=85) return '#B48EFF';
-        if(v>=50) return '#8B5CF6';
-        return '#483699';
+        if(v>=85) return '#6D42C7';
+        if(v>=50) return '#6D4AFF';
+        return '#4C2FA3';
       },
       borderRadius:8, barThickness:36
     }]
@@ -761,14 +761,14 @@ new Chart(document.getElementById('valueCurve'),{
       {
         label:'RAG / NotebookLM',
         data:[10,10,11,10,11,10,11,10],
-        borderColor:'#9A93B0', backgroundColor:'rgba(154,147,176,0.08)',
+        borderColor:'#687186', backgroundColor:'rgba(104,113,134,0.08)',
         tension:0.3, fill:true, borderWidth:2, pointRadius:3
       },
       {
         label:'LLM Wiki (바이브 옵시디언)',
         data:[10,14,20,29,42,58,82,110],
-        borderColor:'#B48EFF', backgroundColor:'rgba(180,142,255,0.18)',
-        tension:0.35, fill:true, borderWidth:3, pointRadius:4, pointBackgroundColor:'#B48EFF'
+        borderColor:'#6D42C7', backgroundColor:'rgba(109,66,199,0.12)',
+        tension:0.35, fill:true, borderWidth:3, pointRadius:4, pointBackgroundColor:'#6D42C7'
       }
     ]
   },
@@ -791,11 +791,11 @@ new Chart(document.getElementById('conceptRadar'),{
   data:{
     labels:['스케일 한계','구축 단순성','답변 품질','유지보수 부담(역)','오염 위험(역)','다중 사용자'],
     datasets:[
-      {label:'PKM',           data:[1,5,1,1,5,1], borderColor:'#9A93B0', backgroundColor:'rgba(154,147,176,0.12)', borderWidth:2},
-      {label:'RAG',           data:[4,2,3,4,4,4], borderColor:'#6B3FA0', backgroundColor:'rgba(107,63,160,0.15)',  borderWidth:2},
+      {label:'PKM',           data:[1,5,1,1,5,1], borderColor:'#687186', backgroundColor:'rgba(104,113,134,0.10)', borderWidth:2},
+      {label:'RAG',           data:[4,2,3,4,4,4], borderColor:'#7B5DE8', backgroundColor:'rgba(123,93,232,0.12)',  borderWidth:2},
       {label:'Wiki',          data:[2,3,2,2,5,3], borderColor:'#C4B5FD', backgroundColor:'rgba(196,181,253,0.10)', borderWidth:2},
-      {label:'LLM Wiki',      data:[2,4,4,5,1,1], borderColor:'#B48EFF', backgroundColor:'rgba(180,142,255,0.22)', borderWidth:3},
-      {label:'GraphRAG',      data:[5,1,5,3,3,5], borderColor:'#8B5CF6', backgroundColor:'rgba(139,92,246,0.15)',  borderWidth:2}
+      {label:'LLM Wiki',      data:[2,4,4,5,1,1], borderColor:'#6D42C7', backgroundColor:'rgba(109,66,199,0.16)', borderWidth:3},
+      {label:'GraphRAG',      data:[5,1,5,3,3,5], borderColor:'#6D4AFF', backgroundColor:'rgba(109,74,255,0.12)',  borderWidth:2}
     ]
   },
   options:{
@@ -819,9 +819,9 @@ new Chart(document.getElementById('sizeChart'),{
   data:{
     labels:['S1\n개인 1명','S2\n팀 1-10','S3\n중소 10-50','S4\n중견 50-300','S5\n대기업 300+'],
     datasets:[
-      {label:'LLM Wiki', data:[100,90,40,15,5],   backgroundColor:'#B48EFF', stack:'a', borderRadius:6},
-      {label:'RAG',      data:[10,30,80,90,60],   backgroundColor:'#8B5CF6', stack:'a', borderRadius:6},
-      {label:'GraphRAG', data:[0,5,20,60,100],    backgroundColor:'#483699', stack:'a', borderRadius:6}
+      {label:'LLM Wiki', data:[100,90,40,15,5],   backgroundColor:'#6D42C7', stack:'a', borderRadius:6},
+      {label:'RAG',      data:[10,30,80,90,60],   backgroundColor:'#6D4AFF', stack:'a', borderRadius:6},
+      {label:'GraphRAG', data:[0,5,20,60,100],    backgroundColor:'#4C2FA3', stack:'a', borderRadius:6}
     ]
   },
   options:{

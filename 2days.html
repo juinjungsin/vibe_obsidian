@@ -7,22 +7,22 @@
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='a' x1='20%25' y1='0%25' x2='80%25' y2='100%25'><stop offset='0%25' stop-color='%23D4BBFF'/><stop offset='100%25' stop-color='%239B6FE8'/></linearGradient><linearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%237C4ECF'/><stop offset='100%25' stop-color='%234A2D7E'/></linearGradient></defs><path d='M50 8 L25 35 L22 70 L48 92 L50 50 Z' fill='url(%23a)'/><path d='M50 8 L78 38 L82 68 L52 92 L50 50 Z' fill='url(%23b)'/></svg>">
 <style>
 :root{
-  --bg:#0B0B0F;
-  --bg-card:#16151C;
-  --bg-card-2:#1C1B24;
-  --line:#2A2833;
-  --purple-1:#B48EFF;
-  --purple-2:#8B5CF6;
-  --purple-3:#6B3FA0;
-  --purple-4:#483699;
-  --purple-deep:#2B1F5C;
-  --text:#E8E6F0;
-  --text-mute:#9A93B0;
-  --good:#7DD3A0;
-  --warn:#F4B860;
-  --bad:#F07178;
-  --day1:#B48EFF;
-  --day2:#7DD3A0;
+  --bg:#F6F7FB;
+  --bg-card:#FFFFFF;
+  --bg-card-2:#F1F4F9;
+  --line:#D8DEE9;
+  --purple-1:#6D42C7;
+  --purple-2:#6D4AFF;
+  --purple-3:#7B5DE8;
+  --purple-4:#4C2FA3;
+  --purple-deep:#312060;
+  --text:#1F2430;
+  --text-mute:#687186;
+  --good:#23825A;
+  --warn:#A96000;
+  --bad:#B43A46;
+  --day1:#6D42C7;
+  --day2:#23825A;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg);color:var(--text);font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",-apple-system,sans-serif;line-height:1.65;font-feature-settings:"tnum"}
@@ -44,19 +44,19 @@ a{color:var(--purple-1);text-decoration:none}
 /* 표지 */
 .cover{
   position:relative;
-  background:radial-gradient(900px 480px at 80% -20%,rgba(139,92,246,0.30),transparent 60%),
-             radial-gradient(700px 400px at 10% 110%,rgba(72,54,153,0.35),transparent 55%),
-             linear-gradient(180deg,#15121E 0%,#0B0B0F 100%);
+  background:radial-gradient(900px 480px at 80% -20%,rgba(109,74,255,0.12),transparent 60%),
+             radial-gradient(700px 400px at 10% 110%,rgba(35,130,90,0.10),transparent 55%),
+             linear-gradient(180deg,#FFFFFF 0%,#F6F7FB 100%);
   border:1px solid var(--line);border-radius:22px;
   padding:54px 48px;overflow:hidden;margin-bottom:40px;
 }
 .cover::before{
   content:"";position:absolute;right:-60px;top:-60px;width:340px;height:340px;
-  background:conic-gradient(from 120deg,#B48EFF,#6B3FA0,#2B1F5C,#B48EFF);
+  background:conic-gradient(from 120deg,#6D42C7,#7B5DE8,#312060,#6D42C7);
   filter:blur(80px);opacity:0.4;border-radius:50%;
 }
-.cover .badge{display:inline-block;padding:5px 14px;border:1px solid var(--purple-3);border-radius:999px;color:var(--purple-1);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;background:rgba(139,92,246,0.08);margin-bottom:16px}
-.cover h1{font-size:46px;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,#E8E6F0 0%,#B48EFF 60%,#8B5CF6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15;margin-bottom:14px}
+.cover .badge{display:inline-block;padding:5px 14px;border:1px solid var(--purple-3);border-radius:999px;color:var(--purple-1);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;background:rgba(109,74,255,0.08);margin-bottom:16px}
+.cover h1{font-size:46px;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,#1F2430 0%,#6D42C7 60%,#6D4AFF 100%);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15;margin-bottom:14px}
 .cover .desc{color:var(--text-mute);font-size:16px;max-width:720px;position:relative;z-index:1}
 .cover .meta{margin-top:24px;display:flex;gap:24px;flex-wrap:wrap;color:var(--text-mute);font-size:13px;position:relative;z-index:1}
 .cover .meta b{color:var(--purple-1);font-weight:600}
@@ -74,7 +74,7 @@ p{color:var(--text);margin-bottom:10px;font-size:14.5px}
 
 /* 콜아웃 */
 .callout{
-  background:radial-gradient(600px 280px at 0% 0%,rgba(139,92,246,0.12),transparent 60%),var(--bg-card);
+  background:radial-gradient(600px 280px at 0% 0%,rgba(109,74,255,0.10),transparent 60%),var(--bg-card);
   border:1px solid var(--purple-4);border-radius:16px;padding:22px 26px;margin:14px 0;
 }
 .callout .lbl{display:inline-block;background:var(--purple-2);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;letter-spacing:0.06em;margin-bottom:10px}
@@ -93,16 +93,16 @@ p{color:var(--text);margin-bottom:10px;font-size:14.5px}
 .day .day-head{
   padding:24px 28px;border-bottom:1px solid var(--line);
   display:flex;align-items:center;gap:16px;
-  background:linear-gradient(90deg,rgba(180,142,255,0.05),transparent);
+  background:linear-gradient(90deg,rgba(109,66,199,0.05),transparent);
 }
-.day.d1 .day-head{background:linear-gradient(90deg,rgba(180,142,255,0.10),transparent)}
+.day.d1 .day-head{background:linear-gradient(90deg,rgba(109,66,199,0.10),transparent)}
 .day.d2 .day-head{background:linear-gradient(90deg,rgba(125,211,160,0.08),transparent)}
 .day-no{
   width:54px;height:54px;border-radius:14px;
   display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#fff;
 }
-.day.d1 .day-no{background:linear-gradient(135deg,var(--purple-1),var(--purple-3));box-shadow:0 8px 24px -8px rgba(180,142,255,0.5)}
-.day.d2 .day-no{background:linear-gradient(135deg,#7DD3A0,#4A8B68);box-shadow:0 8px 24px -8px rgba(125,211,160,0.5)}
+.day.d1 .day-no{background:linear-gradient(135deg,var(--purple-1),var(--purple-3));box-shadow:0 8px 24px -8px rgba(109,66,199,0.22)}
+.day.d2 .day-no{background:linear-gradient(135deg,#23825A,#4A8B68);box-shadow:0 8px 24px -8px rgba(125,211,160,0.5)}
 .day-head .name{flex:1}
 .day-head .name .ttl{font-size:22px;font-weight:700}
 .day-head .name .sub{font-size:13px;color:var(--text-mute);margin-top:2px}
@@ -117,7 +117,7 @@ p{color:var(--text);margin-bottom:10px;font-size:14.5px}
   border:1px solid rgba(125,211,160,0.25);border-radius:12px;
   padding:14px 18px;margin:12px 0;
 }
-.outcome .lbl{display:inline-block;background:var(--good);color:#0B0B0F;font-size:10px;font-weight:800;padding:3px 9px;border-radius:5px;letter-spacing:0.08em;margin-bottom:8px}
+.outcome .lbl{display:inline-block;background:var(--good);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:5px;letter-spacing:0.08em;margin-bottom:8px}
 .outcome ul{list-style:none;padding:0}
 .outcome ul li{padding:4px 0 4px 20px;position:relative;color:var(--text);font-size:14px}
 .outcome ul li::before{content:"✓";position:absolute;left:0;color:var(--good);font-weight:700}
@@ -127,7 +127,7 @@ p{color:var(--text);margin-bottom:10px;font-size:14.5px}
 .schedule{margin-top:14px}
 .schedule table{width:100%;border-collapse:collapse;font-size:13.5px}
 .schedule th,.schedule td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
-.schedule th{background:rgba(139,92,246,0.06);color:var(--purple-1);font-weight:600;font-size:12px;letter-spacing:0.02em}
+.schedule th{background:rgba(109,74,255,0.06);color:var(--purple-1);font-weight:600;font-size:12px;letter-spacing:0.02em}
 .day.d2 .schedule th{background:rgba(125,211,160,0.06);color:var(--good)}
 .schedule td.t{font-family:"JetBrains Mono",monospace;color:var(--text-mute);font-size:12.5px;width:90px}
 .schedule td.m{width:80px}
@@ -136,13 +136,13 @@ p{color:var(--text);margin-bottom:10px;font-size:14.5px}
 .schedule .new{color:var(--good);font-weight:600}
 .schedule .br{color:var(--text-mute);font-style:italic}
 .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600}
-.pill-m{background:rgba(180,142,255,0.12);color:var(--purple-1);border:1px solid rgba(180,142,255,0.35)}
+.pill-m{background:rgba(109,66,199,0.10);color:var(--purple-1);border:1px solid rgba(109,66,199,0.22)}
 .pill-n{background:rgba(125,211,160,0.12);color:var(--good);border:1px solid rgba(125,211,160,0.35)}
-.pill-r{background:rgba(154,147,176,0.12);color:var(--text-mute);border:1px solid var(--line)}
+.pill-r{background:rgba(104,113,134,0.10);color:var(--text-mute);border:1px solid var(--line)}
 
 /* 사이 기간 박스 */
 .between{
-  background:linear-gradient(90deg,rgba(180,142,255,0.08),rgba(125,211,160,0.08));
+  background:linear-gradient(90deg,rgba(109,66,199,0.08),rgba(125,211,160,0.08));
   border:1px solid var(--line);border-radius:18px;
   padding:24px 28px;margin:24px 0;text-align:center;
   position:relative;
@@ -165,7 +165,7 @@ p{color:var(--text);margin-bottom:10px;font-size:14.5px}
   text-align:center;font-size:12px;color:var(--text-mute);
 }
 .modmap .m b{display:block;color:var(--text);font-size:13px;margin-bottom:2px}
-.modmap .m.d1{border-color:rgba(180,142,255,0.45);background:rgba(180,142,255,0.06)}
+.modmap .m.d1{border-color:rgba(109,66,199,0.24);background:rgba(109,66,199,0.06)}
 .modmap .m.d1 b{color:var(--purple-1)}
 .modmap .m.d2{border-color:rgba(125,211,160,0.45);background:rgba(125,211,160,0.06)}
 .modmap .m.d2 b{color:var(--good)}
@@ -174,7 +174,7 @@ p{color:var(--text);margin-bottom:10px;font-size:14.5px}
 /* 비교 표 */
 table.cmp{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:14px}
 table.cmp th,table.cmp td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-table.cmp th{background:rgba(139,92,246,0.08);color:var(--purple-1);font-weight:600;font-size:12.5px}
+table.cmp th{background:rgba(109,74,255,0.08);color:var(--purple-1);font-weight:600;font-size:12.5px}
 table.cmp td:first-child{color:var(--text-mute);width:160px}
 
 /* 풋터 */
@@ -190,7 +190,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:v
   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
       <linearGradient id="lg1" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#E0CCFF"/><stop offset="100%" stop-color="#9B6FE8"/></linearGradient>
-      <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9B6FE8"/><stop offset="100%" stop-color="#6B3FA0"/></linearGradient>
+      <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9B6FE8"/><stop offset="100%" stop-color="#7B5DE8"/></linearGradient>
     </defs>
     <path d="M50 6 L24 34 L20 68 L46 94 L50 52 Z" fill="url(#lg1)"/>
     <path d="M50 6 L78 36 L84 70 L54 94 L50 52 Z" fill="url(#lg2)"/>
@@ -227,15 +227,15 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:v
 
   <div class="grid grid-3" style="margin-top:14px">
     <div class="callout" style="margin:0">
-      <span class="lbl" style="background:var(--purple-1);color:#0B0B0F">Day 1</span>
+      <span class="lbl" style="background:var(--purple-1);color:#fff">Day 1</span>
       <p style="font-size:14px;margin:0"><b>가시적 결과물 1건</b>을 손에 들고 강의장을 나가게 한다. Vault · wiki 3건 · 그래프 1개.</p>
     </div>
     <div class="callout" style="margin:0;border-color:var(--line)">
-      <span class="lbl" style="background:#9A93B0;color:#0B0B0F">사이 1주</span>
+      <span class="lbl" style="background:#687186;color:#fff">사이 1주</span>
       <p style="font-size:14px;margin:0">본인 자료로 <b>실전 운용</b>. 막힌 부분을 미해결 큐에 적어 Day 2에 가져온다.</p>
     </div>
     <div class="callout" style="margin:0;border-color:rgba(125,211,160,0.4)">
-      <span class="lbl" style="background:var(--good);color:#0B0B0F">Day 2</span>
+      <span class="lbl" style="background:var(--good);color:#fff">Day 2</span>
       <p style="font-size:14px;margin:0"><b>본인 사례</b>로 자동화·트러블슈팅·30일 플랜을 완성한다. 강사 1:1 코칭 시간 확보.</p>
     </div>
   </div>
@@ -299,7 +299,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:v
             <tr><td class="t">2:25 ~</td><td class="m"><span class="pill pill-m">M4</span></td><td class="b">raw·wiki·그래프 (라운드 3×15분)</td><td class="d">70</td><td class="mute">wiki 3건 + 그래프 클러스터 1개</td></tr>
             <tr><td class="t">3:35 ~</td><td class="m"><span class="pill pill-r">마무리</span></td><td class="b new">Day 1 회고 · 1주 과제 안내</td><td class="d">15</td><td class="mute">★ 2일 구성 추가</td></tr>
             <tr><td class="t">3:50 ~</td><td class="m"><span class="pill pill-r">QnA</span></td><td class="br">자유 질문</td><td class="d">10</td><td></td></tr>
-            <tr style="background:rgba(180,142,255,0.04)"><td colspan="3" style="text-align:right;color:var(--purple-1)"><b>합계</b></td><td class="d"><b>240분</b></td><td><b>= 4시간</b></td></tr>
+            <tr style="background:rgba(109,66,199,0.04)"><td colspan="3" style="text-align:right;color:var(--purple-1)"><b>합계</b></td><td class="d"><b>240분</b></td><td><b>= 4시간</b></td></tr>
           </tbody>
         </table>
       </div>

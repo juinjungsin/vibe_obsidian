@@ -8,21 +8,21 @@
 <style>
 /* 바이브 옵시디언 워크북 공통 스타일 */
 :root{
-  --bg:#0B0B0F;
-  --bg-card:#16151C;
-  --bg-card-2:#1C1B24;
-  --line:#2A2833;
-  --purple-1:#B48EFF;
-  --purple-2:#8B5CF6;
-  --purple-3:#6B3FA0;
-  --purple-4:#483699;
-  --purple-deep:#2B1F5C;
-  --text:#E8E6F0;
-  --text-mute:#9A93B0;
-  --accent:#C4B5FD;
-  --good:#7DD3A0;
-  --warn:#F4B860;
-  --bad:#F07178;
+  --bg:#F6F7FB;
+  --bg-card:#FFFFFF;
+  --bg-card-2:#F1F4F9;
+  --line:#D8DEE9;
+  --purple-1:#6D42C7;
+  --purple-2:#6D4AFF;
+  --purple-3:#7B5DE8;
+  --purple-4:#4C2FA3;
+  --purple-deep:#312060;
+  --text:#1F2430;
+  --text-mute:#687186;
+  --accent:#7B5DE8;
+  --good:#23825A;
+  --warn:#A96000;
+  --bad:#B43A46;
   --ink:#D8D2E8; /* 빈칸 라인 */
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -41,24 +41,24 @@ a{color:var(--purple-1);text-decoration:none}
 .wb-nav .pages a{padding:4px 10px;border:1px solid var(--line);border-radius:6px;color:var(--text-mute);font-size:12px}
 .wb-nav .pages a:hover{border-color:var(--purple-3);color:var(--purple-1)}
 .wb-nav .pages a.cur{background:linear-gradient(135deg,var(--purple-2),var(--purple-4));color:#fff;border-color:transparent}
-.wb-nav .pages a.hub{background:rgba(180,142,255,0.08);color:var(--purple-1);border-color:var(--purple-3)}
+.wb-nav .pages a.hub{background:rgba(109,66,199,0.08);color:var(--purple-1);border-color:var(--purple-3)}
 
 /* 표지 (모듈 헤더) */
 .m-cover{
   position:relative;
-  background:radial-gradient(900px 400px at 80% -20%,rgba(139,92,246,0.30),transparent 60%),
-             radial-gradient(700px 400px at 10% 110%,rgba(72,54,153,0.35),transparent 55%),
-             linear-gradient(180deg,#15121E 0%,#0B0B0F 100%);
+  background:radial-gradient(900px 400px at 80% -20%,rgba(109,74,255,0.12),transparent 60%),
+             radial-gradient(700px 400px at 10% 110%,rgba(35,130,90,0.10),transparent 55%),
+             linear-gradient(180deg,#FFFFFF 0%,#F6F7FB 100%);
   border:1px solid var(--line);border-radius:20px;
   padding:42px 40px;overflow:hidden;margin-bottom:34px;
 }
 .m-cover::before{
   content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;
-  background:conic-gradient(from 120deg,#B48EFF,#6B3FA0,#2B1F5C,#B48EFF);
+  background:conic-gradient(from 120deg,#6D42C7,#7B5DE8,#312060,#6D42C7);
   filter:blur(70px);opacity:0.35;border-radius:50%;
 }
-.m-cover .badge{display:inline-block;padding:4px 12px;border:1px solid var(--purple-3);border-radius:999px;color:var(--purple-1);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;background:rgba(139,92,246,0.08);margin-bottom:14px}
-.m-cover h1{font-size:38px;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,#E8E6F0 0%,#B48EFF 60%,#8B5CF6 100%);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.2;margin-bottom:10px}
+.m-cover .badge{display:inline-block;padding:4px 12px;border:1px solid var(--purple-3);border-radius:999px;color:var(--purple-1);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;background:rgba(109,74,255,0.08);margin-bottom:14px}
+.m-cover h1{font-size:38px;font-weight:800;letter-spacing:-0.02em;background:linear-gradient(135deg,#1F2430 0%,#6D42C7 60%,#6D4AFF 100%);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.2;margin-bottom:10px}
 .m-cover .desc{color:var(--text-mute);font-size:15px;max-width:680px}
 .m-cover .meta{margin-top:22px;display:flex;gap:18px;flex-wrap:wrap;color:var(--text-mute);font-size:13px;position:relative;z-index:1}
 .m-cover .meta b{color:var(--purple-1);font-weight:600}
@@ -89,7 +89,7 @@ ul.dot li{margin:4px 0;font-size:14px;color:var(--text)}
 
 /* 학습 목표 박스 */
 .goals{
-  background:radial-gradient(500px 240px at 0% 0%,rgba(139,92,246,0.15),transparent 60%),var(--bg-card);
+  background:radial-gradient(500px 240px at 0% 0%,rgba(109,74,255,0.12),transparent 60%),var(--bg-card);
   border:1px solid var(--purple-4);border-radius:16px;padding:22px 26px;margin-bottom:24px;
 }
 .goals .lbl{display:inline-block;background:var(--purple-2);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;letter-spacing:0.06em;margin-bottom:10px}
@@ -100,7 +100,7 @@ ul.dot li{margin:4px 0;font-size:14px;color:var(--text)}
 /* 체크박스 리스트 (수강생용) */
 .check{list-style:none;padding:0;margin:6px 0}
 .check li{
-  padding:10px 12px 10px 38px;position:relative;border-bottom:1px dashed rgba(106,99,135,0.25);
+  padding:10px 12px 10px 38px;position:relative;border-bottom:1px dashed rgba(104,113,134,0.22);
   font-size:14.5px;color:var(--text);
 }
 .check li:last-child{border-bottom:none}
@@ -126,7 +126,7 @@ ul.dot li{margin:4px 0;font-size:14px;color:var(--text)}
 .step-list{counter-reset:step-counter;list-style:none;padding:0}
 .step .ttl{font-size:15px;font-weight:600;margin-bottom:4px;color:var(--text)}
 .step .body{font-size:13.5px;color:var(--text-mute);line-height:1.65}
-.step .body code{background:rgba(180,142,255,0.10);color:var(--purple-1);padding:2px 6px;border-radius:4px;font-size:12.5px;font-family:"JetBrains Mono",monospace}
+.step .body code{background:rgba(109,66,199,0.10);color:var(--purple-1);padding:2px 6px;border-radius:4px;font-size:12.5px;font-family:"JetBrains Mono",monospace}
 
 /* 빈칸 작성 영역 */
 .fill{
@@ -136,7 +136,7 @@ ul.dot li{margin:4px 0;font-size:14px;color:var(--text)}
 .fill .q{color:var(--purple-1);font-size:13px;font-weight:600;margin-bottom:8px;letter-spacing:0.02em}
 .fill .lines{display:block}
 .fill .lines span{
-  display:block;height:24px;border-bottom:1px dashed rgba(154,147,176,0.35);
+  display:block;height:24px;border-bottom:1px dashed rgba(104,113,134,0.30);
 }
 .fill .lines span:last-child{border-bottom:none}
 .fill.short .lines span{height:24px}
@@ -145,8 +145,8 @@ ul.dot li{margin:4px 0;font-size:14px;color:var(--text)}
 /* 워크시트 표 */
 table.ws{width:100%;border-collapse:collapse;font-size:13.5px;margin:12px 0}
 table.ws th,table.ws td{padding:10px 12px;text-align:left;border:1px solid var(--line);vertical-align:top}
-table.ws th{background:rgba(139,92,246,0.08);color:var(--purple-1);font-weight:600;font-size:12.5px;letter-spacing:0.02em}
-table.ws td.blank{height:38px;background:repeating-linear-gradient(transparent 0,transparent 22px,rgba(154,147,176,0.18) 23px,rgba(154,147,176,0.18) 24px)}
+table.ws th{background:rgba(109,74,255,0.08);color:var(--purple-1);font-weight:600;font-size:12.5px;letter-spacing:0.02em}
+table.ws td.blank{height:38px;background:repeating-linear-gradient(transparent 0,transparent 22px,rgba(104,113,134,0.18) 23px,rgba(104,113,134,0.18) 24px)}
 table.ws td.fill-sm{height:32px}
 table.ws td.fill-md{height:56px}
 table.ws td.fill-lg{height:88px}
@@ -154,7 +154,7 @@ table.ws td .ex{display:block;color:var(--text-mute);font-size:12px;margin-top:2
 
 /* 강사 시연 박스 / 데모 박스 */
 .demo{
-  background:linear-gradient(180deg,rgba(139,92,246,0.08),rgba(139,92,246,0.02));
+  background:linear-gradient(180deg,rgba(109,74,255,0.08),rgba(109,74,255,0.02));
   border-left:3px solid var(--purple-2);
   padding:16px 18px 16px 20px;border-radius:0 12px 12px 0;
   margin:14px 0;
@@ -164,7 +164,7 @@ table.ws td .ex{display:block;color:var(--text-mute);font-size:12px;margin-top:2
 
 /* 콜아웃 */
 .callout{
-  background:radial-gradient(500px 240px at 0% 0%,rgba(139,92,246,0.15),transparent 60%),var(--bg-card);
+  background:radial-gradient(500px 240px at 0% 0%,rgba(109,74,255,0.12),transparent 60%),var(--bg-card);
   border:1px solid var(--purple-4);border-radius:14px;padding:18px 22px;margin:14px 0;
 }
 .callout .lbl{display:inline-block;background:var(--purple-2);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;letter-spacing:0.06em;margin-bottom:8px}
@@ -172,21 +172,21 @@ table.ws td .ex{display:block;color:var(--text-mute);font-size:12px;margin-top:2
 
 /* 코드 박스 */
 pre.code{
-  background:#0E0D14;border:1px solid var(--line);border-radius:10px;
-  padding:14px 16px;color:#D8D2E8;font-size:12.5px;line-height:1.6;
+  background:#F8FAFC;border:1px solid var(--line);border-radius:10px;
+  padding:14px 16px;color:#293241;font-size:12.5px;line-height:1.6;
   font-family:"JetBrains Mono","SF Mono",monospace;overflow-x:auto;margin:10px 0;
 }
 pre.code .hl{color:var(--purple-1)}
 pre.code .mute{color:var(--text-mute)}
-code.inline{background:rgba(180,142,255,0.10);color:var(--purple-1);padding:2px 7px;border-radius:4px;font-size:12.5px;font-family:"JetBrains Mono",monospace}
+code.inline{background:rgba(109,66,199,0.10);color:var(--purple-1);padding:2px 7px;border-radius:4px;font-size:12.5px;font-family:"JetBrains Mono",monospace}
 
 /* 그래프 더미 (SVG 컨테이너) */
-.gview{background:#0A0910;border:1px solid var(--line);border-radius:12px;padding:18px;margin:12px 0;text-align:center}
+.gview{background:#F8FAFC;border:1px solid var(--line);border-radius:12px;padding:18px;margin:12px 0;text-align:center}
 .gview svg{max-width:100%;height:auto}
 .gview .cap{display:block;font-size:12px;color:var(--text-mute);margin-top:8px}
 
 /* 시간 표시 라벨 */
-.dur-tag{display:inline-block;padding:3px 10px;font-size:11px;color:var(--purple-1);border:1px solid var(--purple-3);border-radius:999px;background:rgba(139,92,246,0.06)}
+.dur-tag{display:inline-block;padding:3px 10px;font-size:11px;color:var(--purple-1);border:1px solid var(--purple-3);border-radius:999px;background:rgba(109,74,255,0.06)}
 
 /* 풋터 */
 .wb-foot{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);color:var(--text-mute);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
@@ -204,7 +204,7 @@ code.inline{background:rgba(180,142,255,0.10);color:var(--purple-1);padding:2px 
 .memo{
   background:var(--bg-card);border:1px solid var(--line);border-radius:12px;
   padding:16px;margin:12px 0;min-height:120px;
-  background-image:repeating-linear-gradient(transparent 0,transparent 26px,rgba(154,147,176,0.18) 27px,rgba(154,147,176,0.18) 28px);
+  background-image:repeating-linear-gradient(transparent 0,transparent 26px,rgba(104,113,134,0.18) 27px,rgba(104,113,134,0.18) 28px);
   background-position:0 32px;
 }
 .memo .q{color:var(--purple-1);font-size:13px;font-weight:600;margin-bottom:10px}
@@ -228,7 +228,7 @@ code.inline{background:rgba(180,142,255,0.10);color:var(--purple-1);padding:2px 
   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
       <linearGradient id="lg1" x1="20%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#E0CCFF"/><stop offset="100%" stop-color="#9B6FE8"/></linearGradient>
-      <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9B6FE8"/><stop offset="100%" stop-color="#6B3FA0"/></linearGradient>
+      <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#9B6FE8"/><stop offset="100%" stop-color="#7B5DE8"/></linearGradient>
     </defs>
     <path d="M50 6 L24 34 L20 68 L46 94 L50 52 Z" fill="url(#lg1)"/>
     <path d="M50 6 L78 36 L84 70 L54 94 L50 52 Z" fill="url(#lg2)"/>
@@ -315,11 +315,11 @@ code.inline{background:rgba(180,142,255,0.10);color:var(--purple-1);padding:2px 
       <tr><th>위치 유형</th><th>예시 경로</th><th>권장</th><th>비고</th></tr>
     </thead>
     <tbody>
-      <tr><td>로컬 일반 폴더</td><td><code>~/Documents/vibe_2026</code></td><td><span class="pill pill-good" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(125,211,160,0.12);color:#7DD3A0;border:1px solid rgba(125,211,160,0.35)">권장</span></td><td>기본 선택</td></tr>
-      <tr><td>iCloud Drive</td><td><code>~/Library/Mobile Documents/.../vibe</code></td><td><span class="pill pill-warn" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(244,184,96,0.12);color:#F4B860;border:1px solid rgba(244,184,96,0.35)">주의</span></td><td>지연 동기화로 파일 충돌 발생</td></tr>
-      <tr><td>OneDrive / Dropbox</td><td><code>~/OneDrive/vibe</code></td><td><span class="pill pill-warn" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(244,184,96,0.12);color:#F4B860;border:1px solid rgba(244,184,96,0.35)">주의</span></td><td>플러그인 설정 파일 잠금 가능</td></tr>
-      <tr><td>Obsidian Sync</td><td>유료 옵션</td><td><span class="pill pill-good" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(125,211,160,0.12);color:#7DD3A0;border:1px solid rgba(125,211,160,0.35)">권장</span></td><td>다기기 사용 시</td></tr>
-      <tr><td>네트워크 드라이브</td><td><code>\\nas\vault</code></td><td><span class="pill pill-bad" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(240,113,120,0.12);color:#F07178;border:1px solid rgba(240,113,120,0.35)">비권장</span></td><td>I/O 지연 큼</td></tr>
+      <tr><td>로컬 일반 폴더</td><td><code>~/Documents/vibe_2026</code></td><td><span class="pill pill-good" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(125,211,160,0.12);color:#23825A;border:1px solid rgba(125,211,160,0.35)">권장</span></td><td>기본 선택</td></tr>
+      <tr><td>iCloud Drive</td><td><code>~/Library/Mobile Documents/.../vibe</code></td><td><span class="pill pill-warn" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(244,184,96,0.12);color:#A96000;border:1px solid rgba(244,184,96,0.35)">주의</span></td><td>지연 동기화로 파일 충돌 발생</td></tr>
+      <tr><td>OneDrive / Dropbox</td><td><code>~/OneDrive/vibe</code></td><td><span class="pill pill-warn" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(244,184,96,0.12);color:#A96000;border:1px solid rgba(244,184,96,0.35)">주의</span></td><td>플러그인 설정 파일 잠금 가능</td></tr>
+      <tr><td>Obsidian Sync</td><td>유료 옵션</td><td><span class="pill pill-good" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(125,211,160,0.12);color:#23825A;border:1px solid rgba(125,211,160,0.35)">권장</span></td><td>다기기 사용 시</td></tr>
+      <tr><td>네트워크 드라이브</td><td><code>\\nas\vault</code></td><td><span class="pill pill-bad" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(240,113,120,0.12);color:#B43A46;border:1px solid rgba(240,113,120,0.35)">비권장</span></td><td>I/O 지연 큼</td></tr>
     </tbody>
   </table>
 
@@ -342,11 +342,11 @@ code.inline{background:rgba(180,142,255,0.10);color:var(--purple-1);padding:2px 
       <tr><th style="width:200px">필드</th><th style="width:170px">기본값</th><th>본인 입력</th><th style="width:90px">필수</th></tr>
     </thead>
     <tbody>
-      <tr><td><code class="inline">API Key</code></td><td>(없음)</td><td class="fill-sm"></td><td><span class="pill pill-bad" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(240,113,120,0.12);color:#F07178;border:1px solid rgba(240,113,120,0.35)">필수</span></td></tr>
-      <tr><td><code class="inline">Model</code></td><td>claude-sonnet-4-6</td><td class="fill-sm"></td><td><span class="pill pill-good" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(125,211,160,0.12);color:#7DD3A0;border:1px solid rgba(125,211,160,0.35)">권장</span></td></tr>
-      <tr><td><code class="inline">Max tokens</code></td><td>2048</td><td class="fill-sm"></td><td><span class="pill pill-muted" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(154,147,176,0.12);color:#9A93B0;border:1px solid #2A2833">선택</span></td></tr>
-      <tr><td><code class="inline">Default folder</code></td><td>20_wiki</td><td class="fill-sm"></td><td><span class="pill pill-muted" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(154,147,176,0.12);color:#9A93B0;border:1px solid #2A2833">선택</span></td></tr>
-      <tr><td><code class="inline">Language</code></td><td>ko</td><td class="fill-sm"></td><td><span class="pill pill-muted" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(154,147,176,0.12);color:#9A93B0;border:1px solid #2A2833">선택</span></td></tr>
+      <tr><td><code class="inline">API Key</code></td><td>(없음)</td><td class="fill-sm"></td><td><span class="pill pill-bad" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(240,113,120,0.12);color:#B43A46;border:1px solid rgba(240,113,120,0.35)">필수</span></td></tr>
+      <tr><td><code class="inline">Model</code></td><td>claude-sonnet-4-6</td><td class="fill-sm"></td><td><span class="pill pill-good" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(125,211,160,0.12);color:#23825A;border:1px solid rgba(125,211,160,0.35)">권장</span></td></tr>
+      <tr><td><code class="inline">Max tokens</code></td><td>2048</td><td class="fill-sm"></td><td><span class="pill pill-muted" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(104,113,134,0.10);color:#687186;border:1px solid #D8DEE9">선택</span></td></tr>
+      <tr><td><code class="inline">Default folder</code></td><td>20_wiki</td><td class="fill-sm"></td><td><span class="pill pill-muted" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(104,113,134,0.10);color:#687186;border:1px solid #D8DEE9">선택</span></td></tr>
+      <tr><td><code class="inline">Language</code></td><td>ko</td><td class="fill-sm"></td><td><span class="pill pill-muted" style="padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;background:rgba(104,113,134,0.10);color:#687186;border:1px solid #D8DEE9">선택</span></td></tr>
     </tbody>
   </table>
 
