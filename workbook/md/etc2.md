@@ -71,7 +71,7 @@ API 키 거부. 401/403 응답. 결제 한도 초과.
 | **③** | 응답 30초 후 타임아웃 | max tokens 과대 · 네트워크 지연 | tokens 1024로 낮춤 · 핫스팟 테스트 |
 | **③** | 응답이 영어로만 나옴 | Language 미설정 | 설정 패널 Language → `ko` |
 | **③** | 응답 빈 문자열 | 입력 노트가 빈 본문 | 본문 200자 이상 후 재시도 |
-| **④** | `*.conflict-2026-05-18.md` 생성 | iCloud / OneDrive 동기화 지연 | 로컬 폴더로 Vault 이전 / Obsidian Sync 사용 |
+| **④** | `*.conflict.md` 생성 | iCloud / OneDrive 동기화 지연 | 로컬 폴더로 Vault 이전 / Obsidian Sync 사용 |
 | **④** | 노트 저장은 되는데 그래프 미반영 | 인덱스 캐시 지연 | `Cmd/Ctrl+P` → `Reload app` |
 | **⑤** | 자동화 트리거가 발화하지 않음 | 경로 패턴 불일치 / debounce 미설정 | 경로 점검 · 로그에서 매칭 여부 확인 |
 | **⑤** | 같은 파일 무한 루프 변환 | 출력이 다시 입력 폴더에 저장됨 | 출력 경로를 입력 패턴 밖으로 이동 |
@@ -86,9 +86,9 @@ API 키 거부. 401/403 응답. 결제 한도 초과.
 
 ```
 # claudian.log 발췌
-2026-05-18 14:02:11 [ERROR] auto-summarize-inbox failed
+14:02:11 [ERROR] auto-summarize-inbox failed
 rule=auto-summarize-inbox
-file=00_inbox/회의록_2026-05-18.md
+file=00_inbox/회의록.md
 error=API_401
 message="invalid x-api-key"
 retry=0/3

@@ -36,7 +36,7 @@ git push origin main
 ```
 
 ## 5) 배포 확인 (1~2분 후)
-- 본 강의 제안서: https://juinjungsin.github.io/vibe_obsidian/
+- 본 페이지: https://juinjungsin.github.io/vibe_obsidian/
 - 워크북 허브: https://juinjungsin.github.io/vibe_obsidian/workbook/
 - 모듈 1~7: https://juinjungsin.github.io/vibe_obsidian/workbook/module1.html ~ module7.html
 - GitHub Actions 진행 상황: https://github.com/juinjungsin/vibe_obsidian/actions

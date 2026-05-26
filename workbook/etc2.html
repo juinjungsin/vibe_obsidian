@@ -306,7 +306,7 @@ code.inline{background:rgba(109,66,199,0.10);color:var(--purple-1);padding:2px 7
       <tr><td><b>③</b></td><td>응답 30초 후 타임아웃</td><td>max tokens 과대 · 네트워크 지연</td><td>tokens 1024로 낮춤 · 핫스팟 테스트</td></tr>
       <tr><td><b>③</b></td><td>응답이 영어로만 나옴</td><td>Language 미설정</td><td>설정 패널 Language → <code>ko</code></td></tr>
       <tr><td><b>③</b></td><td>응답 빈 문자열</td><td>입력 노트가 빈 본문</td><td>본문 200자 이상 후 재시도</td></tr>
-      <tr><td><b>④</b></td><td><code>*.conflict-2026-05-18.md</code> 생성</td><td>iCloud / OneDrive 동기화 지연</td><td>로컬 폴더로 Vault 이전 / Obsidian Sync 사용</td></tr>
+      <tr><td><b>④</b></td><td><code>*.conflict.md</code> 생성</td><td>iCloud / OneDrive 동기화 지연</td><td>로컬 폴더로 Vault 이전 / Obsidian Sync 사용</td></tr>
       <tr><td><b>④</b></td><td>노트 저장은 되는데 그래프 미반영</td><td>인덱스 캐시 지연</td><td><code>Cmd/Ctrl+P</code> → <code>Reload app</code></td></tr>
       <tr><td><b>⑤</b></td><td>자동화 트리거가 발화하지 않음</td><td>경로 패턴 불일치 / debounce 미설정</td><td>경로 점검 · 로그에서 매칭 여부 확인</td></tr>
       <tr><td><b>⑤</b></td><td>같은 파일 무한 루프 변환</td><td>출력이 다시 입력 폴더에 저장됨</td><td>출력 경로를 입력 패턴 밖으로 이동</td></tr>
@@ -326,9 +326,9 @@ code.inline{background:rgba(109,66,199,0.10);color:var(--purple-1);padding:2px 7
 
   <pre class="code">
 <span class="mute"># claudian.log 발췌</span>
-<span class="hl">2026-05-18 14:02:11</span> [ERROR] auto-summarize-inbox failed
+<span class="hl">14:02:11</span> [ERROR] auto-summarize-inbox failed
   rule=auto-summarize-inbox
-  file=00_inbox/회의록_2026-05-18.md
+  file=00_inbox/회의록.md
   error=API_401
   message="invalid x-api-key"
   retry=0/3</pre>

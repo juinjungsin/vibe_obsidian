@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>etc1 · 자동화 — 바이브 옵시디언 워크북</title>
+<title>etc1 · 자동화 규칙 설계 메모 — 바이브 옵시디언 워크북</title>
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 8 L25 35 L22 70 L48 92 L50 50 Z' fill='%23B48EFF'/><path d='M50 8 L78 38 L82 68 L52 92 L50 50 Z' fill='%236B3FA0'/></svg>">
 <style>
 /* 바이브 옵시디언 워크북 공통 스타일 */
@@ -176,6 +176,16 @@ pre.code{
   padding:14px 16px;color:#293241;font-size:12.5px;line-height:1.6;
   font-family:"JetBrains Mono","SF Mono",monospace;overflow-x:auto;margin:10px 0;
 }
+pre.code.prompt-box{
+  background:#FFF8E8;
+  border:1px solid #E3B85C;
+  border-left:4px solid #A96000;
+  color:#3F2B08;
+  font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR",-apple-system,sans-serif;
+  font-size:13.5px;
+  line-height:1.75;
+  white-space:pre-wrap;
+}
 pre.code .hl{color:var(--purple-1)}
 pre.code .mute{color:var(--text-mute)}
 code.inline{background:rgba(109,66,199,0.10);color:var(--purple-1);padding:2px 7px;border-radius:4px;font-size:12.5px;font-family:"JetBrains Mono",monospace}
@@ -248,252 +258,672 @@ code.inline{background:rgba(109,66,199,0.10);color:var(--purple-1);padding:2px 7
 </nav>
 
 <div class="m-cover">
-  <span class="badge">etc1 · Automation</span>
-  <h1>etc1</h1>
-  <p class="desc">자동화 보조 실습. inbox 폴더 감시(파일 추가 시 자동 변환) + 매일 정해진 시각 스케줄 실행(중복 검사, 백링크 제안)을 설정한다. 2개 자동화 시나리오를 본인 Vault에 적용한다.</p>
+  <span class="badge">etc1 · Automation Design</span>
+  <h1>자동화 규칙 설계 메모</h1>
+  <p class="desc">ingest 폴더 자동 노트화와 논문 검색 자동화를 안정적으로 설계하기 위한 조건, YAML 예시, 자연어 요청 예시를 정리한다.</p>
   <div class="meta">
-    <span>소요 <b>25분</b><small style="color:var(--text-mute);font-size:11px;display:block;margin-top:2px">(실측 23.6분, 5분 단위)</small></span>
-    <span>방식 <b>설정 + 트리거 확인</b></span>
-    <span>완료 시점 <b>자동 변환 1건 + 스케줄 1건</b></span>
+    <span>구분 <b>보조 실습</b></span>
+    <span>방식 <b>조건 정의 + 프롬프트 개선</b></span>
+    <span>결과물 <b>자동화 요청 예시 2종</b></span>
   </div>
 </div>
 
 <div class="goals">
   <span class="lbl">LEARNING GOALS</span>
   <ol>
-    <li><b>폴더 감시 자동화</b>를 통해 raw 1건이 wiki 1건으로 변환되는 흐름을 만든다.</li>
-    <li><b>스케줄 자동화</b>로 매일 정해진 시각에 1개 작업이 실행되도록 한다.</li>
-    <li>자동화 <b>로그</b>를 어디서 보는지 확인한다.</li>
+    <li><b>이벤트 기반</b>과 <b>스케줄 기반</b> 자동화의 차이를 구분한다.</li>
+    <li>입력, 필터, 중복 방지, 출력, 오류 처리 조건을 빠짐없이 설계한다.</li>
+    <li>자동화 요청을 자연어와 YAML 형식으로 명확하게 작성한다.</li>
   </ol>
 </div>
 
-<!-- 1. 자동화 흐름도 -->
 <section>
   <div class="sec-head">
-    <span class="sec-num">01 / FLOW</span>
-    <h2>자동화 흐름 (2 시나리오)</h2>
-    <span class="tag">파일 감시 · 스케줄</span>
+    <span class="sec-num">01 / RULE</span>
+    <h2>1. 질문: ingest 폴더 자동 노트화</h2>
   </div>
-
-  <div class="gview">
-    <svg viewBox="0 0 740 260" xmlns="http://www.w3.org/2000/svg" aria-label="자동화 흐름도">
-      <rect width="740" height="260" fill="#F8FAFC"/>
-      <!-- 시나리오 1: 파일 감시 -->
-      <text x="20" y="30" font-family="Pretendard,sans-serif" font-size="12" fill="#6D42C7" font-weight="700">A. 폴더 감시</text>
-      <!-- 박스들 -->
-      <g font-family="Pretendard,sans-serif" font-size="11" fill="#1F2430">
-        <rect x="20" y="50" width="120" height="50" rx="8" fill="#FFFFFF" stroke="#D8DEE9"/>
-        <text x="80" y="74" text-anchor="middle">📥 00_inbox</text>
-        <text x="80" y="90" text-anchor="middle" fill="#687186" font-size="10">파일 추가 감지</text>
-
-        <rect x="190" y="50" width="120" height="50" rx="8" fill="#FFFFFF" stroke="#7B5DE8"/>
-        <text x="250" y="74" text-anchor="middle" fill="#6D42C7">⚡ Trigger</text>
-        <text x="250" y="90" text-anchor="middle" fill="#687186" font-size="10">on:create *.md</text>
-
-        <rect x="360" y="50" width="120" height="50" rx="8" fill="#FFFFFF" stroke="#7B5DE8"/>
-        <text x="420" y="74" text-anchor="middle" fill="#6D42C7">🤖 Claudian</text>
-        <text x="420" y="90" text-anchor="middle" fill="#687186" font-size="10">summarize + link</text>
-
-        <rect x="530" y="50" width="190" height="50" rx="8" fill="#FFFFFF" stroke="#D8DEE9"/>
-        <text x="625" y="74" text-anchor="middle">📚 20_wiki/[제목].md</text>
-        <text x="625" y="90" text-anchor="middle" fill="#687186" font-size="10">생성 또는 업데이트</text>
-      </g>
-      <g stroke="#7B5DE8" stroke-width="1.5" fill="none">
-        <path d="M140 75 L190 75" marker-end="url(#arr)"/>
-        <path d="M310 75 L360 75" marker-end="url(#arr)"/>
-        <path d="M480 75 L530 75" marker-end="url(#arr)"/>
-      </g>
-
-      <!-- 시나리오 2: 스케줄 -->
-      <text x="20" y="155" font-family="Pretendard,sans-serif" font-size="12" fill="#6D42C7" font-weight="700">B. 스케줄 (매일 09:00)</text>
-      <g font-family="Pretendard,sans-serif" font-size="11" fill="#1F2430">
-        <rect x="20" y="175" width="120" height="50" rx="8" fill="#FFFFFF" stroke="#D8DEE9"/>
-        <text x="80" y="199" text-anchor="middle">⏰ Cron 09:00</text>
-        <text x="80" y="215" text-anchor="middle" fill="#687186" font-size="10">매일 1회</text>
-
-        <rect x="190" y="175" width="120" height="50" rx="8" fill="#FFFFFF" stroke="#7B5DE8"/>
-        <text x="250" y="199" text-anchor="middle" fill="#6D42C7">📂 20_wiki 스캔</text>
-        <text x="250" y="215" text-anchor="middle" fill="#687186" font-size="10">전체 노트</text>
-
-        <rect x="360" y="175" width="120" height="50" rx="8" fill="#FFFFFF" stroke="#7B5DE8"/>
-        <text x="420" y="199" text-anchor="middle" fill="#6D42C7">🔍 중복 / 후보</text>
-        <text x="420" y="215" text-anchor="middle" fill="#687186" font-size="10">유사도 0.85+</text>
-
-        <rect x="530" y="175" width="190" height="50" rx="8" fill="#FFFFFF" stroke="#D8DEE9"/>
-        <text x="625" y="199" text-anchor="middle">📋 99_meta/daily_report.md</text>
-        <text x="625" y="215" text-anchor="middle" fill="#687186" font-size="10">결과 누적</text>
-      </g>
-      <g stroke="#7B5DE8" stroke-width="1.5" fill="none">
-        <path d="M140 200 L190 200" marker-end="url(#arr)"/>
-        <path d="M310 200 L360 200" marker-end="url(#arr)"/>
-        <path d="M480 200 L530 200" marker-end="url(#arr)"/>
-      </g>
-      <defs>
-        <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 0 L 10 5 L 0 10 z" fill="#6D42C7"/>
-        </marker>
-      </defs>
-    </svg>
-    <span class="cap">▲ A) inbox 파일 감시 · B) 스케줄 기반 일일 스캔</span>
-  </div>
-</section>
-
-<!-- 2. 폴더 감시 설정 -->
-<section>
-  <div class="sec-head">
-    <span class="sec-num">02 / WATCH</span>
-    <h2>A. 폴더 감시 설정</h2>
-    <span class="tag">Claudian → Automations</span>
-  </div>
-
-  <p class="mute" style="margin-bottom:10px">Claudian Settings → Automations → New rule.</p>
-
-  <pre class="code">
-<span class="hl">rule:</span> auto-summarize-inbox
-<span class="hl">trigger:</span>
+<p>특정 폴더를 ingest 폴더로 지정하고, 특정 시간에 해당 폴더에 파일이 있는지 감지하고 있다면 파일을 Markdown 문법에 맞게 작성하여 노트로 등록하는 자동화를 만들고 싶다.</p>
+<p>초안 프롬프트:</p>
+<pre class="code">rule: auto-summarize-inbox
+trigger:
   type: file_create
   path: 00_inbox/**/*.md
-<span class="hl">action:</span>
+action:
   - run: claudian.summarize
     output: 20_wiki/{filename_slug}.md
   - run: claudian.suggest_links
     limit: 5
-<span class="hl">debounce:</span> 3s   <span class="mute"># 같은 파일 연속 저장 방지</span>
-<span class="hl">on_error:</span> log  <span class="mute"># 또는 notify</span></pre>
-
-  <table class="ws" style="margin-top:14px">
-    <thead>
-      <tr><th style="width:200px">필드</th><th>본인 입력</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>rule name</td><td class="fill-sm"></td></tr>
-      <tr><td>trigger path</td><td class="fill-sm"></td></tr>
-      <tr><td>action 1</td><td class="fill-sm"></td></tr>
-      <tr><td>action 2 (선택)</td><td class="fill-sm"></td></tr>
-      <tr><td>debounce 초</td><td class="fill-sm"></td></tr>
-    </tbody>
-  </table>
-
-  <h3 style="margin-top:18px">동작 확인 절차</h3>
-  <ul class="check">
-    <li><code>00_inbox/</code>에 새 노트 <code>test-watch.md</code> 작성 후 저장</li>
-    <li>3~10초 대기 → <code>20_wiki/test-watch.md</code> 생성 확인</li>
-    <li>Claudian 로그 패널에서 <b>summarize · suggest_links</b> 실행 기록 확인</li>
-  </ul>
+debounce: 3s   # 같은 파일 연속 저장 방지
+on_error: log  # 또는 notify</pre>
 </section>
-
-<!-- 3. 스케줄 설정 -->
 <section>
   <div class="sec-head">
-    <span class="sec-num">03 / SCHEDULE</span>
-    <h2>B. 스케줄 설정 (매일 09:00)</h2>
-    <span class="tag">Cron 형식</span>
+    <span class="sec-num">02 / RULE</span>
+    <h2>2. ingest 폴더 자동화 초안 평가</h2>
   </div>
+<p>초안은 방향은 좋지만, 실제 요구사항인 <b>“특정 시간에 ingest 폴더를 확인하고 파일이 있으면 Markdown 노트로 등록”</b>하는 방식과는 조금 다르다.</p>
+<p>현재 초안의 핵심 동작은 다음에 가깝다.</p>
+<ul class="dot">
+  <li><code class="inline">file_create</code> 이벤트가 발생하면 실행</li>
+  <li><code class="inline">00_inbox/**/*.md</code> 안에 새 Markdown 파일이 생기면 요약</li>
+  <li>결과를 <code class="inline">20_wiki/{filename_slug}.md</code>로 생성</li>
+  <li>관련 링크를 최대 5개 제안</li>
+  <li>같은 파일 연속 저장 방지를 위해 debounce 적용</li>
+  <li>오류는 로그 또는 알림 처리</li>
+</ul>
+<p>하지만 이 구조는 <b>스케줄 기반 자동화</b>가 아니라 <b>이벤트 기반 자동화</b>다.</p>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">03 / RULE</span>
+    <h2>3. ingest 폴더 자동화에서 보완할 점</h2>
+  </div>
+<p>명확히 해야 할 조건은 다음과 같다.</p>
+<ol>
+  <li>ingest 폴더가 정확히 어디인지</li>
+  <li>대상 파일 형식이 <code class="inline">.md</code>만인지, <code class="inline">.txt</code>, <code class="inline">.pdf</code>, <code class="inline">.docx</code>, <code class="inline">.html</code> 등도 포함하는지</li>
+  <li>원본 파일을 변환하는지, 요약하는지, 정리하는지</li>
+  <li>이미 처리한 파일을 다시 처리하지 않을 기준</li>
+  <li>처리 후 원본 파일을 어디로 이동할지</li>
+  <li>생성될 노트의 frontmatter 형식</li>
+  <li>기존 같은 이름의 노트가 있을 때 덮어쓸지, 새 이름을 만들지</li>
+  <li>관련 링크 제안 결과를 본문에 넣을지, 별도 메타데이터로 둘지</li>
+</ol>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">04 / RULE</span>
+    <h2>4. ingest 폴더 자동화 개선 예시</h2>
+  </div>
+<pre class="code">rule: scheduled-ingest-to-note
 
-  <pre class="code">
-<span class="hl">rule:</span> daily-wiki-scan
-<span class="hl">trigger:</span>
+description: &gt;
+  매일 지정된 시간에 ingest 폴더를 확인하고,
+  새 파일이 있으면 Obsidian Markdown 문법에 맞는 노트로 변환하여 등록한다.
+
+trigger:
   type: schedule
-  cron: "0 9 * * *"   <span class="mute"># 매일 09:00</span>
-<span class="hl">action:</span>
-  - run: claudian.dedupe
-    folder: 20_wiki
-    threshold: 0.85
+  cron: &quot;0 9 * * *&quot;
+  timezone: &quot;Asia/Seoul&quot;
+
+source:
+  path: &quot;00_inbox/ingest&quot;
+  include:
+    - &quot;*.md&quot;
+    - &quot;*.txt&quot;
+    - &quot;*.pdf&quot;
+    - &quot;*.docx&quot;
+  recursive: true
+
+condition:
+  if_empty: noop
+  skip_already_processed: true
+
+action:
+  - run: claudian.ingest_to_markdown
+    output: &quot;20_wiki/{date}-{filename_slug}.md&quot;
+    options:
+      language: &quot;ko&quot;
+      preserve_original_content: true
+      summarize: true
+      format: obsidian_markdown
+      add_frontmatter: true
+      frontmatter:
+        source_file: &quot;{source_path}&quot;
+        created: &quot;{now}&quot;
+        status: &quot;ingested&quot;
+        tags:
+          - inbox
+          - auto-ingested
+
   - run: claudian.suggest_links
-    folder: 20_wiki
-    limit_per_note: 3
-  - run: claudian.report
-    output: 99_meta/daily_report_{YYYY-MM-DD}.md</pre>
+    limit: 5
+    write_to: &quot;related_notes_section&quot;
 
-  <h3 style="margin-top:14px">Cron 표기 예시</h3>
-  <table class="ws">
-    <thead>
-      <tr><th>식</th><th>의미</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><code class="inline">0 9 * * *</code></td><td>매일 09:00</td></tr>
-      <tr><td><code class="inline">0 9 * * 1-5</code></td><td>평일 09:00</td></tr>
-      <tr><td><code class="inline">0 */6 * * *</code></td><td>6시간마다</td></tr>
-      <tr><td><code class="inline">30 22 * * 0</code></td><td>매주 일요일 22:30</td></tr>
-    </tbody>
-  </table>
+  - run: move_file
+    to: &quot;00_inbox/processed/{filename}&quot;
 
-  <div class="fill" style="margin-top:14px">
-    <div class="q">본인이 적용하고 싶은 스케줄 표기 (Cron)</div>
-    <div class="lines"><span></span></div>
-  </div>
+on_duplicate:
+  strategy: append_number
+
+on_error:
+  strategy: log
+  log_path: &quot;99_system/logs/ingest-errors.md&quot;</pre>
 </section>
-
-<!-- 4. 로그 확인 -->
 <section>
   <div class="sec-head">
-    <span class="sec-num">04 / LOG</span>
-    <h2>자동화 로그 확인</h2>
-    <span class="tag">디버깅 기본 경로</span>
+    <span class="sec-num">05 / RULE</span>
+    <h2>5. 핵심 수정 포인트</h2>
   </div>
+<h3>5.1 <code class="inline">file_create</code> 대신 <code class="inline">schedule</code></h3>
+<p>특정 시간에 폴더를 확인하려면 다음처럼 작성하는 것이 더 정확하다.</p>
+<pre class="code">trigger:
+  type: schedule
+  cron: &quot;0 9 * * *&quot;</pre>
+<p>예: 매일 오전 9시 실행.</p>
+<h3>5.2 ingest 폴더와 출력 노트 폴더 분리</h3>
+<pre class="code">source:
+  path: &quot;00_inbox/ingest&quot;
 
-  <table class="ws">
-    <thead>
-      <tr><th style="width:200px">로그 위치</th><th>내용</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><code class="inline">99_meta/claudian.log</code></td><td>모든 실행 이력 (timestamp · rule · result · 소요 ms)</td></tr>
-      <tr><td>Claudian 패널 → Log 탭</td><td>최근 50건 실시간 표시</td></tr>
-      <tr><td>Obsidian Developer Tools (Cmd/Ctrl+Shift+I)</td><td>오류 stack trace</td></tr>
-    </tbody>
-  </table>
+output:
+  path: &quot;20_wiki&quot;</pre>
+<p>이렇게 해야 “대기 중인 파일”과 “정식 노트”가 섞이지 않는다.</p>
+<h3>5.3 중복 처리 방지</h3>
+<p>자동화에서 가장 중요한 부분 중 하나다.</p>
+<pre class="code">skip_already_processed: true</pre>
+<p>또는 처리 후 원본을 이동한다.</p>
+<pre class="code">move_file:
+  to: &quot;00_inbox/processed&quot;</pre>
+<p>이 조건이 없으면 같은 파일이 매일 반복 처리될 수 있다.</p>
+<h3>5.4 Markdown 노트 템플릿 명시</h3>
+<p>생성될 노트 형식을 명확히 지정하면 더 안정적이다.</p>
+<pre class="code">---
+title: &quot;{title}&quot;
+source: &quot;{source_path}&quot;
+created: &quot;{now}&quot;
+tags:
+  - inbox
+  - auto-ingested
+---
 
-  <pre class="code" style="margin-top:12px">
-<span class="mute"># claudian.log 샘플</span>
-<span class="hl">2026-05-18 09:00:01</span> [INFO]  daily-wiki-scan started
-<span class="hl">2026-05-18 09:00:08</span> [INFO]  dedupe scanned=47 candidates=3
-<span class="hl">2026-05-18 09:00:14</span> [INFO]  suggest_links generated=12 (4 notes touched)
-<span class="hl">2026-05-18 09:00:15</span> [INFO]  report saved 99_meta/daily_report_2026-05-18.md
-<span class="hl">2026-05-18 09:00:15</span> [DONE]  duration=14.2s tokens_used=3,418</pre>
+# {title}
+
+## 요약
+
+{summary}
+
+## 원문 정리
+
+{cleaned_content}
+
+## 관련 노트
+
+{suggested_links}</pre>
 </section>
-
-<!-- 5. 본인 자동화 설계 워크시트 -->
 <section>
   <div class="sec-head">
-    <span class="sec-num">05 / DESIGN</span>
-    <h2>본인 자동화 1건 설계</h2>
-    <span class="tag">설계 → 실행 → 확인</span>
+    <span class="sec-num">06 / RULE</span>
+    <h2>6. ingest 자동화 자연어 요청 예시</h2>
   </div>
+<pre class="code prompt-box">00_inbox/ingest 폴더를 매일 오전 9시에 확인해서 새 파일이 있으면 Obsidian Markdown 노트로 변환해줘.
 
-  <table class="ws">
-    <thead>
-      <tr><th style="width:150px">설계 항목</th><th>본인 입력</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>자동화 이름</td><td class="fill-sm"></td></tr>
-      <tr><td>트리거 (감시/스케줄)</td><td class="fill-sm"></td></tr>
-      <tr><td>대상 폴더 / 파일 패턴</td><td class="fill-sm"></td></tr>
-      <tr><td>실행 액션 1</td><td class="fill-sm"></td></tr>
-      <tr><td>실행 액션 2 (선택)</td><td class="fill-sm"></td></tr>
-      <tr><td>출력 위치</td><td class="fill-sm"></td></tr>
-      <tr><td>실패 시 대응</td><td class="fill-sm"></td></tr>
-    </tbody>
-  </table>
+.md, .txt, .pdf, .docx 파일을 대상으로 하고, 결과는 20_wiki 폴더에 {날짜}-{파일명}.md 형식으로 저장해줘.
 
-  <div class="memo">
-    <div class="q">설계한 자동화를 실행한 결과 기록 (실행 시각 · 성공 여부 · 처리된 노트 수 · 소요 시간)</div>
+생성된 노트에는 YAML frontmatter, 요약, 정리된 본문, 관련 노트 링크 5개를 포함해줘.
+
+처리 완료된 원본 파일은 00_inbox/processed로 이동하고, 이미 처리한 파일은 다시 처리하지 않게 해줘.
+
+오류는 99_system/logs/ingest-errors.md에 기록해줘.</pre>
+<hr style="border:0;border-top:1px solid var(--line);margin:34px 0">
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">PART / RESEARCH</span>
+    <h2>논문 검색 자동화 설계</h2>
+    <span class="tag">설계 확장</span>
   </div>
 </section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">07 / RULE</span>
+    <h2>7. 질문: 특정 사이트에서 키워드 검색 후 논문 노트화</h2>
+  </div>
+<p>특정 사이트, 예를 들어 논문 조회 사이트에서 특정 키워드를 매일 같은 시간에 검색하고, 논문 내용을 읽고 노트로 등록하는 작업을 매일 수행한다면 어떤 조건으로 수행해야 할지 확인하고 싶다.</p>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">08 / RULE</span>
+    <h2>8. 논문 검색 자동화의 전체 흐름</h2>
+  </div>
+<p>이 자동화는 단순 파일 감지보다 조건이 더 많다.</p>
+<p>핵심 흐름은 다음과 같다.</p>
+<ol>
+  <li>정해진 시간에 실행</li>
+  <li>특정 논문 사이트 또는 API에서 키워드 검색</li>
+  <li>신규 논문인지 판별</li>
+  <li>본문 또는 초록 접근 가능 여부 확인</li>
+  <li>논문 내용 읽기</li>
+  <li>요약 및 정리</li>
+  <li>Obsidian Markdown 노트 생성</li>
+  <li>관련 노트 링크 추천</li>
+  <li>처리 상태 기록</li>
+  <li>오류 기록</li>
+</ol>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">09 / RULE</span>
+    <h2>9. 실행 조건</h2>
+  </div>
+<pre class="code">trigger:
+  type: schedule
+  cron: &quot;0 8 * * *&quot;
+  timezone: &quot;Asia/Seoul&quot;</pre>
+<p>의미: 매일 오전 8시에 실행.</p>
+<p>정해야 할 것:</p>
+<ul class="dot">
+  <li>매일 몇 시에 실행할지</li>
+  <li>주말도 실행할지</li>
+  <li>실패하면 재시도할지</li>
+  <li>마지막 실행 이후 새 논문만 볼지</li>
+  <li>매번 최근 24시간을 볼지</li>
+</ul>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">10 / RULE</span>
+    <h2>10. 검색 대상 사이트 조건</h2>
+  </div>
+<p>예시:</p>
+<pre class="code">source:
+  name: arxiv
+  type: api
+  endpoint: &quot;arxiv_api&quot;</pre>
+<p>정해야 할 것:</p>
+<ul class="dot">
+  <li>대상 사이트: arXiv, PubMed, Semantic Scholar, Google Scholar, 특정 학회 사이트 등</li>
+  <li>공식 API 또는 RSS가 있는지</li>
+  <li>로그인이 필요한지</li>
+  <li>PDF 다운로드가 허용되는지</li>
+  <li>자동화 접근이 사이트 이용약관이나 robots.txt에 위반되지 않는지</li>
+</ul>
+<p>주의할 점:</p>
+<ul class="dot">
+  <li>Google Scholar처럼 자동화 크롤링에 제한이 있는 사이트는 주의해야 한다.</li>
+  <li>가능하면 공식 API, RSS, OpenAlex, Crossref, arXiv API, PubMed API 같은 경로를 사용하는 것이 안전하다.</li>
+</ul>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">11 / RULE</span>
+    <h2>11. 검색 키워드 조건</h2>
+  </div>
+<p>단순 예시:</p>
+<pre class="code">query:
+  keywords:
+    - &quot;site reliability engineering&quot;
+    - &quot;incident response&quot;
+    - &quot;root cause analysis&quot;
+  operator: OR</pre>
+<p>더 정확한 예시:</p>
+<pre class="code">query:
+  expression: &#39;(&quot;site reliability engineering&quot; OR SRE) AND (&quot;incident response&quot; OR &quot;root cause analysis&quot;)&#39;
+  fields:
+    - title
+    - abstract
+    - keywords</pre>
+<p>정해야 할 것:</p>
+<ul class="dot">
+  <li>제목만 검색할지</li>
+  <li>초록까지 검색할지</li>
+  <li>본문까지 검색할지</li>
+  <li>AND / OR 조건을 어떻게 구성할지</li>
+  <li>제외 키워드를 둘지</li>
+</ul>
+<p>제외 키워드 예시:</p>
+<pre class="code">exclude:
+  keywords:
+    - &quot;marketing&quot;
+    - &quot;survey only&quot;</pre>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">12 / RULE</span>
+    <h2>12. 수집 대상 필터 조건</h2>
+  </div>
+<pre class="code">filter:
+  published_since: last_successful_run
+  language:
+    - en
+    - ko
+  max_results: 10
+  require_abstract: true
+  require_open_access: true</pre>
+<p>정해야 할 것:</p>
+<ul class="dot">
+  <li>하루 최대 몇 편까지 처리할지</li>
+  <li>Open Access 논문만 읽을지</li>
+  <li>초록만 읽고 노트화할지</li>
+  <li>PDF 본문까지 읽을지</li>
+  <li>preprint를 포함할지</li>
+  <li>peer-reviewed 논문만 포함할지</li>
+</ul>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">13 / RULE</span>
+    <h2>13. 중복 방지 조건</h2>
+  </div>
+<p>자동화에서 매우 중요하다.</p>
+<pre class="code">dedupe:
+  keys:
+    - doi
+    - arxiv_id
+    - url
+    - title_hash
+  state_file: &quot;99_system/automation/paper-ingest-state.json&quot;</pre>
+<p>중복 기준 후보:</p>
+<ul class="dot">
+  <li>DOI</li>
+  <li>arXiv ID</li>
+  <li>PubMed ID</li>
+  <li>URL</li>
+  <li>제목 해시</li>
+  <li>이미 생성된 노트의 frontmatter <code class="inline">paper_id</code></li>
+</ul>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">14 / RULE</span>
+    <h2>14. 읽기 범위 조건</h2>
+  </div>
+<pre class="code">read:
+  priority:
+    - abstract
+    - conclusion
+    - full_text_pdf
+  full_text: open_access_only</pre>
+<p>정해야 할 것:</p>
+<ul class="dot">
+  <li>초록만 요약할지</li>
+  <li>PDF 전체를 읽을지</li>
+  <li>Introduction / Method / Results / Conclusion 중심으로 읽을지</li>
+  <li>표와 그림 캡션도 읽을지</li>
+  <li>참고문헌은 제외할지</li>
+</ul>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">15 / RULE</span>
+    <h2>15. 노트 생성 조건</h2>
+  </div>
+<p>Obsidian 노트로 등록하려면 템플릿이 명확해야 한다.</p>
+<pre class="code">output:
+  folder: &quot;20_wiki/papers&quot;
+  filename: &quot;{published_date}-{title_slug}.md&quot;
+  format: obsidian_markdown</pre>
+<p>추천 노트 구조:</p>
+<pre class="code">---
+title: &quot;{paper_title}&quot;
+authors:
+  - &quot;{author_1}&quot;
+published: &quot;{published_date}&quot;
+source: &quot;{source_name}&quot;
+url: &quot;{paper_url}&quot;
+doi: &quot;{doi}&quot;
+paper_id: &quot;{paper_id}&quot;
+tags:
+  - paper
+  - research
+  - auto-ingested
+status: unread
+created: &quot;{now}&quot;
+---
 
-<!-- 셀프 체크 -->
-<div class="self">
-  <h3>etc1 종료 시 셀프 체크</h3>
-  <ul class="check">
-    <li><b>폴더 감시 규칙 1건</b>이 활성화되어 있다.</li>
-    <li>inbox에 테스트 파일을 넣었을 때 <b>wiki에 자동 생성</b>되는 것을 확인했다.</li>
-    <li><b>스케줄 규칙 1건</b>이 등록되어 있다.</li>
-    <li><code>99_meta/claudian.log</code> 또는 Log 탭에서 <b>실행 이력</b>을 봤다.</li>
-  </ul>
-</div>
+# {paper_title}
+
+## 한 줄 요약
+
+{one_sentence_summary}
+
+## 핵심 내용
+
+{summary}
+
+## 문제의식
+
+{research_problem}
+
+## 방법론
+
+{method}
+
+## 주요 결과
+
+{findings}
+
+## SRE/RCA 관점에서의 시사점
+
+{implications}
+
+## 인용할 만한 개념
+
+{key_concepts}
+
+## 관련 노트
+
+{suggested_links}
+
+## 원문
+
+- [논문 링크]({paper_url})
+- DOI: `{doi}`</pre>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">16 / RULE</span>
+    <h2>16. 관련 링크 추천 조건</h2>
+  </div>
+<pre class="code">linking:
+  suggest_links: true
+  limit: 5
+  target_folders:
+    - &quot;20_wiki&quot;
+    - &quot;30_areas&quot;</pre>
+<p>정해야 할 것:</p>
+<ul class="dot">
+  <li>관련 노트 몇 개까지 추천할지</li>
+  <li>자동으로 링크를 삽입할지</li>
+  <li>후보만 남길지</li>
+  <li>어떤 폴더를 검색 대상으로 삼을지</li>
+</ul>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">17 / RULE</span>
+    <h2>17. 오류 처리 조건</h2>
+  </div>
+<pre class="code">on_error:
+  strategy: log_and_continue
+  log_path: &quot;99_system/logs/paper-ingest-errors.md&quot;</pre>
+<p>필요한 오류 조건:</p>
+<ul class="dot">
+  <li>사이트 접속 실패</li>
+  <li>API 제한 초과</li>
+  <li>PDF 다운로드 실패</li>
+  <li>본문 추출 실패</li>
+  <li>중복 파일명 발생</li>
+  <li>요약 실패</li>
+  <li>노트 저장 실패</li>
+</ul>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">18 / RULE</span>
+    <h2>18. 논문 검색 자동화 개선 예시</h2>
+  </div>
+<pre class="code">rule: daily-paper-research-ingest
+
+description: &gt;
+  매일 오전 8시에 지정한 논문 검색 사이트에서 키워드를 검색하고,
+  새 논문이 있으면 초록 또는 공개 본문을 읽어 Obsidian Markdown 노트로 등록한다.
+
+trigger:
+  type: schedule
+  cron: &quot;0 8 * * *&quot;
+  timezone: &quot;Asia/Seoul&quot;
+
+source:
+  name: arxiv
+  access: api
+  search_scope:
+    - title
+    - abstract
+
+query:
+  expression: &#39;(&quot;site reliability engineering&quot; OR SRE) AND (&quot;incident response&quot; OR &quot;root cause analysis&quot;)&#39;
+  exclude_keywords:
+    - &quot;marketing&quot;
+  max_results: 10
+
+filter:
+  published_since: last_successful_run
+  require_abstract: true
+  require_open_access: false
+  language:
+    - en
+    - ko
+
+dedupe:
+  keys:
+    - doi
+    - arxiv_id
+    - url
+    - title_hash
+  state_file: &quot;99_system/automation/paper-ingest-state.json&quot;
+
+read:
+  use:
+    - title
+    - abstract
+    - conclusion
+  full_text_pdf: open_access_only
+
+action:
+  - run: claudian.paper_summarize
+    output: &quot;20_wiki/papers/{published_date}-{title_slug}.md&quot;
+    template:
+      frontmatter: true
+      sections:
+        - 한 줄 요약
+        - 핵심 내용
+        - 문제의식
+        - 방법론
+        - 주요 결과
+        - SRE/RCA 관점에서의 시사점
+        - 관련 노트
+        - 원문 링크
+
+  - run: claudian.suggest_links
+    limit: 5
+    target_folders:
+      - &quot;20_wiki&quot;
+      - &quot;30_areas&quot;
+
+on_empty: log
+on_duplicate: skip
+on_error:
+  strategy: log_and_continue
+  log_path: &quot;99_system/logs/paper-ingest-errors.md&quot;</pre>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">19 / RULE</span>
+    <h2>19. 논문 검색 자동화 자연어 요청 예시</h2>
+  </div>
+<pre class="code prompt-box">매일 오전 8시에 arXiv에서 &quot;site reliability engineering&quot; OR SRE 와 &quot;incident response&quot; OR &quot;root cause analysis&quot; 관련 논문을 검색해줘.
+
+마지막 성공 실행 이후 새로 등록된 논문만 대상으로 하고, DOI/arXiv ID/URL/제목 해시를 기준으로 중복은 제외해줘.
+
+각 논문의 제목, 저자, 발행일, URL, 초록을 읽고 가능하면 공개 PDF의 결론까지 참고해서 Obsidian Markdown 노트로 20_wiki/papers에 저장해줘.
+
+노트에는 YAML frontmatter, 한 줄 요약, 핵심 내용, 방법론, 주요 결과, SRE/RCA 관점 시사점, 관련 노트 링크 5개를 포함해줘.
+
+실패나 빈 결과는 99_system/logs/paper-ingest-errors.md에 기록해줘.</pre>
+</section>
+<section>
+  <div class="sec-head">
+    <span class="sec-num">20 / RULE</span>
+    <h2>20. 핵심 결론</h2>
+  </div>
+<p>ingest 폴더 자동화와 논문 검색 자동화 모두 안정적으로 만들기 위해서는 다음 조건이 반드시 필요하다.</p>
+<ol>
+  <li>실행 조건</li>
+</ol>
+<ul class="dot">
+  <li>파일 생성 이벤트인지</li>
+  <li>정해진 시간에 실행하는 스케줄인지</li>
+</ul>
+<ol>
+  <li>입력 조건</li>
+</ol>
+<ul class="dot">
+  <li>어떤 폴더 또는 사이트를 대상으로 할지</li>
+  <li>어떤 파일 형식 또는 검색 키워드를 대상으로 할지</li>
+</ul>
+<ol>
+  <li>필터 조건</li>
+</ol>
+<ul class="dot">
+  <li>새 항목만 처리할지</li>
+  <li>최대 처리 개수</li>
+  <li>언어</li>
+  <li>Open Access 여부</li>
+  <li>필수 메타데이터 여부</li>
+</ul>
+<ol>
+  <li>중복 방지 조건</li>
+</ol>
+<ul class="dot">
+  <li>파일 해시</li>
+  <li>DOI</li>
+  <li>URL</li>
+  <li>제목 해시</li>
+  <li>처리 상태 파일</li>
+</ul>
+<ol>
+  <li>읽기 및 변환 조건</li>
+</ol>
+<ul class="dot">
+  <li>원문 전체를 읽을지</li>
+  <li>초록만 읽을지</li>
+  <li>요약할지</li>
+  <li>원문을 보존할지</li>
+</ul>
+<ol>
+  <li>출력 조건</li>
+</ol>
+<ul class="dot">
+  <li>저장 폴더</li>
+  <li>파일명 규칙</li>
+  <li>Obsidian Markdown 형식</li>
+  <li>YAML frontmatter</li>
+  <li>본문 섹션 구조</li>
+</ul>
+<ol>
+  <li>연결 조건</li>
+</ol>
+<ul class="dot">
+  <li>관련 노트 추천 여부</li>
+  <li>추천 개수</li>
+  <li>링크 삽입 방식</li>
+  <li>검색 대상 폴더</li>
+</ul>
+<ol>
+  <li>사후 처리 조건</li>
+</ol>
+<ul class="dot">
+  <li>원본 파일 이동</li>
+  <li>처리 완료 표시</li>
+  <li>중복 항목 skip</li>
+  <li>실패 로그 기록</li>
+</ul>
+<ol>
+  <li>오류 처리 조건</li>
+</ol>
+<ul class="dot">
+  <li>실패 시 계속 진행할지</li>
+  <li>알림을 보낼지</li>
+  <li>로그 파일 위치</li>
+  <li>재시도 여부</li>
+</ul>
+<p>결국 좋은 자동화 요청은 단순히 “검색해서 노트로 만들어줘”가 아니라,</p>
+<p><b>언제, 어디서, 무엇을, 어떤 기준으로, 어떻게 읽고, 어떤 형식으로, 어디에 저장하고, 실패하면 어떻게 할지</b>를 명확히 지정해야 한다.</p>
+</section>
 
 <div class="wb-foot">
   <a class="nav-prev" href="module6.html">← M6 · 대량의 파일을 MD로 변환하기</a>
-  <span>etc1 · 자동화</span>
+  <span>etc1 · 자동화 규칙 설계 메모</span>
   <a class="nav-next" href="etc2.html">etc2 · 트러블슈팅 →</a>
 </div>
 

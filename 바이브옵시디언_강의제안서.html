@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>바이브 옵시디언 강의 제안서</title>
+<title>바이브 옵시디언</title>
 <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='a' x1='20%25' y1='0%25' x2='80%25' y2='100%25'><stop offset='0%25' stop-color='%23D4BBFF'/><stop offset='100%25' stop-color='%239B6FE8'/></linearGradient><linearGradient id='b' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%237C4ECF'/><stop offset='100%25' stop-color='%234A2D7E'/></linearGradient></defs><path d='M50 8 L25 35 L22 70 L48 92 L50 50 Z' fill='url(%23a)'/><path d='M50 8 L78 38 L82 68 L52 92 L50 50 Z' fill='url(%23b)'/></svg>">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -240,7 +240,11 @@
   }
   .callout .lbl{display:inline-block;background:var(--purple-2);color:#fff;font-size:11px;font-weight:700;
     padding:3px 10px;border-radius:6px;letter-spacing:0.06em;margin-bottom:10px}
-
+  .pain-table{margin-top:12px;background:#FFFFFF;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .pain-table table{margin:0;font-size:13.5px}
+  .pain-table th{background:rgba(169,96,0,0.10);color:#7A4B00}
+  .pain-table td{vertical-align:top;line-height:1.65}
+  .pain-table td:first-child{font-weight:700;color:var(--text)}
   /* 풋터 */
   footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:var(--text-mute);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
@@ -361,7 +365,6 @@
     <span>강의 시간 <b>4H · 실습형</b></span>
     <span>대상 <b>PKM 입문~중급</b></span>
     <span>도구 <b>Obsidian · Claude · Codex</b></span>
-    <span>작성일 <b>2026-05-18</b></span>
   </div>
 </div>
 
@@ -388,8 +391,22 @@
   </div>
 
   <div class="callout">
-    <span class="lbl">강의 포지셔닝</span>
-    <p>옵시디언은 자유도가 높고 좋은 기능을 가지고 있지만, 의미 있는 수준에 도달하기까지 작업자의 <b>노동 집약적 요소</b>가 많았다. 그것이 실제로 허들로 작용했다. 옵시디언의 커뮤니티 플러그인에 생성형 AI가 연결되면서, 기존과 다른 접근으로 옵시디언을 사용할 계기가 마련되었다. 이른바 <b>바이브 옵시디언</b>.</p>
+    <span class="lbl">Pain Point</span>
+    <p><b>지식 관리 구조</b>와 <b>재사용 가능한 AI 맥락</b>으로 해결한다.</p>
+    <div class="pain-table">
+      <table>
+        <thead>
+          <tr><th style="width:22%">문제</th><th>현상</th><th>교육에서 해결하는 방식</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>자료가 흩어짐</td><td>PPT, PDF, HWP, 웹자료, 메모가 각자 따로 존재</td><td>Obsidian Vault와 raw/wiki/output 구조로 통합</td></tr>
+          <tr><td>다시 찾기 어려움</td><td>예전에 쓴 강의자료를 매번 다시 검색</td><td>Wiki-link, Backlink, Search, Graph View로 재탐색</td></tr>
+          <tr><td>AI에 매번 설명해야 함</td><td>강의 맥락, 고객사 맥락을 매번 프롬프트에 반복</td><td>LLM Wiki를 통해 재사용 가능한 맥락 구축</td></tr>
+          <tr><td>자료 변환 품질이 낮음</td><td>PDF/PPT를 요약하면 표·그림·출처가 사라짐</td><td>원본 보존, sources 속성, 검수 체크리스트 적용</td></tr>
+          <tr><td>시각화가 부족함</td><td>노트가 쌓여도 구조가 보이지 않음</td><td>Graph View와 Canvas로 지식 구조 시각화</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -412,13 +429,13 @@
     <div>
       <div class="card" style="margin-bottom:14px">
         <span class="ico">R</span>
-        <div class="ttl">RAG / NotebookLM</div>
-        <div class="body">원본 → 질문 → 청크 검색 + 합성 (매번 처음부터) → 답변 (휘발). 누적되는 것이 없음.</div>
+        <div class="ttl">RAG/NotebookLM</div>
+        <div class="body">시험 때마다 두꺼운 교과서를 처음부터 다시 펼쳐서 답을 찾는 방식. 다음 시험 때도 똑같이 처음부터.</div>
       </div>
       <div class="card">
         <span class="ico">W</span>
         <div class="ttl">LLM Wiki (바이브 옵시디언)</div>
-        <div class="body">원본 → ingest 시점 합성 → 영속 위키 → 질문 시 위키 읽음 → 답변 + 위키 추가. 사용할수록 가치가 커지는 자산.</div>
+        <div class="body">한 번 공부한 내용을 정리노트로 만들고, 새로 알게 된 것을 계속 노트에 추가해 가는 방식. 노트가 두꺼워질수록 다음 공부가 더 빨라진다.<br><br>compounding은 수학에서 배우는 '복리' 개념과 같다. 원금에 이자가 붙고, 그 이자에 또 이자가 붙어 시간이 갈수록 격차가 크게 벌어진다.</div>
       </div>
     </div>
   </div>
@@ -656,7 +673,7 @@
 </section>
 
 <footer>
-  <div>바이브 옵시디언 강의 제안서 · 2026-05-18</div>
+  <div>바이브 옵시디언</div>
   <div>근거 자료: Karpathy LLM Wiki Gist · 강의 연구 정리 10장 · 바이브 옵시디언 분석 5섹션</div>
 </footer>
 

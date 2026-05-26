@@ -15,7 +15,7 @@
 - `module2.md` - 나도 해봅시다
 - `module3.md` - 따라해봅시다 - 설치
 - `module4.md` - raw · wiki · 그래프 뷰
-- `module5.md` - etc1 - 자동화
+- `module5.md` - etc1 - 자동화 규칙 설계 메모
 - `module6.md` - 대량의 파일을 MD로 변환하기
 - `module7.md` - M5 - 나도 이제 PKM 유저
 - `etc2.md` - etc2 - 트러블슈팅

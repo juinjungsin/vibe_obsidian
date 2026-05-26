@@ -16,7 +16,7 @@ git remote add origin https://github.com/juinjungsin/vibe_obsidian.git
 
 # 파일 추가 및 커밋
 git add index.html 바이브옵시디언_강의제안서.html
-git commit -m "feat: 바이브 옵시디언 강의 제안서 배포"
+git commit -m "feat: 바이브 옵시디언 배포"
 
 # 최초 push
 git push -u origin main
