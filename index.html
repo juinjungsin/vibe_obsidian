@@ -323,7 +323,7 @@
     <li><a class="sub" href="#etc2">└ etc2. 트러블슈팅</a></li>
     <li><a href="#ref-compare"><span class="num">A1</span>5개 개념 비교</a></li>
     <li><a href="#ref-tradeoff"><span class="num">A2</span>장단점</a></li>
-    <li><a href="#ref-discipline"><span class="num">A3</span>디시플린</a></li>
+    <li><a href="#ref-discipline"><span class="num">A3</span>거버넌스</a></li>
     <li><a href="#outcomes"><span class="num">04</span>수강 결과물</a></li>
     <li style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line)"><a href="workbook/index.html" style="background:linear-gradient(90deg,rgba(109,66,199,0.12),rgba(109,74,255,0.04));color:var(--purple-1);border-left-color:var(--purple-1);font-weight:600"><span class="num">WB</span>워크북 (6+2)</a></li>
     <li><a href="2days.html" style="background:linear-gradient(90deg,rgba(125,211,160,0.14),rgba(125,211,160,0.02));color:#23825A;border-left-color:#23825A;font-weight:600"><span class="num" style="color:#23825A">2D</span>2일 구성 (4H×2)</a></li>
@@ -652,50 +652,65 @@
   <div class="sec-head">
     <span class="sec-num">A2 / TRADE-OFF</span>
     <h2>부록 · 바이브 옵시디언 장단점</h2>
-    <span class="tag">근거: 바이브옵시디언_분석.md</span>
   </div>
 
   <div class="grid grid-2">
     <div class="card">
       <span class="ico">+</span>
-      <div class="ttl">장점 (확인된 자료 기준)</div>
+      <div class="ttl">장점 (기술적 타당성 높음)</div>
       <div class="body">
-        · 자동 링킹/백링크 생성, 자동 인덱스<br/>
-        · 3개 이상 토픽 교차 패턴 → wiki/concepts/ 자동 글<br/>
-        · 그래프 뷰 임계점(200+ 노트) 초기부터 충족<br/>
-        · 세션 간 컨텍스트 보존 (100+ 파일 재독 불필요)
+        · <b>자동 링킹/백링크·인덱스 생성</b><br/>
+        Ingest 시점에 지식 간 관계를 찾아 연결하므로, 사용자가 수동으로 링크를 만들지 않아도 지식 그래프 밀도가 올라간다.<br/><br/>
+        · <b>3개 이상 토픽 교차 시 개념 페이지 생성</b><br/>
+        반복 등장하는 개념을 wiki/concepts/로 분리하면 LLM Wiki의 합성 결과가 재사용 가능한 지식 단위가 된다.<br/><br/>
+        · <b>그래프 뷰 임계점(200+ 노트) 초기 충족</b><br/>
+        전통적 PKM은 노트가 쌓이기 전까지 효용을 체감하기 어렵다. 대량 raw를 빠르게 wiki로 전환하면 초기에 지식 지도를 볼 수 있다.<br/><br/>
+        · <b>세션 간 컨텍스트 보존</b><br/>
+        매번 100+ 파일을 다시 읽히지 않고 정제된 위키를 맥락 저장소로 쓰므로 토큰 비용과 반복 설명이 줄어든다.<br/><br/>
+        · <b>지식의 복리 효과</b><br/>
+        새 질문과 답변이 다시 위키에 누적되면서 다음 탐색의 출발점이 좋아진다.
       </div>
     </div>
     <div class="card">
       <span class="ico">−</span>
-      <div class="ttl">한계 (확인된 자료 기준)</div>
+      <div class="ttl">한계와 보완 (운영 규칙 필요)</div>
       <div class="body">
-        · 위키 페이지 직접 편집 비권장 (재컴파일 충돌)<br/>
-        · 의존성: Node 18+, Git, 포트 27124, MCP 서버<br/>
-        · 플러그인별 명령어 분산<br/>
-        · 외부 API 의존 → 로컬 우선·데이터 소유권 약화<br/>
-        · 기존 Dataview/Templater/Zettelkasten 자산 통합 방식 미정의
+        · <b>위키 페이지 직접 편집 비권장</b><br/>
+        재컴파일 시 LLM이 wiki 페이지를 다시 생성하면 사용자의 수동 편집과 충돌할 수 있다. 개인 메모는 별도 폴더에 두고 wiki-link로 연결하는 규칙이 필요하다.<br/><br/>
+        · <b>인간의 거버넌스 레이어 필요</b><br/>
+        Lint 규칙, 검수 체크리스트, sources 속성으로 자동 생성 결과를 관리해야 한다.<br/><br/>
+        · <b>기술적 의존성</b><br/>
+        Node 18+, Git, 포트 27124, MCP 서버 등은 입문자에게 진입 장벽이 될 수 있다. 설치 모듈, 원클릭 스크립트, 트러블슈팅 가이드가 전제되어야 한다.<br/><br/>
+        · <b>외부 API 의존</b><br/>
+        Claude/Codex API를 거치면 로컬 중심 데이터 소유권과 보안 민감도가 약해질 수 있다. 민감 자료는 로컬 처리와 제외 기준을 먼저 정해야 한다.<br/><br/>
+        · <b>기존 자산 통합 방식</b><br/>
+        Dataview, Templater, Zettelkasten 자산은 폴더·속성·링크 규칙을 정한 뒤 단계적으로 연결해야 한다.
       </div>
     </div>
   </div>
+
+  <div class="callout" style="margin-top:18px">
+    <span class="lbl">검증 요약</span>
+    <p>장점은 LLM Wiki의 본질인 <b>ingest 시점 합성</b>과 논리적으로 일치한다. 한계 역시 기술적 과장이 아니라 실제 운영에서 발생할 수 있는 충돌, 의존성, 데이터 소유권 문제다. 따라서 강의에서는 자동화 자체보다 <b>수동 메모와 자동 생성 위키의 분리</b>, <b>검수·린트 규칙</b>, <b>처리 상태 관리</b>를 함께 다루는 것이 핵심이다.</p>
+  </div>
 </section>
 
-<!-- ============ 부록 3: 디시플린 ============ -->
+<!-- ============ 부록 3: 인간의 거버넌스 ============ -->
 <section id="ref-discipline">
   <div class="sec-head">
-    <span class="sec-num">A3 / DISCIPLINE</span>
-    <h2>부록 · 디시플린의 자리</h2>
+    <span class="sec-num">A3 / GOVERNANCE</span>
+    <h2>부록 · 시스템이 작동하는 최소한의 규칙 (인간의 거버넌스)</h2>
   </div>
 
-  <p>Notion이 무덤이 되는 4가지 이유 중 자유도 부담·디시플린 의존성·사일로 사후 정리는 LLM이 대신 처리. 거버넌스만 인간 영역으로 남는다 (자료 9.5).</p>
+  <p>노션(Notion)이 결국 쓰기 싫은 정보의 무덤이 되는 이유는 과도한 자유도, 매번 정리해야 하는 귀찮음, 사후 정리의 막막함 때문이다. 바이브 옵시디언 시스템에서는 이 지루한 정리 노동을 LLM이 맡는다. <b>인간은 지식이 오염되지 않도록 방향을 잡는 최소한의 거버넌스만 유지하면 된다.</b></p>
 
   <div class="grid grid-3" style="margin-top:14px">
-    <div class="card"><div class="ttl">정기 리뷰</div><div class="body">주간/월간/분기 점검 시점 고정</div></div>
-    <div class="card"><div class="ttl">일관된 규칙</div><div class="body">캡처 형식·태그·파일명 매번 동일</div></div>
-    <div class="card"><div class="ttl">미루지 않기</div><div class="body">유입 즉시 처리 또는 inbox 분류</div></div>
-    <div class="card"><div class="ttl">아카이브 실행</div><div class="body">안 쓰는 항목 주기적 정리</div></div>
-    <div class="card"><div class="ttl">오너십 유지</div><div class="body">자기 영역 책임 의식</div></div>
-    <div class="card"><div class="ttl">LLM 외주 영역</div><div class="body">위 1–4번 → LLM Wiki가 대행</div></div>
+    <div class="card"><div class="ttl">[LLM 외주] 정기적인 지식 업데이트</div><div class="body">주간/월간 단위로 자료를 모아 AI에게 넘기는 타이밍만 정한다.</div></div>
+    <div class="card"><div class="ttl">[LLM 외주] 복잡한 분류 규칙 해방</div><div class="body">파일명이나 태그를 매번 똑같이 맞추느라 스트레스받지 않는다. AI가 맥락을 기준으로 분류한다.</div></div>
+    <div class="card"><div class="ttl">[LLM 외주] 쌓아두기만 해도 처리</div><div class="body">들어오는 자료를 Inbox 폴더에 던져두면 AI가 인제스천(Ingest)을 시작한다.</div></div>
+    <div class="card"><div class="ttl">[LLM 외주] 알아서 하는 지식 구조화</div><div class="body">오래되거나 안 쓰는 지식을 인간이 수동으로 골라 숨기지 않아도 된다.</div></div>
+    <div class="card"><div class="ttl">인간의 오너십과 방향성</div><div class="body">생성된 위키가 내 생각의 방향과 맞는지 검수하고, 필요한 지식 욕구의 이정표(<a href="#m4">CLAUDE.md</a>)를 세우는 데 집중한다.</div></div>
+    <div class="card"><div class="ttl">최종 거버넌스</div><div class="body">반복 정리는 LLM Wiki에 맡기되, 무엇을 남기고 어떤 기준으로 신뢰할지는 사람이 결정한다.</div></div>
   </div>
 </section>
 
@@ -715,7 +730,6 @@
 
 <footer>
   <div>바이브 옵시디언</div>
-  <div>근거 자료: Karpathy LLM Wiki Gist · 강의 연구 정리 10장 · 바이브 옵시디언 분석 5섹션</div>
 </footer>
 
 </div>
